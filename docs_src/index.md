@@ -1,6 +1,8 @@
 ---
 title: On a density conjecture about unit fractions
 ---
+# What is this file for???
+
 # What is it about?
 
 The goal of this project is to formalize the main result of the preprint
