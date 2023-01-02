@@ -1,0 +1,27 @@
+\chapter{Definitions}
+\label{chap:def}
+
+Some definitions, local to this paper, that occur frequently.
+
+\begin{definition}
+  \label{def:fin_abstr_simpl_complex}
+  \lean{fin_abstr_simpl_complex}
+  \leanok
+  An \emph{(finite) abstract simplicial complex} is a pair $(V,\K)$, 
+  where $V$ is a finite set, 
+  $\K \subseteq \P(V)$ is a set of subsets of $V$, 
+  every $\sigma \in \K$ is finite, 
+  and for all $\sigma \in \K$, 
+  $\sigma' \subseteq \sigma$ implies $\sigma' \in \K$. 
+  $V$ is called the set of \emph{vertices} 
+  and elements of $\K$ are called \emph{simplices}.
+\end{definition}
+
+\begin{definition}
+  \label{def:fin_abstr_simplex}
+  \lean{fin_abstr_simplex}
+  \leanok
+  Let $(V,\K)$ be a finite simplicial complex. 
+  For $k \in \N$, an \emph{abstract $k$-simplex} is 
+  a simplex $\sigma \in \K$ consisting of exactly $k+1$ vertices.
+\end{definition}
