@@ -1,3 +1,4 @@
+/-
 import tactic.suggest
 import tactic.linarith
 
@@ -69,3 +70,4 @@ def abstr_simplex_old {A : Type*} (k : ℕ) (σ : finset A) (K : set (finset A))
 --  ∀ (σ : set A), (σ ∈ K) → (finite σ) ∧ (∀ (τ : set A), (τ ⊆ σ) → τ ∈ K)
 
 --def ASC : set(finset A) → Prop := abstr_simpl_complex
+-/
