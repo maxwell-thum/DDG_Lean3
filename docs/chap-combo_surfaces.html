@@ -16,8 +16,6 @@
 <link rel="prev" href="sect0001.html" title="Introduction" />
 <link rel="up" href="index.html" title="Discrete Differential Geometry" />
 <link rel="stylesheet" href="styles/theme-blue.css" />
-<link rel="stylesheet" href="styles/amsthm.css" />
-<link rel="stylesheet" href="styles/showmore.css" />
 <link rel="stylesheet" href="styles/stylecours.css" />
 </head>
 
@@ -34,9 +32,8 @@
   <a href="sect0001.html"><span class="toc_ref"></span> <span class="toc_entry">Introduction</span></a>
  </li>
 <li class=" active current">
-  <a href="chap-combo_surfaces.html"><span class="toc_ref">1</span> <span class="toc_entry">Combinatorial Surfaces</span></a>
+  <a href="chap-combo_surfaces.html"><span class="toc_ref"></span> <span class="toc_entry">Combinatorial Surfaces</span></a>
  </li>
-<li ><a href="dep_graph_document.html">Dependency graph</a></li>
 </ul>
 </nav>
 
@@ -45,67 +42,29 @@
 
 
 <div class="main-text">
-<h1 id="chap:combo_surfaces">1 Combinatorial Surfaces</h1>
+<h1 id="chap:combo_surfaces"> Combinatorial Surfaces</h1>
 
-<p><div class="definition_thmwrapper" id="def:fin_abstr_simpl_complex">
+<p><div class="definition_thmwrapper " id="def:fin_abstr_simpl_complex">
   <div class="definition_thmheading">
     <span class="definition_thmcaption">
     Definition
     </span>
-    <span class="definition_thmlabel">1.1</span>
-    ✓
-    <div class="thm_icons">
-    <a class="icon proof" href="chap-combo_surfaces.html#def:fin_abstr_simpl_complex">#</a>
-    <button class="modal lean">L∃∀N</button>
-    <div class="modal-container">
-      <div class="modal-content">
-        <header>
-          <h1>Lean declarations</h1>
-          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
-</button>
-        </header>
-                <ul class="uses">
-          <li><a href="https://github.com/maxwell-thum/DDG_Lean3/blob/68675af62b7d050e625d2561acf92e50ace8502a/src/combo_surfaces.lean#L3">fin_abstr_simpl_complex</a></li>
-        </ul>
-
-      </div>
-    </div>
-
-  </div>
+    <span class="definition_thmlabel">.1</span>
   </div>
   <div class="definition_thmcontent">
-  <p>  An <em>(finite) abstract simplicial complex</em> is a pair \((V,\mathcal{K})\), where \(V\) is a finite set, \(\mathcal{K}\subseteq \mathcal{P}(V)\) is a set of subsets of \(V\), every \(\sigma \in \mathcal{K}\) is finite, and for all \(\sigma \in \mathcal{K}\), \(\sigma ' \subseteq \sigma \) implies \(\sigma ' \in \mathcal{K}\). \(V\) is called the set of <em>vertices</em> and elements of \(\mathcal{K}\) are called <em>simplices</em>. </p>
+  <p> fin_abstr_simpl_complex An <em>(finite) abstract simplicial complex</em> is a pair \((V,\mathcal{K})\), where \(V\) is a finite set, \(\mathcal{K}\subseteq \mathcal{P}(V)\) is a set of subsets of \(V\), every \(\sigma \in \mathcal{K}\) is finite, and for all \(\sigma \in \mathcal{K}\), \(\sigma ' \subseteq \sigma \) implies \(\sigma ' \in \mathcal{K}\). \(V\) is called the set of <em>vertices</em> and elements of \(\mathcal{K}\) are called <em>simplices</em>. </p>
 
   </div>
 </div> </p>
-<p><div class="definition_thmwrapper" id="def:fin_abstr_simplex">
+<p><div class="definition_thmwrapper " id="def:fin_abstr_simplex">
   <div class="definition_thmheading">
     <span class="definition_thmcaption">
     Definition
     </span>
-    <span class="definition_thmlabel">1.2</span>
-    ✓
-    <div class="thm_icons">
-    <a class="icon proof" href="chap-combo_surfaces.html#def:fin_abstr_simplex">#</a>
-    <button class="modal lean">L∃∀N</button>
-    <div class="modal-container">
-      <div class="modal-content">
-        <header>
-          <h1>Lean declarations</h1>
-          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
-</button>
-        </header>
-                <ul class="uses">
-          <li><a href="https://github.com/maxwell-thum/DDG_Lean3/blob/68675af62b7d050e625d2561acf92e50ace8502a/src/combo_surfaces.lean#L12">fin_abstr_simplex</a></li>
-        </ul>
-
-      </div>
-    </div>
-
-  </div>
+    <span class="definition_thmlabel">.2</span>
   </div>
   <div class="definition_thmcontent">
-  <p>  Let \((V,\mathcal{K})\) be a finite simplicial complex. For \(k \in \mathbb {N}\), an <em>abstract \(k\)-simplex</em> is a simplex \(\sigma \in \mathcal{K}\) consisting of exactly \(k+1\) vertices. </p>
+  <p> fin_abstr_simplex Let \((V,\mathcal{K})\) be a finite simplicial complex. For \(k \in \mathbb {N}\), an <em>abstract \(k\)-simplex</em> is a simplex \(\sigma \in \mathcal{K}\) consisting of exactly \(k+1\) vertices. </p>
 
   </div>
 </div>  </p>
@@ -116,10 +75,6 @@
 </div> <!-- wrapper -->
 
 <nav class="prev_up_next">
-  <svg  id="showmore-minus" class="icon icon-eye-minus showmore"><use xlink:href="symbol-defs.svg#icon-eye-minus"></use></svg>
-
-  <svg  id="showmore-plus" class="icon icon-eye-plus showmore"><use xlink:href="symbol-defs.svg#icon-eye-plus"></use></svg>
-
   <a href="sect0001.html" title="Introduction"><svg  class="icon icon-arrow-left "><use xlink:href="symbol-defs.svg#icon-arrow-left"></use></svg>
 </a>
   <a href="index.html" title="Discrete Differential Geometry"><svg  class="icon icon-arrow-up "><use xlink:href="symbol-defs.svg#icon-arrow-up"></use></svg>
@@ -129,7 +84,5 @@
 <script type="text/javascript" src="js/jquery.min.js"></script>
 <script type="text/javascript" src="js/plastex.js"></script>
 <script type="text/javascript" src="js/svgxuse.js"></script>
-<script type="text/javascript" src="js/js.cookie.min.js"></script>
-<script type="text/javascript" src="js/showmore.js"></script>
 </body>
 </html>
