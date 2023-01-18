@@ -8,7 +8,7 @@ Much of the project infrastructure has been adapted from the [unit fractions pro
 To build the Lean files of this project, you need to have a working version of Lean.
 See [the installation instructions](https://leanprover-community.github.io/get_started.html) (under Regular install).
 
-To obtain this repo, run `leanproject get https://github.com/b-mehta/unit-fractions`. If you already have the repo, you can
+To obtain this repo, run `leanproject get https://github.com/maxwell-thum/DDG_Lean3`. If you already have the repo, you can
 update it with `git pull` followed by `leanproject get-mathlib-cache`.
 
 To build the repo, run `leanproject build`.
