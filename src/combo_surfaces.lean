@@ -19,12 +19,12 @@ and for all `σ ∈ S`,
 
 universes u v
 
-variables (A : Type*)
+variable {A : Type*}
 
 /-- Based off of `analysis.convex.simplicial_complex.basic` and 
 `https://ncatlab.org/nlab/show/simplicial+complex`. -/
 --@[ext]
-class abstract_simplicial_complex := -- making this a class again?
+class abstract_simplicial_complex (A : Type*) := -- making this a class again?
 --(vertices : set A) -- maybe we don't start with the vertices, we start with the simplices and let vertices be 0-simplices
 (simplices : set (finset A))
 --(simpl_subset_𝒫vert : ∀ σ ∈ simplices, ↑σ ⊆ vertices)
@@ -37,8 +37,7 @@ namespace abstract_simplicial_complex
 instance example_1 : abstract_simplicial_complex ℕ :=
 { simplices := { {1}, {2}, {1, 2}, {3}},
   not_empty_mem := dec_trivial,
-  down_closed := by simp ; dec_trivial,
-}
+  down_closed := by simp ; dec_trivial, }
 
 /- Getting some error about class instance depth
 instance example_2 : abstract_simplicial_complex ℕ :=
@@ -48,9 +47,49 @@ instance example_2 : abstract_simplicial_complex ℕ :=
 }
 -/
 
-def p_simplices {A : Type*} (K : abstract_simplicial_complex A) (p : ℕ) := 
-  { σ ∈ K.simplices | finset.card σ = p+1 }
+/- The set of `k`-simplices, the simplices with `k+1` elements. -/
+def k_simplices (K : abstract_simplicial_complex A) (k : ℕ) := 
+  { σ ∈ K.simplices | finset.card σ = k+1 }
 
-def vertices (K : abstract_simplicial_complex A) := p_simplices K 0
+/- The set of vertices, which is just another name for 0-simplices. -/
+def vertices (K : abstract_simplicial_complex A) := k_simplices K 0
+
+/- A pure (abstract) `k`-simplicial complex is such that every simplex is contained in some `k`-simplex. -/
+class pure_abstract_k_simplicial_complex (A : Type*) (k : ℕ) extends abstract_simplicial_complex A :=
+(pure : ∀ σ ∈ simplices, ∃ σ' ∈ k_simplices to_abstract_simplicial_complex k, σ ⊆ σ')
+
+/- Simply any subset of an abstract simplicial complex, not necessarily itself an asc -/
+class asc_subset (K : abstract_simplicial_complex A) :=
+(simplices : set (finset A))
+(subset : simplices ⊆ K.simplices)
+
+instance asc_is_asc_subset_self (K : abstract_simplicial_complex A) : asc_subset K :=
+{ simplices := K.simplices,
+  subset := rfl.subset, }
+
+-- **TODO**: Do we just want this proposition or do we want a yes/no?
+/- -/
+def is_subcomplex {A : Type*} {K: abstract_simplicial_complex A} (S : asc_subset K) : Prop :=
+  S.simplices ⊆ K.simplices
+
+/-- Construct an abstract simplicial complex as a subset of a given abstract simplicial complex. -/
+@[simps]
+def of_subcomplex {A : Type*} (K : abstract_simplicial_complex A)
+  (S : asc_subset K)
+  (down_closed : ∀ σ ∈ S.simplices, ∀ τ ⊆ σ, τ ∈ S.simplices) :
+  abstract_simplicial_complex A :=
+{ simplices := S.simplices,
+  not_empty_mem := λ h, K.not_empty_mem (S.subset h),
+  down_closed := λ σ hσ τ hτσ _, down_closed σ hσ τ hτσ, }
+
+def star {A : Type*} {K : abstract_simplicial_complex A} (S : asc_subset K) : asc_subset K :=
+{ simplices := { σ ∈ K.simplices | ∃ σ' ∈ S.simplices, σ' ⊆ σ },
+  subset := by refine simplices.sep_subset (λ (x : finset A), ∃ (σ' : finset A) (H : σ' ∈ asc_subset.simplices K), σ' ⊆ x)}
+
+def closure {A : Type*} {K : abstract_simplicial_complex A} (S : asc_subset K) : asc_subset K := sorry
+
+/- The link of a subset of an asc is -/
+def link {A : Type*} {K : abstract_simplicial_complex A} (S : asc_subset K) : asc_subset K := sorry
+
 
 end abstract_simplicial_complex
