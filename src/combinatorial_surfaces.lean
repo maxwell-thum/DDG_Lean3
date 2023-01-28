@@ -34,19 +34,6 @@ class abstract_simplicial_complex (A : Type*) := -- making this a class again?
 
 namespace abstract_simplicial_complex
 
-instance example_1 : abstract_simplicial_complex ℕ :=
-{ simplices := { {1}, {2}, {1, 2}, {3}},
-  not_empty_mem := dec_trivial,
-  down_closed := by simp ; dec_trivial, }
-
-/- Getting some error about class instance depth
-instance example_2 : abstract_simplicial_complex ℕ :=
-{ simplices := {{1}, {2}, {3}, {4}, {5}, {1,2}, {1,3}, {2,3}, {1,4}, {2,4}, {1,2,3}, {1,2,4}, {4,5}},
-  not_empty_mem := dec_trivial,
-  down_closed := by simp ; dec_trivial,
-}
--/
-
 /- The set of `k`-simplices, the simplices with `k+1` elements. -/
 def k_simplices (K : abstract_simplicial_complex A) (k : ℕ) := 
   { σ ∈ K.simplices | finset.card σ = k+1 }
@@ -58,7 +45,7 @@ def vertices (K : abstract_simplicial_complex A) := k_simplices K 0
 class pure_abstract_k_simplicial_complex (A : Type*) (k : ℕ) extends abstract_simplicial_complex A :=
 (pure : ∀ σ ∈ simplices, ∃ σ' ∈ k_simplices to_abstract_simplicial_complex k, σ ⊆ σ')
 
-/- Simply any subset of an abstract simplicial complex, not necessarily itself an asc -/
+/- Any subset of an abstract simplicial complex, not necessarily itself an asc -/
 class asc_subset (K : abstract_simplicial_complex A) :=
 (simplices : set (finset A))
 (subset : simplices ⊆ K.simplices)
