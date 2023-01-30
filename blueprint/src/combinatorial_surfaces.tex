@@ -1,5 +1,5 @@
 \chapter{Combinatorial Surfaces}
-\label{chap:combo_surfaces}
+\label{chap:combinatorial_surfaces}
 
 
 
@@ -20,9 +20,18 @@
 
 \begin{definition}
   \label{def:abstract_simplex}
-  \lean{abstract_simplex}
+  \uses{def:abstract_simplicial_complex}
+  \lean{abstract_simplicial_complex.abstract_simplex}
   \leanok
   Let $(V,\K)$ be a finite simplicial complex. 
   For $k \in \N$, an \emph{abstract $k$-simplex} is 
   a simplex $\sigma \in \K$ consisting of exactly $k+1$ vertices.
 \end{definition}
+
+\begin{definition}
+    \label{def:degree}
+    \uses{def:abstract_simplicial_complex}
+    \lean{abstract_simplicial_complex.degree}
+    The \emph{degree} of an abstract simplex of size $k$ is $k-1$. For instance, $0$-simplices are vertices, $1$-simplices are edges, $2$-simplices are faces, and $3$-simplices are tetrahedra. The empty set is the only $-1$-simplex.
+\end{definition}
+
