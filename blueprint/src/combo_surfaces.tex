@@ -4,22 +4,23 @@
 
 
 \begin{definition}
-  \label{def:fin_abstr_simpl_complex}
-  \lean{fin_abstr_simpl_complex}
+  \label{def:abstract_simplicial_complex}
+  \lean{abstract_simplicial_complex}
   \leanok
-  A \emph{(finite) abstract simplicial complex} is a pair $(V,\K)$, 
-  where $V$ is a finite set, 
-  $\K \subseteq \Pow(V)$ is a set of subsets of $V$, 
-  every $\sigma \in \K$ is finite, 
+  An \emph{abstract simplicial complex} is a pair $(V,\K)$, 
+  where $V$ is a set, 
+  $\K \subseteq \Pow(V)$ is a set of finite, non-empty subsets of $V$, 
+  %every $\sigma \in \K$ is finite, 
   and for all $\sigma \in \K$, 
-  $\sigma' \subseteq \sigma$ implies $\sigma' \in \K$. 
+  if $\sigma' \subseteq \sigma$ and $\sigma' \neq \emptyset$, 
+  then $\sigma' \in \K$. 
   $V$ is called the set of \emph{vertices} 
   and elements of $\K$ are called \emph{simplices}.
 \end{definition}
 
 \begin{definition}
-  \label{def:fin_abstr_simplex}
-  \lean{fin_abstr_simplex}
+  \label{def:abstract_simplex}
+  \lean{abstract_simplex}
   \leanok
   Let $(V,\K)$ be a finite simplicial complex. 
   For $k \in \N$, an \emph{abstract $k$-simplex} is 
