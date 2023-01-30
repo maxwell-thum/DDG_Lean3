@@ -1,6 +1,6 @@
 import combinatorial_surfaces
 
-namespace abstract_simplicial_complex
+open abstract_simplicial_complex
 
 instance example_1 : abstract_simplicial_complex ℕ :=
 { simplices := { {1}, {2}, {1, 2}, {3}},
@@ -14,5 +14,7 @@ instance example_2 : abstract_simplicial_complex ℕ :=
   down_closed := by simp ; dec_trivial,
 }
 -/
-
-end abstract_simplicial_complex
+#eval @degree ℕ example_1 {1} (by dec_trivial) -- 0
+#eval @degree ℕ example_1 {2} (by dec_trivial) -- 0
+#eval @degree ℕ example_1 {1,2} (by dec_trivial) -- 1
+#eval @degree ℕ example_1 {3} (by dec_trivial) -- 0

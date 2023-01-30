@@ -19,110 +19,134 @@ and for all `σ ∈ S`,
 
 universes u v
 
-variable {A : Type*}
-
 /-- Based off of `analysis.convex.simplicial_complex.basic`,
 `https://ncatlab.org/nlab/show/simplicial+complex`, and Keenan Crane's DDG textbook. -/
 --@[ext]
 class abstract_simplicial_complex (A : Type*) := -- making this a class again?
---(vertices : set A) -- maybe we don't start with the vertices, we start with the simplices and let vertices be 0-simplices
 (simplices : set (finset A))
---(simpl_subset_𝒫vert : ∀ σ ∈ simplices, ↑σ ⊆ vertices)
 (not_empty_mem : ∅ ∉ simplices)
 (down_closed : ∀ σ ∈ simplices, ∀ τ ⊆ σ, τ ≠ ∅ → τ ∈ simplices)
---(vert_subset_simpl : ∀ v ∈ vertices, { v } ∈ simplices)
 
 namespace abstract_simplicial_complex
+variables {A : Type*} {K : abstract_simplicial_complex A}
 
-/- The set of `k`-simplices, the simplices with `k+1` elements. -/
-def k_simplices (K : abstract_simplicial_complex A) (k : ℕ) := 
-  { σ ∈ K.simplices | finset.card σ = k+1 }
+/-- The degree of a simplex is its cardinality minus one. -/
+def degree (σ : finset A) (hσ : σ ∈ K.simplices) : ℕ := σ.card - 1
 
-/- The set of vertices, which is just another name for 0-simplices. -/
+/-- The set of `k`-simplices in `K`, the simplices in `K` with `k+1` elements. -/
+def k_simplices (K : abstract_simplicial_complex A) (k : ℕ) : set (finset A) := 
+  { σ ∈ K.simplices | σ.card = k+1 }
+
+/-- The degree of a `k`-simplex is actually `k`, justifying the name. -/
+@[simp]
+lemma degree_k_simplex_eq_k (σ : finset A) {hσ : σ ∈ K.simplices} {k : ℕ}
+    (hσk : σ ∈ k_simplices K k) : degree σ hσ = k := 
+  tsub_eq_of_eq_add hσk.2
+
+/-- The set of vertices, which is just another name for 0-simplices. -/
 def vertices (K : abstract_simplicial_complex A) := k_simplices K 0
 
-/- A pure (abstract) `k`-simplicial complex is such that every simplex is contained in some `k`-simplex. -/
+/-- A pure (abstract) `k`-simplicial complex is such that every simplex is contained in 
+some `k`-simplex. -/
 def is_pure_k_asc (K : abstract_simplicial_complex A) (k : ℕ) : Prop :=
   ∀ σ ∈ K.simplices, ∃ σ' ∈ K.k_simplices k, σ ⊆ σ'
 
-/- An asc `K'` is a subcomplex of the asc `K` if all of `K'`'s simplices belong to `K`. -/
-def subcomplex (K' K : abstract_simplicial_complex A) : Prop :=
-  K'.simplices ⊆ K.simplices
+/-- An asc `K'` is a subcomplex of the asc `K` if all of `K'`'s simplices belong to `K`. -/
+def subcomplex (K' K : abstract_simplicial_complex A) : Prop := K'.simplices ⊆ K.simplices
 
-/- Every asc is a subcomplex of itself. -/
+/-- Every asc is a subcomplex of itself. -/
 @[simp]
 lemma asc_subcomplex_self (K : abstract_simplicial_complex A) : K.subcomplex K := rfl.subset
 
-/-- Any subset of an asc (not necessarily itself an asc) -/
-class asc_subset (K : abstract_simplicial_complex A) :=
-(simplices : set (finset A))
-(subset : simplices ⊆ K.simplices)
+/-- Proposition that a set (not necessarily itself an asc) is a subset of an asc. -/
+def subset_asc (S : set (finset A)) (K : abstract_simplicial_complex A) := S ⊆ K.simplices
 
-namespace asc_subset
+/-- The set of simplices of a subcomplex of an asc `K` form a subset of `K`. -/
+@[simp]
+lemma subcomplex_simplices_is_subset_asc (K' K : abstract_simplicial_complex A) 
+    (K'_subc_K : K'.subcomplex K) : subset_asc K'.simplices K := K'_subc_K
 
-/-- Instance taking a subcomplex of an asc to a subset of that asc. -/
-instance subcomplex_to_asc_subset (K' K : abstract_simplicial_complex A) (K'_subc_K : K'.subcomplex K) : 
-    asc_subset K :=
-{ simplices := K'.simplices,
-  subset := K'_subc_K, }
+-- (is this lemma unnecessary?)
+/-- In particular, the simplices of an asc are a subset of themselves. -/
+@[simp]
+lemma asc_simplices_is_subset_asc (K : abstract_simplicial_complex A) : 
+    subset_asc K.simplices K := rfl.subset
 
-/-- In particular, we can take an asc to a subset of itself. -/ -- (is this instance unnecessary?)
-instance asc_to_asc_subset_self (K : abstract_simplicial_complex A) : asc_subset K :=
-  asc_subset.subcomplex_to_asc_subset K K (asc_subcomplex_self K)
-
-/-- The proposition that an `asc_subset` is closed downward
+/-- The proposition that a subset of an asc is closed downward
 --, which is equivalent to it forming an asc / 
 --subset by the previous lemma `of_subcomplex_is_subcomplex`. 
---Note: I understand that logically this feels a bit... circular. I don't have a good way  -/
-def is_down_closed {K : abstract_simplicial_complex A} (S : asc_subset K) : Prop := 
-  ∀ σ ∈ S.simplices, ∀ τ ⊆ σ, τ ≠ ∅ → τ ∈ S.simplices
-
-lemma subcomplex_to_asc_subset_is_down_closed (K' K : abstract_simplicial_complex A) 
-    (K'_subc_K : K'.subcomplex K) :
-    (asc_subset.subcomplex_to_asc_subset K' K K'_subc_K).is_down_closed := K'.down_closed
+--Note: I understand that logically this feels a bit... circular. I don't have a good way ...
+Note 2: Both here and in `degree`, it seems weird that the definition doesn't (explicitly) 
+depend on the asc stuff, but it's still important that we only want to talk about degree or
+down-closedness in the context of an asc. Right? -/
+def is_down_closed (S : set (finset A)) (hS : subset_asc S K) : Prop := 
+  ∀ σ ∈ S, ∀ τ ⊆ σ, τ ≠ ∅ → τ ∈ S
 
 /-- Construct an asc from a downward-closed subset of a given asc. -/
 @[simps]
-instance to_complex (K : abstract_simplicial_complex A)
-  (S : asc_subset K)
-  (down_closed : S.is_down_closed) :
+instance to_asc (K : abstract_simplicial_complex A)
+  (S : set (finset A))
+  (hS : subset_asc S K)
+  (down_closed : is_down_closed S hS) :
   abstract_simplicial_complex A :=
-{ simplices := S.simplices,
-  not_empty_mem := λ h, K.not_empty_mem (S.subset h),
+{ simplices := S,
+  not_empty_mem := λ h, K.not_empty_mem (hS h),
   down_closed := down_closed, }
 
-/- --`to_complex` only actually gives an asc; this shows that that asc is indeed a subcomplex. 
-As a consequence, if an `asc_subset` is closed downward, then it forms a subcomplex. -/
+/- The asc constructed from a downward-closed subset of an asc `K` is a subcomplex of `K`. -/
 @[simp]
-lemma to_complex_is_subcomplex (K : abstract_simplicial_complex A) (S : asc_subset K)
-    (down_closed : is_down_closed S) : 
-    (asc_subset.to_complex K S down_closed).subcomplex K := 
-  S.subset
+lemma to_asc_is_subcomplex (K : abstract_simplicial_complex A) (S : set (finset A))
+    (hS : subset_asc S K) (down_closed : is_down_closed S hS) : 
+    (abstract_simplicial_complex.to_asc K S hS down_closed).subcomplex K := 
+  hS
 
-/-- The star of an `asc_subset` `S` is the set of simplices in its asc which contain a simplex in `S`. -/
-def star {K : abstract_simplicial_complex A} (S : asc_subset K) : asc_subset K :=
-{ simplices := { σ ∈ K.simplices | ∃ σ' ∈ S.simplices, σ' ⊆ σ },
-  subset := abstract_simplicial_complex.simplices.sep_subset (λ (x : finset A), ∃ σ' ∈ simplices K, σ' ⊆ x)}
+/-- The star of a subset `S` of an asc `K` is the set of simplices in `K` which contain a 
+simplex in `S`. -/
+def star (S : set (finset A)) (hS : subset_asc S K) : set (finset A) :=
+  { σ ∈ K.simplices | ∃ σ' ∈ S, σ' ⊆ σ }
 
-/-- Book definition: "The closure Cl(S) is the smallest (i.e., fewest elements) subcomplex of K 
-that contains S." This is a rough definition in an arbitrary type `A` / possibly infinite set `K.simplices`
-as it is not necessarily clear that there even *exists* such a minimal set. Perhaps we need to restrict  -/
-def closure {K : abstract_simplicial_complex A} (S : asc_subset K) : asc_subset K := 
-{ simplices := sorry
-  subset := sorry }
+/-- The star of a subset `S` of an asc `K` indeed forms a subset of `K`. -/
+@[simp]
+lemma star_is_subset_asc (S : set (finset A)) 
+    (hS : subset_asc S K) : subset_asc (star S hS) K := by
+{ simp only [subset_asc, star, set.sep_subset], }  
+
+/-- (Downward?) closure of a single simplex. -/
+def simplex_closure (σ : finset A) 
+    (hσ : σ ∈ K.simplices) : set (finset A) :=
+  { σ' ∈ K.simplices | σ' ⊆ σ }
+
+/- **TODO**: Define union and intersection of complexes. Make these instances of `has_union`
+and `has_int` or whatever they're called. This may be a good reason to let ∅ be a simplex.
+On a related note, do we want `subcomplex` to be an instance of `has_sub`? -/
+/-- The closure of a subset `S` of an asc `K` is the union of the closures of its simplices.
+--Book definition: "The closure Cl(S) is the smallest (i.e., fewest elements) subcomplex of 
+--K  that contains S." This is a rough definition in an arbitrary type `A` / possibly infinite 
+--set `K.simplices` as it is not necessarily clear that there even *exists* such a minimal set. 
+--Perhaps we need a nicer definition.  -/
+def closure (S : set (finset A)) (hS : subset_asc S K) : 
+    set (finset A) := 
+  ⋃ (σ ∈ S), simplex_closure σ (hS H)
 
 @[simp]
-lemma closure_is_down_closed {K : abstract_simplicial_complex A} (S : asc_subset K) :
-    S.closure.is_down_closed := sorry
+lemma closure_is_subset_asc (S : set (finset A))
+    (hS : subset_asc S K) : subset_asc (closure S hS) K := by
+{ unfold subset_asc closure,
+  simp at *,
+  }
+
+@[simp]
+lemma closure_is_down_closed (S : set (finset A)) 
+    (hS : subset_asc S K) : is_down_closed (closure S hS):=
+  
 
 /- The link of a subset of an asc is -/
-def link {K : abstract_simplicial_complex A} (S : asc_subset K) : asc_subset K := 
+def link (S : asc_subset K) : asc_subset K := 
 { simplices := S.star.closure.simplices \ S.closure.star.simplices,
   subset := sorry }
 
-end asc_subset
-
-def boundary {K : abstract_simplicial_complex A} (K' : abstract_simplicial_complex A) [K'.subcomplex K] 
+/--  -/
+def boundary (K' : abstract_simplicial_complex A) [K'.subcomplex K] 
     {k : ℕ} [is_pure_k_asc K' k] : 
     abstract_simplicial_complex A := by sorry
 --{ refine (closure _)}  
