@@ -133,11 +133,12 @@ lemma closure_is_subset_asc (S : set (finset A))
     (hS : subset_asc S K) : subset_asc (closure S hS) K := by
 { unfold subset_asc closure,
   simp at *,
+  sorry
   }
 
 @[simp]
 lemma closure_is_down_closed (S : set (finset A)) 
-    (hS : subset_asc S K) : is_down_closed (closure S hS):=
+    (hS : subset_asc S K) : is_down_closed (closure S hS):= sorry
   
 
 /- The link of a subset of an asc is -/
