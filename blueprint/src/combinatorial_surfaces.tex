@@ -1,37 +1,112 @@
 \chapter{Combinatorial Surfaces}
 \label{chap:combinatorial_surfaces}
 
+\section{Abstract simplicial complexes}
 
-
-\begin{definition}
-  \label{def:abstract_simplicial_complex}
-  \lean{abstract_simplicial_complex}
-  \leanok
-  An \emph{abstract simplicial complex} is a pair $(V,\K)$, 
-  where $V$ is a set, 
-  $\K \subseteq \Pow(V)$ is a set of finite, non-empty subsets of $V$, 
-  %every $\sigma \in \K$ is finite, 
-  and for all $\sigma \in \K$, 
-  if $\sigma' \subseteq \sigma$ and $\sigma' \neq \emptyset$, 
-  then $\sigma' \in \K$. 
-  $V$ is called the set of \emph{vertices} 
-  and elements of $\K$ are called \emph{simplices}.
+\begin{definition}\label{def:abstract_simplicial_complex}
+    \leanok
+    \lean{abstract_simplicial_complex}
+    An \emph{abstract simplicial complex} $\K$ is a set of non-empty\footnote{Some authors allow simplices to be empty.} finite sets called \emph{simplices} such that
+    for all $\sigma \in \K$, 
+    if $\sigma' \subseteq \sigma$ 
+    and $\sigma' \neq \emptyset$,
+    then $\sigma' \in \K$.
+\begin{comment}
+    An \emph{abstract simplicial complex} is a pair $(V,\K)$, 
+    where $V$ is a set, 
+    $\K \subseteq \Pow(V)$ is a set of finite %, non-empty 
+    subsets of $V$, 
+    %every $\sigma \in \K$ is finite, 
+    and for all $\sigma \in \K$, 
+    if $\sigma' \subseteq \sigma$ 
+    %and $\sigma' \neq \emptyset$, 
+    then $\sigma' \in \K$. 
+    $V$ is called the set of \emph{vertices} 
+    and elements of $\K$ are called \emph{simplices}.
+\end{comment}
 \end{definition}
 
-\begin{definition}
-  \label{def:abstract_simplex}
-  \uses{def:abstract_simplicial_complex}
-  \lean{abstract_simplicial_complex.abstract_simplex}
-  \leanok
-  Let $(V,\K)$ be a finite simplicial complex. 
-  For $k \in \N$, an \emph{abstract $k$-simplex} is 
-  a simplex $\sigma \in \K$ consisting of exactly $k+1$ vertices.
-\end{definition}
+Abstract simplicial complexes are the combinatorial or topological analogs of \emph{geometric simplicial complexes}, which we will see shortly. Abstract simplicial complexes capture the connectivity of geometric simplicial complexes without their geometry.
 
-\begin{definition}
-    \label{def:degree}
+\begin{comment}
+\begin{definition}\label{def:abstract_simplex}
     \uses{def:abstract_simplicial_complex}
-    \lean{abstract_simplicial_complex.degree}
-    The \emph{degree} of an abstract simplex of size $k$ is $k-1$. For instance, $0$-simplices are vertices, $1$-simplices are edges, $2$-simplices are faces, and $3$-simplices are tetrahedra. The empty set is the only $-1$-simplex.
+    \leanok
+    \lean{abstract_simplicial_complex.abstract_simplex}
+    Let $\K$ %$(V,\K)$ 
+    be a finite simplicial complex. 
+    For $k \in \N$, an \emph{abstract $k$-simplex} is 
+    a simplex $\sigma \in \K$ consisting of exactly $k+1$ vertices.
 \end{definition}
+\end{comment}
+
+\begin{definition}\label{def:degree}
+    \uses{def:abstract_simplicial_complex}
+    %\lean{abstract_simplicial_complex.degree}
+    The \emph{degree} or \emph{dimension} of an (abstract) simplex with $k+1$ vertices is $k$. 
+\end{definition}
+
+\begin{definition}\label{def:k_simplices}
+    \uses{def:degree}
+    An (abstract) simplex of degree $k$ is called an \emph{abstract $k$-simplex}.
+\end{definition}
+For instance, $0$-simplices are points or vertices, $1$-simplices are line segments or edges, $2$-simplices are triangles or faces, and $3$-simplices are tetrahedra. %Under the convention that it is a simplex, the empty set is the only $(-1)$-simplex.
+
+\begin{definition}\label{def:face} % this might not need to be coded in lean
+    \uses{def:abstract_simplicial_complex}
+    A nonempty subset of an abstract simplex is called a \emph{face}.
+\end{definition}
+By definition of an abstract simplicial complex, all of the faces of a simplex are themselves simplices. A proper subset of a simplex is called a \emph{proper face}.
+
+\begin{definition}\label{def:subcomplex}
+    \uses{def:abstract_simplicial_complex}
+    Given two simplicial complexes $\K$ and $\K'$, we say that $\K'$ is a \emph{subcomplex} of $\K$ if $\K' \subseteq \K$, that is, every simplex in $\K'$ is a simplex in $\K$ as well.
+\end{definition}
+
+\begin{definition}\label{def:abstract_simplicial_k-complex}
+    \uses{def:abstract_simplicial_complex,def:degree}
+    If the set of degrees of the simplices of an abstract simplicial complex has a maximum $k$, then that abstract simplicial complex is said to be an \emph{abstract simplicial $k$-complex}.
+\end{definition}
+
+\begin{definition}\label{def:pure_abstract_simplicial_k-complex}
+    \uses{def:abstract_simplicial_k-complex,def:degree,def:face}
+    Let $\K$ be an abstract simplicial $k$-complex. If every simplex is a face of some $k$-simplex, then we say $\K$ is \emph{pure} and call it a \emph{pure simplicial $k$-complex}.
+\end{definition}
+
+\begin{definition}\label{def:star}
+    The \emph{star} $\St(\sigma)$ of a simplex $\sigma$ in an abstract simplicial complex $\K$ is the set of all simplices in $\K$ having $\sigma$ as a face.
+
+    The star $\St(S)$ of a set $S$ of simplices in $\K$ (i.e., a subset of $\K$) is the set of all simplices in $\K$ having some simplex in $S$ as a face. Equivalently, $\St(S) = \bigcup_{\sigma \in S} \St(\sigma)$.
+\end{definition}
+
+\begin{definition}\label{def:closure}
+    \uses{def:abstract_simplicial_complex}
+    The \emph{closure} $\Cl(S)$ of a set of simplices $S \subseteq \K$ is the smallest (by inclusion) simplicial complex containing $S$.
+\end{definition}
+
+\begin{lemma}\label{lem:closure_eq_down_closure}
+    \uses{def:closure}
+    \[ \Cl(S) = \bigcup_{\sigma \in S} \Pow(\sigma) \setminus \emptyset. \] % idk why \setminus isn't showing up
+\end{lemma}
+%\begin{proof} \end{proof}
+
+\begin{definition}\label{def:link}
+    \uses{def:abstract_simplicial_complex}
+    The \emph{link} $\Lk(\sigma)$ of a simplex $\sigma \in \K$ is the set of all simplices $\tau \in \K$ such that $\sigma$ and $\tau$ are disjoint and their union is a simplex. In set-builder notation,
+    \[ \Lk(\sigma) \coloneqq \{ \tau \in \K \mid \tau \cap \sigma = \emptyset, \tau \cup \sigma \in \K \}. \]
+\end{definition}
+
+\begin{lemma}\label{lem:lk_eq_cl_st_sub_st_cl}
+    \uses{def:link,def:closure,def:star}
+    For any set of simplices $S \subseteq \K$, 
+    \[ \Lk(S) = \Cl(\St(S)) \setminus \St(\Cl(S)). \]
+\end{lemma}
+
+\subsection{The halfedge mesh}
+\label{ssec:halfedge_mesh}
+
+
+
+\section{Simplicial complexes}
+\label{sec:simplicial_complex}
 
