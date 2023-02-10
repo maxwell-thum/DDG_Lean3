@@ -25,7 +25,7 @@ git clone git@github.com:plastex/plastex
 pip3 install ./plastex
 git clone git@github.com:PatrickMassot/leanblueprint
 pip3 install ./leanblueprint
-cd DDG
+cd DDG_Lean3
 ```
 
 To actually build the blueprint, run
