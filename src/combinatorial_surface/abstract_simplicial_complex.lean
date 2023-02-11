@@ -72,6 +72,7 @@ def subcomplex (K' K : abstract_simplicial_complex A) : Prop := K'.simplices ⊆
 @[simp]
 lemma asc_subcomplex_self (K : abstract_simplicial_complex A) : K.subcomplex K := rfl.subset
 
+/-
 /- I think I might prefer to just use `S ⊆ K.simplices`. Being able to just write `S ⊆ K` might be nice,
 but `⊆` seems to be reserved for terms of the same type. -/
 /-- Proposition that a set (not necessarily itself an ASC) is a subset of an ASC. -/
@@ -87,6 +88,7 @@ lemma subcomplex_simplices_is_subset_asc (K' K : abstract_simplicial_complex A)
 @[simp]
 lemma asc_simplices_is_subset_asc (K : abstract_simplicial_complex A) : 
     subset_asc K.simplices K := rfl.subset
+-/
 
 /-- The proposition that a subset of an ASC is closed downward
 --, which is equivalent to it forming an ASC / 
@@ -95,14 +97,15 @@ lemma asc_simplices_is_subset_asc (K : abstract_simplicial_complex A) :
 Note 2: Both here and in `degree`, it seems weird that the definition doesn't (explicitly) 
 depend on the ASC stuff, but it's still important that we only want to talk about degree or
 down-closedness in the context of an ASC. Right? -/
-def is_down_closed (S : set (finset A)) (hS : subset_asc S K) : Prop := 
+def is_down_closed (S : set (finset A)) (hS : S ⊆ K.simplices) : Prop := 
   ∀ σ ∈ S, ∀ τ ⊆ σ, τ ∈ S
 
+/-
 /-- Construct an ASC from a downward-closed subset of a given ASC. -/
 --@[simps]
 instance to_asc (K : abstract_simplicial_complex A)
   (S : set (finset A))
-  (hS : subset_asc S K)
+  (hS : S ⊆ K.simplices)
   (down_closed : is_down_closed S hS) :
   abstract_simplicial_complex A :=
 { simplices := S,
@@ -111,19 +114,20 @@ instance to_asc (K : abstract_simplicial_complex A)
 /- The ASC constructed from a downward-closed subset of an ASC `K` is a subcomplex of `K`. -/
 @[simp]
 lemma to_asc_is_subcomplex (K : abstract_simplicial_complex A) (S : set (finset A))
-    (hS : subset_asc S K) (down_closed : is_down_closed S hS) : 
+    (hS : S ⊆ K.simplices) (down_closed : is_down_closed S hS) : 
     (abstract_simplicial_complex.to_asc K S hS down_closed).subcomplex K := 
   hS
+-/
 
 /-- The star of a subset `S` of an ASC `K` is the set of simplices in `K` which contain a 
 simplex in `S`. -/
-def star (S : set (finset A)) {hS : subset_asc S K} : set (finset A) :=
+def star (S : set (finset A)) {hS : S ⊆ K.simplices} : set (finset A) :=
   { σ ∈ K.simplices | ∃ σ' ∈ S, σ' ⊆ σ }
 
 /-- The star of a subset `S` of an ASC `K` indeed forms a subset of `K`. -/
 @[simp]
 lemma star_is_subset_asc (S : set (finset A)) 
-    {hS : subset_asc S K} : subset_asc (star S) K := 
+    {hS : S ⊆ K.simplices} : (star S) ⊆ K.simplices := 
   by simp only [subset_asc, star, set.sep_subset]
 
 /-- (Downward?) closure of a single simplex. -/
