@@ -124,11 +124,13 @@ simplex in `S`. -/
 def star (S : set (finset A)) {hS : S ⊆ K.simplices} : set (finset A) :=
   { σ ∈ K.simplices | ∃ σ' ∈ S, σ' ⊆ σ }
 
+/- trying to get blueprint working
 /-- The star of a subset `S` of an ASC `K` indeed forms a subset of `K`. -/
 @[simp]
 lemma star_is_subset_asc (S : set (finset A)) 
-    {hS : S ⊆ K.simplices} : (star S) ⊆ K.simplices := 
-  by simp only [subset_asc, star, set.sep_subset]
+    {hS : S ⊆ K.simplices} : (@star A K S hS) ⊆ K.simplices := 
+  by sorry --simp only [subset_asc, star, set.sep_subset]
+-/
 
 /-- (Downward?) closure of a single simplex. -/
 def simplex_closure (σ : finset A) 
@@ -143,14 +145,15 @@ On a related note, do we want `subcomplex` to be an instance of `has_sub`? -/
 --K  that contains S." This is a rough definition in an arbitrary type `A` / possibly infinite 
 --set `K.simplices` as it is not necessarily clear that there even *exists* such a minimal set. 
 --Perhaps we need a nicer definition.  -/
-def closure (S : set (finset A)) [hS : subset_asc S K] : 
+def closure (S : set (finset A)) [hS : S ⊆ K.simplices] : 
     set (finset A) := 
   ⋃ (σ ∈ S), simplex_closure σ (hS H)
 
+/- for now 
 /-- The closure of a subset `S` of an ASC `K` indeed forms a subset of `K`. -/
 @[simp]
 lemma closure_is_subset_asc (S : set (finset A))
-    (hS : subset_asc S K) : subset_asc (closure S hS) K := by
+    (hS : S ⊆ K.simplices) : (closure S hS) ⊆ K.simplices := by
 { unfold subset_asc closure,
   simp at *,
   sorry
@@ -172,4 +175,5 @@ def boundary (K' : abstract_simplicial_complex A) [K'.subcomplex K]
     abstract_simplicial_complex A := by sorry
 --{ refine (closure _)}  
 
+-/
 end abstract_simplicial_complex

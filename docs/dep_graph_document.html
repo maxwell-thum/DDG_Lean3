@@ -48,46 +48,288 @@
 <div id="statements">
 
     
-    <div class="dep-modal-container" id="def:fin_abstr_simpl_complex_modal">
+    <div class="dep-modal-container" id="def:abstract_simplicial_complex_modal">
       <div class="dep-modal-content">
           <button class="dep-closebtn">
 <svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
 </button>
         
-  <div class="thm" id="def:fin_abstr_simpl_complex" style="display: none">
+  <div class="thm" id="def:abstract_simplicial_complex" style="display: none">
     <div class="thm_thmheading">
       <span class="definition_thmcaption">
       Definition
       </span>
       <span class="definition_thmlabel">1.1</span></div>
-    <div class="thm_thmcontent"><p>  An <em>(finite) abstract simplicial complex</em> is a pair \((V,\mathcal{K})\), where \(V\) is a finite set, \(\mathcal{K}\subseteq \mathcal{P}(V)\) is a set of subsets of \(V\), every \(\sigma \in \mathcal{K}\) is finite, and for all \(\sigma \in \mathcal{K}\), \(\sigma ' \subseteq \sigma \) implies \(\sigma ' \in \mathcal{K}\). \(V\) is called the set of <em>vertices</em> and elements of \(\mathcal{K}\) are called <em>simplices</em>. </p>
+    <div class="thm_thmcontent"><p>  An <em>abstract simplicial complex</em> \(\mathcal{K}\) is a set of non-empty<a class="footnote" href="#a0000000004">
+  <sup class="footnotemark">1</sup>
+</a> finite sets called <em>simplices</em> such that for all \(\sigma \in \mathcal{K}\), if \(\sigma ' \subseteq \sigma \) and \(\sigma ' \neq \emptyset \), then \(\sigma ' \in \mathcal{K}\).  </p>
 </div>
 
-    <a class="latex_link" href="chap-combo_surfaces.html#def:fin_abstr_simpl_complex">LaTeX</a>
-  <a class="lean_link" href="https://github.com/maxwell-thum/DDG_Lean3/blob/68675af62b7d050e625d2561acf92e50ace8502a/src/combo_surfaces.lean#L3">Lean</a></div>
+    <a class="latex_link" href="chap-combinatorial_surfaces.html#def:abstract_simplicial_complex">LaTeX</a>
+  <a class="lean_link" href="https://github.com/maxwell-thum/DDG_Lean3/blob/aa01c43427260527bf377d7c39c249af64efe9b1/src/combinatorial_surface/abstract_simplicial_complex.lean#L40">Lean</a></div>
     
       </div>
     </div>
 
 
     
-    <div class="dep-modal-container" id="def:fin_abstr_simplex_modal">
+    <div class="dep-modal-container" id="def:abstract_simplicial_k-complex_modal">
       <div class="dep-modal-content">
           <button class="dep-closebtn">
 <svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
 </button>
         
-  <div class="thm" id="def:fin_abstr_simplex" style="display: none">
+  <div class="thm" id="def:abstract_simplicial_k-complex" style="display: none">
+    <div class="thm_thmheading">
+      <span class="definition_thmcaption">
+      Definition
+      </span>
+      <span class="definition_thmlabel">1.6</span></div>
+    <div class="thm_thmcontent"><p>  If the set of degrees of the simplices of an abstract simplicial complex has a maximum \(k\), then that abstract simplicial complex is said to be an <em>abstract simplicial \(k\)-complex</em>. </p>
+</div>
+
+    <a class="latex_link" href="chap-combinatorial_surfaces.html#def:abstract_simplicial_k-complex">LaTeX</a>
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="def:closure_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="def:closure" style="display: none">
+    <div class="thm_thmheading">
+      <span class="definition_thmcaption">
+      Definition
+      </span>
+      <span class="definition_thmlabel">1.9</span></div>
+    <div class="thm_thmcontent"><p>  The <em>closure</em> \(\operatorname{Cl}(S)\) of a set of simplices \(S \subseteq \mathcal{K}\) is the smallest (by inclusion) simplicial complex containing \(S\). </p>
+</div>
+
+    <a class="latex_link" href="chap-combinatorial_surfaces.html#def:closure">LaTeX</a>
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="def:degree_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="def:degree" style="display: none">
     <div class="thm_thmheading">
       <span class="definition_thmcaption">
       Definition
       </span>
       <span class="definition_thmlabel">1.2</span></div>
-    <div class="thm_thmcontent"><p>  Let \((V,\mathcal{K})\) be a finite simplicial complex. For \(k \in \mathbb {N}\), an <em>abstract \(k\)-simplex</em> is a simplex \(\sigma \in \mathcal{K}\) consisting of exactly \(k+1\) vertices. </p>
+    <div class="thm_thmcontent"><p>  The <em>degree</em> or <em>dimension</em> of an (abstract) simplex with \(k+1\) vertices is \(k\). </p>
 </div>
 
-    <a class="latex_link" href="chap-combo_surfaces.html#def:fin_abstr_simplex">LaTeX</a>
-  <a class="lean_link" href="https://github.com/maxwell-thum/DDG_Lean3/blob/68675af62b7d050e625d2561acf92e50ace8502a/src/combo_surfaces.lean#L12">Lean</a></div>
+    <a class="latex_link" href="chap-combinatorial_surfaces.html#def:degree">LaTeX</a>
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="def:face_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="def:face" style="display: none">
+    <div class="thm_thmheading">
+      <span class="definition_thmcaption">
+      Definition
+      </span>
+      <span class="definition_thmlabel">1.4</span></div>
+    <div class="thm_thmcontent"><p>  A nonempty subset of an abstract simplex is called a <em>face</em>. </p>
+</div>
+
+    <a class="latex_link" href="chap-combinatorial_surfaces.html#def:face">LaTeX</a>
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="def:k_simplices_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="def:k_simplices" style="display: none">
+    <div class="thm_thmheading">
+      <span class="definition_thmcaption">
+      Definition
+      </span>
+      <span class="definition_thmlabel">1.3</span></div>
+    <div class="thm_thmcontent"><p>  An (abstract) simplex of degree \(k\) is called an <em>abstract \(k\)-simplex</em>. </p>
+</div>
+
+    <a class="latex_link" href="chap-combinatorial_surfaces.html#def:k_simplices">LaTeX</a>
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="def:link_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="def:link" style="display: none">
+    <div class="thm_thmheading">
+      <span class="definition_thmcaption">
+      Definition
+      </span>
+      <span class="definition_thmlabel">1.11</span></div>
+    <div class="thm_thmcontent"><p>  The <em>link</em> \(\operatorname{Lk}(\sigma )\) of a simplex \(\sigma \in \mathcal{K}\) is the set of all simplices \(\tau \in \mathcal{K}\) such that \(\sigma \) and \(\tau \) are disjoint and their union is a simplex. In set-builder notation, </p>
+<div class="displaymath" id="a0000000006">
+  \[  \operatorname{Lk}(\sigma ) \coloneqq \{  \tau \in \mathcal{K}\mid \tau \cap \sigma = \emptyset , \tau \cup \sigma \in \mathcal{K}\} .  \]
+</div>
+</div>
+
+    <a class="latex_link" href="chap-combinatorial_surfaces.html#def:link">LaTeX</a>
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="def:pure_abstract_simplicial_k-complex_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="def:pure_abstract_simplicial_k-complex" style="display: none">
+    <div class="thm_thmheading">
+      <span class="definition_thmcaption">
+      Definition
+      </span>
+      <span class="definition_thmlabel">1.7</span></div>
+    <div class="thm_thmcontent"><p>  Let \(\mathcal{K}\) be an abstract simplicial \(k\)-complex. If every simplex is a face of some \(k\)-simplex, then we say \(\mathcal{K}\) is <em>pure</em> and call it a <em>pure simplicial \(k\)-complex</em>. </p>
+</div>
+
+    <a class="latex_link" href="chap-combinatorial_surfaces.html#def:pure_abstract_simplicial_k-complex">LaTeX</a>
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="def:star_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="def:star" style="display: none">
+    <div class="thm_thmheading">
+      <span class="definition_thmcaption">
+      Definition
+      </span>
+      <span class="definition_thmlabel">1.8</span></div>
+    <div class="thm_thmcontent"><p> The <em>star</em> \(\operatorname{St}(\sigma )\) of a simplex \(\sigma \) in an abstract simplicial complex \(\mathcal{K}\) is the set of all simplices in \(\mathcal{K}\) having \(\sigma \) as a face. </p>
+<p>The star \(\operatorname{St}(S)\) of a set \(S\) of simplices in \(\mathcal{K}\) (i.e., a subset of \(\mathcal{K}\)) is the set of all simplices in \(\mathcal{K}\) having some simplex in \(S\) as a face. Equivalently, \(\operatorname{St}(S) = \bigcup _{\sigma \in S} \operatorname{St}(\sigma )\). </p>
+</div>
+
+    <a class="latex_link" href="chap-combinatorial_surfaces.html#def:star">LaTeX</a>
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="def:subcomplex_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="def:subcomplex" style="display: none">
+    <div class="thm_thmheading">
+      <span class="definition_thmcaption">
+      Definition
+      </span>
+      <span class="definition_thmlabel">1.5</span></div>
+    <div class="thm_thmcontent"><p>  Given two simplicial complexes \(\mathcal{K}\) and \(\mathcal{K}'\), we say that \(\mathcal{K}'\) is a <em>subcomplex</em> of \(\mathcal{K}\) if \(\mathcal{K}' \subseteq \mathcal{K}\), that is, every simplex in \(\mathcal{K}'\) is a simplex in \(\mathcal{K}\) as well. </p>
+</div>
+
+    <a class="latex_link" href="chap-combinatorial_surfaces.html#def:subcomplex">LaTeX</a>
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:closure_eq_down_closure_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:closure_eq_down_closure" style="display: none">
+    <div class="thm_thmheading">
+      <span class="lemma_thmcaption">
+      Lemma
+      </span>
+      <span class="lemma_thmlabel">1.10</span></div>
+    <div class="thm_thmcontent">
+<div class="displaymath" id="a0000000005">
+  \[  \operatorname{Cl}(S) = \bigcup _{\sigma \in S} \mathcal{P}(\sigma ) \setminus \emptyset .  \]
+</div>
+</div>
+
+    <a class="latex_link" href="chap-combinatorial_surfaces.html#lem:closure_eq_down_closure">LaTeX</a>
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:lk_eq_cl_st_sub_st_cl_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:lk_eq_cl_st_sub_st_cl" style="display: none">
+    <div class="thm_thmheading">
+      <span class="lemma_thmcaption">
+      Lemma
+      </span>
+      <span class="lemma_thmlabel">1.12</span></div>
+    <div class="thm_thmcontent"><p>  For any set of simplices \(S \subseteq \mathcal{K}\), </p>
+<div class="displaymath" id="a0000000007">
+  \[  \operatorname{Lk}(S) = \operatorname{Cl}(\operatorname{St}(S)) \setminus \operatorname{St}(\operatorname{Cl}(S)).  \]
+</div>
+</div>
+
+    <a class="latex_link" href="chap-combinatorial_surfaces.html#lem:lk_eq_cl_st_sub_st_cl">LaTeX</a>
+  </div>
     
       </div>
     </div>
@@ -110,7 +352,7 @@ graphContainer.graphviz({useWorker: true})
     .width(width)
     .height(height)
     .fit(true)
-    .renderDot('strict digraph "" {	graph [bgcolor=transparent];	node [label="\N",		penwidth=1.8	];	edge [arrowhead=vee];	"def:fin_abstr_simpl_complex"	[color=green,		fillcolor="#b0eca3",		label=fin_abstr_simpl_complex,		shape=box,		style=filled];	"def:fin_abstr_simplex"	[color=green,		fillcolor="#b0eca3",		label=fin_abstr_simplex,		shape=box,		style=filled];}')
+    .renderDot('strict digraph "" {	graph [bgcolor=transparent];	node [label="\N",		penwidth=1.8	];	edge [arrowhead=vee];	"def:degree"	[color=blue,		label=degree,		shape=box];	"def:k_simplices"	[label=k_simplices,		shape=box];	"def:degree" -> "def:k_simplices"	[style=dashed];	"def:abstract_simplicial_k-complex"	[label="abstract_simplicial_k-complex",		shape=box];	"def:degree" -> "def:abstract_simplicial_k-complex"	[style=dashed];	"def:pure_abstract_simplicial_k-complex"	[label="pure_abstract_simplicial_k-complex",		shape=box];	"def:degree" -> "def:pure_abstract_simplicial_k-complex"	[style=dashed];	"def:subcomplex"	[color=blue,		label=subcomplex,		shape=box];	"def:face"	[color=blue,		label=face,		shape=box];	"def:face" -> "def:pure_abstract_simplicial_k-complex"	[style=dashed];	"def:abstract_simplicial_k-complex" -> "def:pure_abstract_simplicial_k-complex"	[style=dashed];	"def:star"	[color=blue,		label=star,		shape=box];	"lem:lk_eq_cl_st_sub_st_cl"	[label=lk_eq_cl_st_sub_st_cl,		shape=ellipse];	"def:star" -> "lem:lk_eq_cl_st_sub_st_cl"	[style=dashed];	"def:link"	[color=blue,		label=link,		shape=box];	"def:link" -> "lem:lk_eq_cl_st_sub_st_cl"	[style=dashed];	"lem:closure_eq_down_closure"	[label=closure_eq_down_closure,		shape=ellipse];	"def:abstract_simplicial_complex"	[color=green,		fillcolor="#b0eca3",		label=abstract_simplicial_complex,		shape=box,		style=filled];	"def:abstract_simplicial_complex" -> "def:degree"	[style=dashed];	"def:abstract_simplicial_complex" -> "def:subcomplex"	[style=dashed];	"def:abstract_simplicial_complex" -> "def:face"	[style=dashed];	"def:abstract_simplicial_complex" -> "def:abstract_simplicial_k-complex"	[style=dashed];	"def:abstract_simplicial_complex" -> "def:link"	[style=dashed];	"def:closure"	[color=blue,		label=closure,		shape=box];	"def:abstract_simplicial_complex" -> "def:closure"	[style=dashed];	"def:closure" -> "lem:closure_eq_down_closure"	[style=dashed];	"def:closure" -> "lem:lk_eq_cl_st_sub_st_cl"	[style=dashed];}')
     .on("end", interactive);
 
 clickNode = function() {
