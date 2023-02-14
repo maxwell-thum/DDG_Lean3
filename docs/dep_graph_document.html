@@ -48,75 +48,6 @@
 <div id="statements">
 
     
-    <div class="dep-modal-container" id="a0000000010_modal">
-      <div class="dep-modal-content">
-          <button class="dep-closebtn">
-<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
-</button>
-        
-  <div class="thm" id="a0000000010" style="display: none">
-    <div class="thm_thmheading">
-      <span class="definition_thmcaption">
-      Definition
-      </span>
-      <span class="definition_thmlabel">1.12</span></div>
-    <div class="thm_thmcontent"><p>An <em>orientation</em> on a An <em>oriented abstract simplicial complex</em> is an abstract simplicial complex with an orientation assigned to each of its simplices. </p>
-</div>
-
-    <a class="latex_link" href="chap-combinatorial_surfaces.html#a0000000010">LaTeX</a>
-  </div>
-    
-      </div>
-    </div>
-
-
-    
-    <div class="dep-modal-container" id="a0000000011_modal">
-      <div class="dep-modal-content">
-          <button class="dep-closebtn">
-<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
-</button>
-        
-  <div class="thm" id="a0000000011" style="display: none">
-    <div class="thm_thmheading">
-      <span class="definition_thmcaption">
-      Definition
-      </span>
-      <span class="definition_thmlabel">1.13</span></div>
-    <div class="thm_thmcontent"><p>A <em>(geometric) simplicial complex</em> is... </p>
-</div>
-
-    <a class="latex_link" href="chap-combinatorial_surfaces.html#a0000000011">LaTeX</a>
-  </div>
-    
-      </div>
-    </div>
-
-
-    
-    <div class="dep-modal-container" id="a0000000012_modal">
-      <div class="dep-modal-content">
-          <button class="dep-closebtn">
-<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
-</button>
-        
-  <div class="thm" id="a0000000012" style="display: none">
-    <div class="thm_thmheading">
-      <span class="definition_thmcaption">
-      Definition
-      </span>
-      <span class="definition_thmlabel">1.14</span></div>
-    <div class="thm_thmcontent"><p>The <em>underlying abstract simplicial complex</em> of a geometric simplicial complex is the abstract simplicial complex whose abstract simplices are simply the sets of vertices of each geometric simplex. </p>
-</div>
-
-    <a class="latex_link" href="chap-combinatorial_surfaces.html#a0000000012">LaTeX</a>
-  </div>
-    
-      </div>
-    </div>
-
-
-    
     <div class="dep-modal-container" id="def:abstract_simplicial_complex_modal">
       <div class="dep-modal-content">
           <button class="dep-closebtn">
@@ -135,7 +66,7 @@
 </div>
 
     <a class="latex_link" href="chap-combinatorial_surfaces.html#def:abstract_simplicial_complex">LaTeX</a>
-  <a class="lean_link" href="https://github.com/maxwell-thum/DDG_Lean3/blob/4c7a91b217fe32699206b14bbbb86c2a0ab6f620/src/combinatorial_surface/abstract_simplicial_complex.lean#L40">Lean</a></div>
+  <a class="lean_link" href="https://github.com/maxwell-thum/DDG_Lean3/blob/950aaaacd9beede237564c852f388ba3ee0ae49d/src/combinatorial_surface/abstract_simplicial_complex.lean#L40">Lean</a></div>
     
       </div>
     </div>
@@ -181,7 +112,7 @@
 </div>
 
     <a class="latex_link" href="chap-combinatorial_surfaces.html#def:closure">LaTeX</a>
-  <a class="lean_link" href="https://github.com/maxwell-thum/DDG_Lean3/blob/4c7a91b217fe32699206b14bbbb86c2a0ab6f620/src/combinatorial_surface/abstract_simplicial_complex.lean#L148">Lean</a></div>
+  <a class="lean_link" href="https://github.com/maxwell-thum/DDG_Lean3/blob/950aaaacd9beede237564c852f388ba3ee0ae49d/src/combinatorial_surface/abstract_simplicial_complex.lean#L148">Lean</a></div>
     
       </div>
     </div>
@@ -204,7 +135,7 @@
 </div>
 
     <a class="latex_link" href="chap-combinatorial_surfaces.html#def:degree">LaTeX</a>
-  <a class="lean_link" href="https://github.com/maxwell-thum/DDG_Lean3/blob/4c7a91b217fe32699206b14bbbb86c2a0ab6f620/src/combinatorial_surface/abstract_simplicial_complex.lean#L51">Lean</a></div>
+  <a class="lean_link" href="https://github.com/maxwell-thum/DDG_Lean3/blob/950aaaacd9beede237564c852f388ba3ee0ae49d/src/combinatorial_surface/abstract_simplicial_complex.lean#L51">Lean</a></div>
     
       </div>
     </div>
@@ -223,7 +154,7 @@
       Definition
       </span>
       <span class="definition_thmlabel">2.3</span></div>
-    <div class="thm_thmcontent"><p>  The <em>discrete exterior derivative</em> on \(k\)-forms is a map \(\mathrm{d}_k \colon \Omega ^k \to \Omega ^{k+1}\) such that </p>
+    <div class="thm_thmcontent"><p>  The <em>discrete exterior derivative</em> on \(k\)-forms is a map \(\hat{\mathrm{d}}_k \colon \hat{\Omega }^k \to \hat{\Omega }^{k+1}\) such that \(\hat{\mathrm{d}}_k \circ \int _k = \int _{k+1} \circ \mathrm{d}_k\). </p>
 </div>
 
     <a class="latex_link" href="chap-discrete_exterior_calculus.html#def:discrete_exterior_derivative">LaTeX</a>
@@ -293,9 +224,10 @@
       </span>
       <span class="definition_thmlabel">2.2</span></div>
     <div class="thm_thmcontent"><p>  The <em>discretization</em> on \(\mathcal{K}\) of a differential \(k\)-form \(\alpha \) on \(M\) is a discrete differential \(k\)-form defined by integrating \(\alpha \) over the image in \(M\) of each (oriented) \(k\)-simplex in \(\mathcal{K}\). In other words, for all \(\sigma \in F_k\), </p>
-<div class="displaymath" id="a0000000014">
+<div class="displaymath" id="a0000000011">
   \[  \hat{\alpha }_\sigma := \int _{t(|\sigma |)} \alpha .  \]
 </div>
+<p> We denote this map by \(\int _k\). </p>
 </div>
 
     <a class="latex_link" href="chap-discrete_exterior_calculus.html#def:k-discretization">LaTeX</a>
@@ -322,7 +254,7 @@
 </div>
 
     <a class="latex_link" href="chap-combinatorial_surfaces.html#def:k_simplices">LaTeX</a>
-  <a class="lean_link" href="https://github.com/maxwell-thum/DDG_Lean3/blob/4c7a91b217fe32699206b14bbbb86c2a0ab6f620/src/combinatorial_surface/abstract_simplicial_complex.lean#L54">Lean</a></div>
+  <a class="lean_link" href="https://github.com/maxwell-thum/DDG_Lean3/blob/950aaaacd9beede237564c852f388ba3ee0ae49d/src/combinatorial_surface/abstract_simplicial_complex.lean#L54">Lean</a></div>
     
       </div>
     </div>
@@ -355,6 +287,30 @@
 
 
     
+    <div class="dep-modal-container" id="def:oriented_asc_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="def:oriented_asc" style="display: none">
+    <div class="thm_thmheading">
+      <span class="definition_thmcaption">
+      Definition
+      </span>
+      <span class="definition_thmlabel">1.12</span></div>
+    <div class="thm_thmcontent"><p>  An <em>orientation</em> on a simplex is a choice of a permutation of its vertices. This permutation and every permutation related to it by even permutations is called <em>positively oriented</em>. Every permutation related to it by odd permutations is called <em>negatively oriented</em>. </p>
+<p>An <em>oriented abstract simplicial complex</em> is an abstract simplicial complex with an orientation assigned to each of its simplices. </p>
+</div>
+
+    <a class="latex_link" href="chap-combinatorial_surfaces.html#def:oriented_asc">LaTeX</a>
+  </div>
+    
+      </div>
+    </div>
+
+
+    
     <div class="dep-modal-container" id="def:pure_abstract_simplicial_k-complex_modal">
       <div class="dep-modal-content">
           <button class="dep-closebtn">
@@ -371,6 +327,29 @@
 </div>
 
     <a class="latex_link" href="chap-combinatorial_surfaces.html#def:pure_abstract_simplicial_k-complex">LaTeX</a>
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="def:simplicial_complex_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="def:simplicial_complex" style="display: none">
+    <div class="thm_thmheading">
+      <span class="definition_thmcaption">
+      Definition
+      </span>
+      <span class="definition_thmlabel">1.13</span></div>
+    <div class="thm_thmcontent"><p>  A <em>(geometric) simplicial complex</em> is... </p>
+</div>
+
+    <a class="latex_link" href="chap-combinatorial_surfaces.html#def:simplicial_complex">LaTeX</a>
   </div>
     
       </div>
@@ -395,7 +374,7 @@
 </div>
 
     <a class="latex_link" href="chap-combinatorial_surfaces.html#def:star">LaTeX</a>
-  <a class="lean_link" href="https://github.com/maxwell-thum/DDG_Lean3/blob/4c7a91b217fe32699206b14bbbb86c2a0ab6f620/src/combinatorial_surface/abstract_simplicial_complex.lean#L124">Lean</a></div>
+  <a class="lean_link" href="https://github.com/maxwell-thum/DDG_Lean3/blob/950aaaacd9beede237564c852f388ba3ee0ae49d/src/combinatorial_surface/abstract_simplicial_complex.lean#L124">Lean</a></div>
     
       </div>
     </div>
@@ -418,7 +397,30 @@
 </div>
 
     <a class="latex_link" href="chap-combinatorial_surfaces.html#def:subcomplex">LaTeX</a>
-  <a class="lean_link" href="https://github.com/maxwell-thum/DDG_Lean3/blob/4c7a91b217fe32699206b14bbbb86c2a0ab6f620/src/combinatorial_surface/abstract_simplicial_complex.lean#L68">Lean</a></div>
+  <a class="lean_link" href="https://github.com/maxwell-thum/DDG_Lean3/blob/950aaaacd9beede237564c852f388ba3ee0ae49d/src/combinatorial_surface/abstract_simplicial_complex.lean#L68">Lean</a></div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="def:underlying_asc_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="def:underlying_asc" style="display: none">
+    <div class="thm_thmheading">
+      <span class="definition_thmcaption">
+      Definition
+      </span>
+      <span class="definition_thmlabel">1.14</span></div>
+    <div class="thm_thmcontent"><p>  The <em>underlying abstract simplicial complex</em> of a geometric simplicial complex is the abstract simplicial complex whose abstract simplices are simply the sets of vertices of each geometric simplex. </p>
+</div>
+
+    <a class="latex_link" href="chap-combinatorial_surfaces.html#def:underlying_asc">LaTeX</a>
+  </div>
     
       </div>
     </div>
@@ -490,7 +492,7 @@
       </span>
       <span class="theorem_thmlabel">2.4</span></div>
     <div class="thm_thmcontent"><p>  The discrete exterior derivative is unique and given by </p>
-<div class="displaymath" id="a0000000016">
+<div class="displaymath" id="a0000000013">
   \[  (\mathrm{d}_k \alpha )(\sigma ) = \sum _{\tau \in F_k \cap \mathcal{P}(\sigma )} \mathrm{sgn}(\tau ,\sigma ) \alpha (\tau )  \]
 </div>
 <p> for all \(\alpha \in \Omega ^k\) and \(\sigma \in F_{k+1}\). </p>
@@ -520,7 +522,7 @@ graphContainer.graphviz({useWorker: true})
     .width(width)
     .height(height)
     .fit(true)
-    .renderDot('strict digraph "" {	graph [bgcolor=transparent];	node [label="\N",		penwidth=1.8	];	edge [arrowhead=vee];	"def:star"	[color=green,		fillcolor="#b0eca3",		label=star,		shape=box,		style=filled];	"lem:lk_eq_cl_st_sub_st_cl"	[label=lk_eq_cl_st_sub_st_cl,		shape=ellipse];	"def:star" -> "lem:lk_eq_cl_st_sub_st_cl"	[style=dashed];	a0000000011	[color=blue,		label=a0000000011,		shape=box];	"def:k-discretization"	[label="k-discretization",		shape=box];	"thm:discrete_exterior_derivative_unique"	[label=discrete_exterior_derivative_unique,		shape=ellipse];	"def:k-discretization" -> "thm:discrete_exterior_derivative_unique"	[style=dashed];	"def:closure"	[color=green,		fillcolor="#b0eca3",		label=closure,		shape=box,		style=filled];	"lem:closure_eq_down_closure"	[color=blue,		label=closure_eq_down_closure,		shape=ellipse];	"def:closure" -> "lem:closure_eq_down_closure"	[style=dashed];	"def:closure" -> "lem:lk_eq_cl_st_sub_st_cl"	[style=dashed];	a0000000012	[color=blue,		label=a0000000012,		shape=box];	"def:discrete_exterior_derivative"	[label=discrete_exterior_derivative,		shape=box];	"def:discrete_exterior_derivative" -> "thm:discrete_exterior_derivative_unique"	[style=dashed];	"def:abstract_simplicial_complex"	[color=green,		fillcolor="#b0eca3",		label=abstract_simplicial_complex,		shape=box,		style=filled];	"def:abstract_simplicial_complex" -> "def:star"	[style=dashed];	"def:abstract_simplicial_complex" -> "def:closure"	[style=dashed];	"def:abstract_simplicial_k-complex"	[color=blue,		label="abstract_simplicial_k-complex",		shape=box];	"def:abstract_simplicial_complex" -> "def:abstract_simplicial_k-complex"	[style=dashed];	"def:degree"	[color=green,		fillcolor="#b0eca3",		label=degree,		shape=box,		style=filled];	"def:abstract_simplicial_complex" -> "def:degree"	[style=dashed];	"def:geometric_realization"	[color=blue,		label=geometric_realization,		shape=box];	"def:abstract_simplicial_complex" -> "def:geometric_realization"	[style=dashed];	"def:link"	[color=blue,		label=link,		shape=box];	"def:abstract_simplicial_complex" -> "def:link"	[style=dashed];	"def:subcomplex"	[color=green,		fillcolor="#b0eca3",		label=subcomplex,		shape=box,		style=filled];	"def:abstract_simplicial_complex" -> "def:subcomplex"	[style=dashed];	"def:k_simplices"	[color=green,		fillcolor="#b0eca3",		label=k_simplices,		shape=box,		style=filled];	a0000000010	[color=blue,		label=a0000000010,		shape=box];	"def:pure_abstract_simplicial_k-complex"	[label="pure_abstract_simplicial_k-complex",		shape=box];	"def:abstract_simplicial_k-complex" -> "def:pure_abstract_simplicial_k-complex"	[style=dashed];	"def:degree" -> "def:k_simplices"	[style=dashed];	"def:degree" -> "def:abstract_simplicial_k-complex"	[style=dashed];	"def:degree" -> "def:pure_abstract_simplicial_k-complex"	[style=dashed];	"def:geometric_realization" -> "def:k-discretization"	[style=dashed];	"def:link" -> "lem:lk_eq_cl_st_sub_st_cl"	[style=dashed];	"def:discrete_k-form"	[color=blue,		label="discrete_k-form",		shape=box];	"def:discrete_k-form" -> "def:k-discretization"	[style=dashed];	"def:discrete_k-form" -> "def:discrete_exterior_derivative"	[style=dashed];}')
+    .renderDot('strict digraph "" {	graph [bgcolor=transparent];	node [label="\N",		penwidth=1.8	];	edge [arrowhead=vee];	"def:underlying_asc"	[color=blue,		label=underlying_asc,		shape=box];	"def:geometric_realization"	[label=geometric_realization,		shape=box];	"def:underlying_asc" -> "def:geometric_realization"	[style=dashed];	"def:discrete_exterior_derivative"	[label=discrete_exterior_derivative,		shape=box];	"thm:discrete_exterior_derivative_unique"	[label=discrete_exterior_derivative_unique,		shape=ellipse];	"def:discrete_exterior_derivative" -> "thm:discrete_exterior_derivative_unique"	[style=dashed];	"def:k_simplices"	[color=green,		fillcolor="#b0eca3",		label=k_simplices,		shape=box,		style=filled];	"def:k-discretization"	[label="k-discretization",		shape=box];	"def:k-discretization" -> "thm:discrete_exterior_derivative_unique"	[style=dashed];	"def:abstract_simplicial_complex"	[color=green,		fillcolor="#b0eca3",		label=abstract_simplicial_complex,		shape=box,		style=filled];	"def:abstract_simplicial_complex" -> "def:underlying_asc"	[style=dashed];	"def:oriented_asc"	[color=blue,		label=oriented_asc,		shape=box];	"def:abstract_simplicial_complex" -> "def:oriented_asc"	[style=dashed];	"def:abstract_simplicial_k-complex"	[color=blue,		label="abstract_simplicial_k-complex",		shape=box];	"def:abstract_simplicial_complex" -> "def:abstract_simplicial_k-complex"	[style=dashed];	"def:degree"	[color=green,		fillcolor="#b0eca3",		label=degree,		shape=box,		style=filled];	"def:abstract_simplicial_complex" -> "def:degree"	[style=dashed];	"def:closure"	[color=green,		fillcolor="#b0eca3",		label=closure,		shape=box,		style=filled];	"def:abstract_simplicial_complex" -> "def:closure"	[style=dashed];	"def:link"	[color=blue,		label=link,		shape=box];	"def:abstract_simplicial_complex" -> "def:link"	[style=dashed];	"def:subcomplex"	[color=green,		fillcolor="#b0eca3",		label=subcomplex,		shape=box,		style=filled];	"def:abstract_simplicial_complex" -> "def:subcomplex"	[style=dashed];	"def:star"	[color=green,		fillcolor="#b0eca3",		label=star,		shape=box,		style=filled];	"def:abstract_simplicial_complex" -> "def:star"	[style=dashed];	"def:discrete_k-form"	[label="discrete_k-form",		shape=box];	"def:oriented_asc" -> "def:discrete_k-form"	[style=dashed];	"lem:closure_eq_down_closure"	[color=blue,		label=closure_eq_down_closure,		shape=ellipse];	"def:pure_abstract_simplicial_k-complex"	[label="pure_abstract_simplicial_k-complex",		shape=box];	"def:abstract_simplicial_k-complex" -> "def:pure_abstract_simplicial_k-complex"	[style=dashed];	"def:degree" -> "def:k_simplices"	[style=dashed];	"def:degree" -> "def:abstract_simplicial_k-complex"	[style=dashed];	"def:degree" -> "def:pure_abstract_simplicial_k-complex"	[style=dashed];	"def:closure" -> "lem:closure_eq_down_closure"	[style=dashed];	"lem:lk_eq_cl_st_sub_st_cl"	[label=lk_eq_cl_st_sub_st_cl,		shape=ellipse];	"def:closure" -> "lem:lk_eq_cl_st_sub_st_cl"	[style=dashed];	"def:link" -> "lem:lk_eq_cl_st_sub_st_cl"	[style=dashed];	"def:simplicial_complex"	[color=green,		fillcolor="#b0eca3",		label=simplicial_complex,		shape=box,		style=filled];	"def:simplicial_complex" -> "def:underlying_asc"	[style=dashed];	"def:geometric_realization" -> "def:k-discretization"	[style=dashed];	"def:discrete_k-form" -> "def:discrete_exterior_derivative"	[style=dashed];	"def:discrete_k-form" -> "def:k-discretization"	[style=dashed];	"def:star" -> "lem:lk_eq_cl_st_sub_st_cl"	[style=dashed];}')
     .on("end", interactive);
 
 clickNode = function() {

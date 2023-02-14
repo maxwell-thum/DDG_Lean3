@@ -80,6 +80,21 @@
     <span class="definition_thmlabel">2.1</span>
     <div class="thm_icons">
     <a class="icon proof" href="chap-discrete_exterior_calculus.html#def:discrete_k-form">#</a>
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+    <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+                <ul class="uses">
+          <li><a href="chap-combinatorial_surfaces.html#def:oriented_asc">Definition 1.12</a></li>
+        </ul>
+
+      </div>
+    </div>
 
   </div>
   </div>
@@ -88,7 +103,7 @@
 
   </div>
 </div> </p>
-<h2 id="a0000000013">2.1.1 Discretization</h2>
+<h2 id="a0000000010">2.1.1 Discretization</h2>
 <p>Recall the notions of a <em>manifold</em> and <em>differential (\(k\)-)forms</em>. From here on, let \(M\) be an \(n\)-dimensional triangulable topological manifold. Let \(t\colon |\mathcal{K}| \to M\) be a triangulation of \(M\). </p>
 <p><div class="definition_thmwrapper" id="def:k-discretization">
   <div class="definition_thmheading">
@@ -119,14 +134,15 @@
   </div>
   <div class="definition_thmcontent">
   <p>  The <em>discretization</em> on \(\mathcal{K}\) of a differential \(k\)-form \(\alpha \) on \(M\) is a discrete differential \(k\)-form defined by integrating \(\alpha \) over the image in \(M\) of each (oriented) \(k\)-simplex in \(\mathcal{K}\). In other words, for all \(\sigma \in F_k\), </p>
-<div class="displaymath" id="a0000000014">
+<div class="displaymath" id="a0000000011">
   \[  \hat{\alpha }_\sigma := \int _{t(|\sigma |)} \alpha .  \]
 </div>
+<p> We denote this map by \(\int _k\). </p>
 
   </div>
 </div> </p>
 <h1 id="a0000000005">2.2 Discrete Exterior Calculus</h1>
-<h2 id="a0000000015">2.2.1 The discrete exterior derivative</h2>
+<h2 id="a0000000012">2.2.1 The discrete exterior derivative</h2>
 <p><div class="definition_thmwrapper" id="def:discrete_exterior_derivative">
   <div class="definition_thmheading">
     <span class="definition_thmcaption">
@@ -154,7 +170,7 @@
   </div>
   </div>
   <div class="definition_thmcontent">
-  <p>  The <em>discrete exterior derivative</em> on \(k\)-forms is a map \(\mathrm{d}_k \colon \Omega ^k \to \Omega ^{k+1}\) such that </p>
+  <p>  The <em>discrete exterior derivative</em> on \(k\)-forms is a map \(\hat{\mathrm{d}}_k \colon \hat{\Omega }^k \to \hat{\Omega }^{k+1}\) such that \(\hat{\mathrm{d}}_k \circ \int _k = \int _{k+1} \circ \mathrm{d}_k\). </p>
 
   </div>
 </div> </p>
@@ -188,7 +204,7 @@
   </div>
   <div class="theorem_thmcontent">
   <p>  The discrete exterior derivative is unique and given by </p>
-<div class="displaymath" id="a0000000016">
+<div class="displaymath" id="a0000000013">
   \[  (\mathrm{d}_k \alpha )(\sigma ) = \sum _{\tau \in F_k \cap \mathcal{P}(\sigma )} \mathrm{sgn}(\tau ,\sigma ) \alpha (\tau )  \]
 </div>
 <p> for all \(\alpha \in \Omega ^k\) and \(\sigma \in F_{k+1}\). </p>

@@ -37,7 +37,7 @@ Click chapter titles to see missing items.
 </section>
 
 <section>
-  <h3>1 Combinatorial Surfaces <span class="partial">40%</span></h3>
+  <h3>1 Combinatorial Surfaces <span class="partial">46%</span></h3>
   
   <ul class="coverage">
     
@@ -67,24 +67,19 @@ Click chapter titles to see missing items.
     
     
     <li>
-      <div class="thm_thmheading">Definition 1.12 (a0000000010)</div>
-      <div class="thm_thm_content"><p>An <em>orientation</em> on a An <em>oriented abstract simplicial complex</em> is an abstract simplicial complex with an orientation assigned to each of its simplices. </p>
+      <div class="thm_thmheading">Definition 1.12 (def:oriented_asc)</div>
+      <div class="thm_thm_content"><p>  An <em>orientation</em> on a simplex is a choice of a permutation of its vertices. This permutation and every permutation related to it by even permutations is called <em>positively oriented</em>. Every permutation related to it by odd permutations is called <em>negatively oriented</em>. </p>
+<p>An <em>oriented abstract simplicial complex</em> is an abstract simplicial complex with an orientation assigned to each of its simplices. </p>
 </div>
     </li>
     
     
     
-    <li>
-      <div class="thm_thmheading">Definition 1.13 (a0000000011)</div>
-      <div class="thm_thm_content"><p>A <em>(geometric) simplicial complex</em> is... </p>
-</div>
-    </li>
-    
     
     
     <li>
-      <div class="thm_thmheading">Definition 1.14 (a0000000012)</div>
-      <div class="thm_thm_content"><p>The <em>underlying abstract simplicial complex</em> of a geometric simplicial complex is the abstract simplicial complex whose abstract simplices are simply the sets of vertices of each geometric simplex. </p>
+      <div class="thm_thmheading">Definition 1.14 (def:underlying_asc)</div>
+      <div class="thm_thm_content"><p>  The <em>underlying abstract simplicial complex</em> of a geometric simplicial complex is the abstract simplicial complex whose abstract simplices are simply the sets of vertices of each geometric simplex. </p>
 </div>
     </li>
     
@@ -155,9 +150,10 @@ Click chapter titles to see missing items.
     <li>
       <div class="thm_thmheading">Definition 2.2 (def:k-discretization)</div>
       <div class="thm_thm_content"><p>  The <em>discretization</em> on \(\mathcal{K}\) of a differential \(k\)-form \(\alpha \) on \(M\) is a discrete differential \(k\)-form defined by integrating \(\alpha \) over the image in \(M\) of each (oriented) \(k\)-simplex in \(\mathcal{K}\). In other words, for all \(\sigma \in F_k\), </p>
-<div class="displaymath" id="a0000000014">
+<div class="displaymath" id="a0000000011">
   \[  \hat{\alpha }_\sigma := \int _{t(|\sigma |)} \alpha .  \]
 </div>
+<p> We denote this map by \(\int _k\). </p>
 </div>
     </li>
     
@@ -165,7 +161,7 @@ Click chapter titles to see missing items.
     
     <li>
       <div class="thm_thmheading">Definition 2.3 (def:discrete_exterior_derivative)</div>
-      <div class="thm_thm_content"><p>  The <em>discrete exterior derivative</em> on \(k\)-forms is a map \(\mathrm{d}_k \colon \Omega ^k \to \Omega ^{k+1}\) such that </p>
+      <div class="thm_thm_content"><p>  The <em>discrete exterior derivative</em> on \(k\)-forms is a map \(\hat{\mathrm{d}}_k \colon \hat{\Omega }^k \to \hat{\Omega }^{k+1}\) such that \(\hat{\mathrm{d}}_k \circ \int _k = \int _{k+1} \circ \mathrm{d}_k\). </p>
 </div>
     </li>
     
@@ -174,7 +170,7 @@ Click chapter titles to see missing items.
     <li>
       <div class="thm_thmheading">Theorem 2.4 (thm:discrete_exterior_derivative_unique)</div>
       <div class="thm_thm_content"><p>  The discrete exterior derivative is unique and given by </p>
-<div class="displaymath" id="a0000000016">
+<div class="displaymath" id="a0000000013">
   \[  (\mathrm{d}_k \alpha )(\sigma ) = \sum _{\tau \in F_k \cap \mathcal{P}(\sigma )} \mathrm{sgn}(\tau ,\sigma ) \alpha (\tau )  \]
 </div>
 <p> for all \(\alpha \in \Omega ^k\) and \(\sigma \in F_{k+1}\). </p>
@@ -209,26 +205,15 @@ Click chapter titles to see missing items.
     </li>
     
     <li>
-      <div class="thm_thmheading">Definition 1.12 (a0000000010)</div>
-      <div class="thm_thm_content"><p>An <em>orientation</em> on a An <em>oriented abstract simplicial complex</em> is an abstract simplicial complex with an orientation assigned to each of its simplices. </p>
+      <div class="thm_thmheading">Definition 1.12 (def:oriented_asc)</div>
+      <div class="thm_thm_content"><p>  An <em>orientation</em> on a simplex is a choice of a permutation of its vertices. This permutation and every permutation related to it by even permutations is called <em>positively oriented</em>. Every permutation related to it by odd permutations is called <em>negatively oriented</em>. </p>
+<p>An <em>oriented abstract simplicial complex</em> is an abstract simplicial complex with an orientation assigned to each of its simplices. </p>
 </div>
     </li>
     
     <li>
-      <div class="thm_thmheading">Definition 1.13 (a0000000011)</div>
-      <div class="thm_thm_content"><p>A <em>(geometric) simplicial complex</em> is... </p>
-</div>
-    </li>
-    
-    <li>
-      <div class="thm_thmheading">Definition 1.14 (a0000000012)</div>
-      <div class="thm_thm_content"><p>The <em>underlying abstract simplicial complex</em> of a geometric simplicial complex is the abstract simplicial complex whose abstract simplices are simply the sets of vertices of each geometric simplex. </p>
-</div>
-    </li>
-    
-    <li>
-      <div class="thm_thmheading">Definition 1.15 (def:geometric_realization)</div>
-      <div class="thm_thm_content"><p>  The <em>geometric realization</em> of an abstract simplicial complex \(\mathcal{K}\) is a geometric simplicial complex whose underlying abstract simplicial complex is \(\mathcal{K}\) itself. In particular, we define it as... </p>
+      <div class="thm_thmheading">Definition 1.14 (def:underlying_asc)</div>
+      <div class="thm_thm_content"><p>  The <em>underlying abstract simplicial complex</em> of a geometric simplicial complex is the abstract simplicial complex whose abstract simplices are simply the sets of vertices of each geometric simplex. </p>
 </div>
     </li>
     
@@ -243,17 +228,6 @@ Click chapter titles to see missing items.
 </section>
 
 <section>
-  
-  <h3>2 Discrete Exterior Calculus</h3>
-  <ul class="coverage">
-    
-    <li>
-      <div class="thm_thmheading">Definition 2.1 (def:discrete_k-form)</div>
-      <div class="thm_thm_content"><p>  A <em>(real-valued) discrete (differential) \(k\)-form</em> on an oriented abstract simplicial complex \(\mathcal{K}\) is a map \(\alpha \colon F_k \to \mathbb {R}\). The set of all discrete \(k\)-forms on \(\mathcal{K}\) is denoted \(\Omega ^k\). </p>
-</div>
-    </li>
-    
-  </ul>
   
 </section>
 

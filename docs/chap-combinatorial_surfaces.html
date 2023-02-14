@@ -90,7 +90,7 @@
 </button>
         </header>
                 <ul class="uses">
-          <li><a href="https://github.com/maxwell-thum/DDG_Lean3/blob/4c7a91b217fe32699206b14bbbb86c2a0ab6f620/src/combinatorial_surface/abstract_simplicial_complex.lean#L40">abstract_simplicial_complex</a></li>
+          <li><a href="https://github.com/maxwell-thum/DDG_Lean3/blob/950aaaacd9beede237564c852f388ba3ee0ae49d/src/combinatorial_surface/abstract_simplicial_complex.lean#L40">abstract_simplicial_complex</a></li>
         </ul>
 
       </div>
@@ -139,7 +139,7 @@
 </button>
         </header>
                 <ul class="uses">
-          <li><a href="https://github.com/maxwell-thum/DDG_Lean3/blob/4c7a91b217fe32699206b14bbbb86c2a0ab6f620/src/combinatorial_surface/abstract_simplicial_complex.lean#L51">abstract_simplicial_complex.degree</a></li>
+          <li><a href="https://github.com/maxwell-thum/DDG_Lean3/blob/950aaaacd9beede237564c852f388ba3ee0ae49d/src/combinatorial_surface/abstract_simplicial_complex.lean#L51">abstract_simplicial_complex.degree</a></li>
         </ul>
 
       </div>
@@ -185,7 +185,7 @@
 </button>
         </header>
                 <ul class="uses">
-          <li><a href="https://github.com/maxwell-thum/DDG_Lean3/blob/4c7a91b217fe32699206b14bbbb86c2a0ab6f620/src/combinatorial_surface/abstract_simplicial_complex.lean#L54">abstract_simplicial_complex.k_simplices</a></li>
+          <li><a href="https://github.com/maxwell-thum/DDG_Lean3/blob/950aaaacd9beede237564c852f388ba3ee0ae49d/src/combinatorial_surface/abstract_simplicial_complex.lean#L54">abstract_simplicial_complex.k_simplices</a></li>
         </ul>
 
       </div>
@@ -232,7 +232,7 @@
 </button>
         </header>
                 <ul class="uses">
-          <li><a href="https://github.com/maxwell-thum/DDG_Lean3/blob/4c7a91b217fe32699206b14bbbb86c2a0ab6f620/src/combinatorial_surface/abstract_simplicial_complex.lean#L68">abstract_simplicial_complex.subcomplex</a></li>
+          <li><a href="https://github.com/maxwell-thum/DDG_Lean3/blob/950aaaacd9beede237564c852f388ba3ee0ae49d/src/combinatorial_surface/abstract_simplicial_complex.lean#L68">abstract_simplicial_complex.subcomplex</a></li>
         </ul>
 
       </div>
@@ -342,7 +342,7 @@
 </button>
         </header>
                 <ul class="uses">
-          <li><a href="https://github.com/maxwell-thum/DDG_Lean3/blob/4c7a91b217fe32699206b14bbbb86c2a0ab6f620/src/combinatorial_surface/abstract_simplicial_complex.lean#L124">abstract_simplicial_complex.star</a></li>
+          <li><a href="https://github.com/maxwell-thum/DDG_Lean3/blob/950aaaacd9beede237564c852f388ba3ee0ae49d/src/combinatorial_surface/abstract_simplicial_complex.lean#L124">abstract_simplicial_complex.star</a></li>
         </ul>
 
       </div>
@@ -389,7 +389,7 @@
 </button>
         </header>
                 <ul class="uses">
-          <li><a href="https://github.com/maxwell-thum/DDG_Lean3/blob/4c7a91b217fe32699206b14bbbb86c2a0ab6f620/src/combinatorial_surface/abstract_simplicial_complex.lean#L148">abstract_simplicial_complex.closure</a></li>
+          <li><a href="https://github.com/maxwell-thum/DDG_Lean3/blob/950aaaacd9beede237564c852f388ba3ee0ae49d/src/combinatorial_surface/abstract_simplicial_complex.lean#L148">abstract_simplicial_complex.closure</a></li>
         </ul>
 
       </div>
@@ -508,19 +508,35 @@
 </div> </p>
 <h2 id="ssec:oriented_ASCs">1.1.1 Oriented ASCs</h2>
 
-<p><div class="definition_thmwrapper" id="a0000000010">
+<p><div class="definition_thmwrapper" id="def:oriented_asc">
   <div class="definition_thmheading">
     <span class="definition_thmcaption">
     Definition
     </span>
     <span class="definition_thmlabel">1.12</span>
     <div class="thm_icons">
-    <a class="icon proof" href="chap-combinatorial_surfaces.html#a0000000010">#</a>
+    <a class="icon proof" href="chap-combinatorial_surfaces.html#def:oriented_asc">#</a>
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+    <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+                <ul class="uses">
+          <li><a href="chap-combinatorial_surfaces.html#def:abstract_simplicial_complex">Definition 1.1</a></li>
+        </ul>
+
+      </div>
+    </div>
 
   </div>
   </div>
   <div class="definition_thmcontent">
-  <p>An <em>orientation</em> on a An <em>oriented abstract simplicial complex</em> is an abstract simplicial complex with an orientation assigned to each of its simplices. </p>
+  <p>  An <em>orientation</em> on a simplex is a choice of a permutation of its vertices. This permutation and every permutation related to it by even permutations is called <em>positively oriented</em>. Every permutation related to it by odd permutations is called <em>negatively oriented</em>. </p>
+<p>An <em>oriented abstract simplicial complex</em> is an abstract simplicial complex with an orientation assigned to each of its simplices. </p>
 
   </div>
 </div> </p>
@@ -528,35 +544,65 @@
 
 <h1 id="sec:simplicial_complex">1.2 Simplicial complexes</h1>
 
-<p><div class="definition_thmwrapper" id="a0000000011">
+<p><div class="definition_thmwrapper" id="def:simplicial_complex">
   <div class="definition_thmheading">
     <span class="definition_thmcaption">
     Definition
     </span>
     <span class="definition_thmlabel">1.13</span>
+    ✓
     <div class="thm_icons">
-    <a class="icon proof" href="chap-combinatorial_surfaces.html#a0000000011">#</a>
+    <a class="icon proof" href="chap-combinatorial_surfaces.html#def:simplicial_complex">#</a>
+    <button class="modal lean">L∃∀N</button>
+    <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+                <ul class="uses">
+        </ul>
+
+      </div>
+    </div>
 
   </div>
   </div>
   <div class="definition_thmcontent">
-  <p>A <em>(geometric) simplicial complex</em> is... </p>
+  <p>  A <em>(geometric) simplicial complex</em> is... </p>
 
   </div>
 </div> </p>
-<p><div class="definition_thmwrapper" id="a0000000012">
+<p><div class="definition_thmwrapper" id="def:underlying_asc">
   <div class="definition_thmheading">
     <span class="definition_thmcaption">
     Definition
     </span>
     <span class="definition_thmlabel">1.14</span>
     <div class="thm_icons">
-    <a class="icon proof" href="chap-combinatorial_surfaces.html#a0000000012">#</a>
+    <a class="icon proof" href="chap-combinatorial_surfaces.html#def:underlying_asc">#</a>
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+    <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+                <ul class="uses">
+          <li><a href="chap-combinatorial_surfaces.html#def:simplicial_complex">Definition 1.13</a></li>
+          <li><a href="chap-combinatorial_surfaces.html#def:abstract_simplicial_complex">Definition 1.1</a></li>
+        </ul>
+
+      </div>
+    </div>
 
   </div>
   </div>
   <div class="definition_thmcontent">
-  <p>The <em>underlying abstract simplicial complex</em> of a geometric simplicial complex is the abstract simplicial complex whose abstract simplices are simply the sets of vertices of each geometric simplex. </p>
+  <p>  The <em>underlying abstract simplicial complex</em> of a geometric simplicial complex is the abstract simplicial complex whose abstract simplices are simply the sets of vertices of each geometric simplex. </p>
 
   </div>
 </div> </p>
@@ -578,7 +624,7 @@
 </button>
         </header>
                 <ul class="uses">
-          <li><a href="chap-combinatorial_surfaces.html#def:abstract_simplicial_complex">Definition 1.1</a></li>
+          <li><a href="chap-combinatorial_surfaces.html#def:underlying_asc">Definition 1.14</a></li>
         </ul>
 
       </div>
