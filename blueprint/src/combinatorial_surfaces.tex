@@ -113,8 +113,10 @@ A nonempty subset of an abstract simplex is called a \emph{face}. By definition 
 
 
 
-\begin{definition}
-    An \emph{orientation} on a 
+\begin{definition}\label{def:oriented_asc}
+    \uses{def:abstract_simplicial_complex}
+    An \emph{orientation} on a simplex is a choice of a permutation of its vertices. This permutation and every permutation related to it by even permutations is called \emph{positively oriented}. Every permutation related to it by odd permutations is called \emph{negatively oriented}.
+    
     An \emph{oriented abstract simplicial complex} is an abstract simplicial complex with an orientation assigned to each of its simplices.
 \end{definition}
 
@@ -126,15 +128,18 @@ A nonempty subset of an abstract simplex is called a \emph{face}. By definition 
 \section{Simplicial complexes}
 \label{sec:simplicial_complex}
 
-\begin{definition} % if I don't label it, does it not show up in the graph? or is there like definition*?
+\begin{definition}\label{def:simplicial_complex} % if I don't label it, does it not show up in the graph? or is there like definition*?
+    \leanok
+    \lean{geometry.simplicial_complex}
     A \emph{(geometric) simplicial complex} is... 
 \end{definition}
 
-\begin{definition}
+\begin{definition}\label{def:underlying_asc}
+    \uses{def:simplicial_complex,def:abstract_simplicial_complex}
     The \emph{underlying abstract simplicial complex} of a geometric simplicial complex is the abstract simplicial complex whose abstract simplices are simply the sets of vertices of each geometric simplex.
 \end{definition}
 
 \begin{definition}\label{def:geometric_realization}
-    \uses{def:abstract_simplicial_complex}
+    \uses{def:underlying_asc}
     The \emph{geometric realization} of an abstract simplicial complex $\K$ is a geometric simplicial complex whose underlying abstract simplicial complex is $\K$ itself. In particular, we define it as...
 \end{definition}
