@@ -37,7 +37,7 @@ Click chapter titles to see missing items.
 </section>
 
 <section>
-  <h3>1 Combinatorial Surfaces <span class="partial">8%</span></h3>
+  <h3>1 Combinatorial Surfaces <span class="partial">40%</span></h3>
   
   <ul class="coverage">
     
@@ -45,21 +45,10 @@ Click chapter titles to see missing items.
     
     
     <li>
-      <div class="thm_thmheading">Lemma 1.10 (lem:closure_eq_down_closure)</div>
-      <div class="thm_thm_content">
-<div class="displaymath" id="a0000000005">
-  \[  \operatorname{Cl}(S) = \bigcup _{\sigma \in S} \mathcal{P}(\sigma ) \setminus \emptyset .  \]
-</div>
-</div>
-    </li>
-    
-    
-    
-    <li>
-      <div class="thm_thmheading">Definition 1.11 (def:link)</div>
+      <div class="thm_thmheading">Definition 1.10 (def:link)</div>
       <div class="thm_thm_content"><p>  The <em>link</em> \(\operatorname{Lk}(\sigma )\) of a simplex \(\sigma \in \mathcal{K}\) is the set of all simplices \(\tau \in \mathcal{K}\) such that \(\sigma \) and \(\tau \) are disjoint and their union is a simplex. In set-builder notation, </p>
-<div class="displaymath" id="a0000000006">
-  \[  \operatorname{Lk}(\sigma ) \coloneqq \{  \tau \in \mathcal{K}\mid \tau \cap \sigma = \emptyset , \tau \cup \sigma \in \mathcal{K}\} .  \]
+<div class="displaymath" id="a0000000008">
+  \[  \operatorname{Lk}(\sigma ) := \{  \tau \in \mathcal{K}\mid \tau \cap \sigma = \emptyset , \tau \cup \sigma \in \mathcal{K}\} .  \]
 </div>
 </div>
     </li>
@@ -67,9 +56,9 @@ Click chapter titles to see missing items.
     
     
     <li>
-      <div class="thm_thmheading">Lemma 1.12 (lem:lk_eq_cl_st_sub_st_cl)</div>
+      <div class="thm_thmheading">Lemma 1.11 (lem:lk_eq_cl_st_sub_st_cl)</div>
       <div class="thm_thm_content"><p>  For any set of simplices \(S \subseteq \mathcal{K}\), </p>
-<div class="displaymath" id="a0000000007">
+<div class="displaymath" id="a0000000009">
   \[  \operatorname{Lk}(S) = \operatorname{Cl}(\operatorname{St}(S)) \setminus \operatorname{St}(\operatorname{Cl}(S)).  \]
 </div>
 </div>
@@ -78,39 +67,45 @@ Click chapter titles to see missing items.
     
     
     <li>
-      <div class="thm_thmheading">Definition 1.2 (def:degree)</div>
-      <div class="thm_thm_content"><p>  The <em>degree</em> or <em>dimension</em> of an (abstract) simplex with \(k+1\) vertices is \(k\). </p>
+      <div class="thm_thmheading">Definition 1.12 (a0000000010)</div>
+      <div class="thm_thm_content"><p>An <em>orientation</em> on a An <em>oriented abstract simplicial complex</em> is an abstract simplicial complex with an orientation assigned to each of its simplices. </p>
 </div>
     </li>
     
     
     
     <li>
-      <div class="thm_thmheading">Definition 1.3 (def:k_simplices)</div>
-      <div class="thm_thm_content"><p>  An (abstract) simplex of degree \(k\) is called an <em>abstract \(k\)-simplex</em>. </p>
+      <div class="thm_thmheading">Definition 1.13 (a0000000011)</div>
+      <div class="thm_thm_content"><p>A <em>(geometric) simplicial complex</em> is... </p>
 </div>
     </li>
     
     
     
     <li>
-      <div class="thm_thmheading">Definition 1.4 (def:face)</div>
-      <div class="thm_thm_content"><p>  A nonempty subset of an abstract simplex is called a <em>face</em>. </p>
+      <div class="thm_thmheading">Definition 1.14 (a0000000012)</div>
+      <div class="thm_thm_content"><p>The <em>underlying abstract simplicial complex</em> of a geometric simplicial complex is the abstract simplicial complex whose abstract simplices are simply the sets of vertices of each geometric simplex. </p>
 </div>
     </li>
     
     
     
     <li>
-      <div class="thm_thmheading">Definition 1.5 (def:subcomplex)</div>
-      <div class="thm_thm_content"><p>  Given two simplicial complexes \(\mathcal{K}\) and \(\mathcal{K}'\), we say that \(\mathcal{K}'\) is a <em>subcomplex</em> of \(\mathcal{K}\) if \(\mathcal{K}' \subseteq \mathcal{K}\), that is, every simplex in \(\mathcal{K}'\) is a simplex in \(\mathcal{K}\) as well. </p>
+      <div class="thm_thmheading">Definition 1.15 (def:geometric_realization)</div>
+      <div class="thm_thm_content"><p>  The <em>geometric realization</em> of an abstract simplicial complex \(\mathcal{K}\) is a geometric simplicial complex whose underlying abstract simplicial complex is \(\mathcal{K}\) itself. In particular, we define it as... </p>
 </div>
     </li>
     
     
     
+    
+    
+    
+    
+    
+    
     <li>
-      <div class="thm_thmheading">Definition 1.6 (def:abstract_simplicial_k-complex)</div>
+      <div class="thm_thmheading">Definition 1.5 (def:abstract_simplicial_k-complex)</div>
       <div class="thm_thm_content"><p>  If the set of degrees of the simplices of an abstract simplicial complex has a maximum \(k\), then that abstract simplicial complex is said to be an <em>abstract simplicial \(k\)-complex</em>. </p>
 </div>
     </li>
@@ -118,25 +113,23 @@ Click chapter titles to see missing items.
     
     
     <li>
-      <div class="thm_thmheading">Definition 1.7 (def:pure_abstract_simplicial_k-complex)</div>
+      <div class="thm_thmheading">Definition 1.6 (def:pure_abstract_simplicial_k-complex)</div>
       <div class="thm_thm_content"><p>  Let \(\mathcal{K}\) be an abstract simplicial \(k\)-complex. If every simplex is a face of some \(k\)-simplex, then we say \(\mathcal{K}\) is <em>pure</em> and call it a <em>pure simplicial \(k\)-complex</em>. </p>
 </div>
     </li>
     
     
     
+    
+    
+    
+    
     <li>
-      <div class="thm_thmheading">Definition 1.8 (def:star)</div>
-      <div class="thm_thm_content"><p> The <em>star</em> \(\operatorname{St}(\sigma )\) of a simplex \(\sigma \) in an abstract simplicial complex \(\mathcal{K}\) is the set of all simplices in \(\mathcal{K}\) having \(\sigma \) as a face. </p>
-<p>The star \(\operatorname{St}(S)\) of a set \(S\) of simplices in \(\mathcal{K}\) (i.e., a subset of \(\mathcal{K}\)) is the set of all simplices in \(\mathcal{K}\) having some simplex in \(S\) as a face. Equivalently, \(\operatorname{St}(S) = \bigcup _{\sigma \in S} \operatorname{St}(\sigma )\). </p>
+      <div class="thm_thmheading">Lemma 1.9 (lem:closure_eq_down_closure)</div>
+      <div class="thm_thm_content">
+<div class="displaymath" id="a0000000007">
+  \[  \operatorname{Cl}(S) = \bigcup _{\sigma \in S} \mathcal{P}(\sigma ) \setminus \emptyset .  \]
 </div>
-    </li>
-    
-    
-    
-    <li>
-      <div class="thm_thmheading">Definition 1.9 (def:closure)</div>
-      <div class="thm_thm_content"><p>  The <em>closure</em> \(\operatorname{Cl}(S)\) of a set of simplices \(S \subseteq \mathcal{K}\) is the smallest (by inclusion) simplicial complex containing \(S\). </p>
 </div>
     </li>
     
@@ -146,7 +139,50 @@ Click chapter titles to see missing items.
 </section>
 
 <section>
-  <h3>2 Discrete Exterior Calculus <span class="ok">100%</span></h3>
+  <h3>2 Discrete Exterior Calculus <span class="void">0%</span></h3>
+  
+  <ul class="coverage">
+    
+    
+    <li>
+      <div class="thm_thmheading">Definition 2.1 (def:discrete_k-form)</div>
+      <div class="thm_thm_content"><p>  A <em>(real-valued) discrete (differential) \(k\)-form</em> on an oriented abstract simplicial complex \(\mathcal{K}\) is a map \(\alpha \colon F_k \to \mathbb {R}\). The set of all discrete \(k\)-forms on \(\mathcal{K}\) is denoted \(\Omega ^k\). </p>
+</div>
+    </li>
+    
+    
+    
+    <li>
+      <div class="thm_thmheading">Definition 2.2 (def:k-discretization)</div>
+      <div class="thm_thm_content"><p>  The <em>discretization</em> on \(\mathcal{K}\) of a differential \(k\)-form \(\alpha \) on \(M\) is a discrete differential \(k\)-form defined by integrating \(\alpha \) over the image in \(M\) of each (oriented) \(k\)-simplex in \(\mathcal{K}\). In other words, for all \(\sigma \in F_k\), </p>
+<div class="displaymath" id="a0000000014">
+  \[  \hat{\alpha }_\sigma := \int _{t(|\sigma |)} \alpha .  \]
+</div>
+</div>
+    </li>
+    
+    
+    
+    <li>
+      <div class="thm_thmheading">Definition 2.3 (def:discrete_exterior_derivative)</div>
+      <div class="thm_thm_content"><p>  The <em>discrete exterior derivative</em> on \(k\)-forms is a map \(\mathrm{d}_k \colon \Omega ^k \to \Omega ^{k+1}\) such that </p>
+</div>
+    </li>
+    
+    
+    
+    <li>
+      <div class="thm_thmheading">Theorem 2.4 (thm:discrete_exterior_derivative_unique)</div>
+      <div class="thm_thm_content"><p>  The discrete exterior derivative is unique and given by </p>
+<div class="displaymath" id="a0000000016">
+  \[  (\mathrm{d}_k \alpha )(\sigma ) = \sum _{\tau \in F_k \cap \mathcal{P}(\sigma )} \mathrm{sgn}(\tau ,\sigma ) \alpha (\tau )  \]
+</div>
+<p> for all \(\alpha \in \Omega ^k\) and \(\sigma \in F_{k+1}\). </p>
+</div>
+    </li>
+    
+    
+  </ul>
   
 </section>
 
@@ -164,42 +200,41 @@ Click chapter titles to see missing items.
   <ul class="coverage">
     
     <li>
-      <div class="thm_thmheading">Definition 1.11 (def:link)</div>
+      <div class="thm_thmheading">Definition 1.10 (def:link)</div>
       <div class="thm_thm_content"><p>  The <em>link</em> \(\operatorname{Lk}(\sigma )\) of a simplex \(\sigma \in \mathcal{K}\) is the set of all simplices \(\tau \in \mathcal{K}\) such that \(\sigma \) and \(\tau \) are disjoint and their union is a simplex. In set-builder notation, </p>
-<div class="displaymath" id="a0000000006">
-  \[  \operatorname{Lk}(\sigma ) \coloneqq \{  \tau \in \mathcal{K}\mid \tau \cap \sigma = \emptyset , \tau \cup \sigma \in \mathcal{K}\} .  \]
+<div class="displaymath" id="a0000000008">
+  \[  \operatorname{Lk}(\sigma ) := \{  \tau \in \mathcal{K}\mid \tau \cap \sigma = \emptyset , \tau \cup \sigma \in \mathcal{K}\} .  \]
 </div>
 </div>
     </li>
     
     <li>
-      <div class="thm_thmheading">Definition 1.2 (def:degree)</div>
-      <div class="thm_thm_content"><p>  The <em>degree</em> or <em>dimension</em> of an (abstract) simplex with \(k+1\) vertices is \(k\). </p>
+      <div class="thm_thmheading">Definition 1.12 (a0000000010)</div>
+      <div class="thm_thm_content"><p>An <em>orientation</em> on a An <em>oriented abstract simplicial complex</em> is an abstract simplicial complex with an orientation assigned to each of its simplices. </p>
 </div>
     </li>
     
     <li>
-      <div class="thm_thmheading">Definition 1.4 (def:face)</div>
-      <div class="thm_thm_content"><p>  A nonempty subset of an abstract simplex is called a <em>face</em>. </p>
+      <div class="thm_thmheading">Definition 1.13 (a0000000011)</div>
+      <div class="thm_thm_content"><p>A <em>(geometric) simplicial complex</em> is... </p>
 </div>
     </li>
     
     <li>
-      <div class="thm_thmheading">Definition 1.5 (def:subcomplex)</div>
-      <div class="thm_thm_content"><p>  Given two simplicial complexes \(\mathcal{K}\) and \(\mathcal{K}'\), we say that \(\mathcal{K}'\) is a <em>subcomplex</em> of \(\mathcal{K}\) if \(\mathcal{K}' \subseteq \mathcal{K}\), that is, every simplex in \(\mathcal{K}'\) is a simplex in \(\mathcal{K}\) as well. </p>
+      <div class="thm_thmheading">Definition 1.14 (a0000000012)</div>
+      <div class="thm_thm_content"><p>The <em>underlying abstract simplicial complex</em> of a geometric simplicial complex is the abstract simplicial complex whose abstract simplices are simply the sets of vertices of each geometric simplex. </p>
 </div>
     </li>
     
     <li>
-      <div class="thm_thmheading">Definition 1.8 (def:star)</div>
-      <div class="thm_thm_content"><p> The <em>star</em> \(\operatorname{St}(\sigma )\) of a simplex \(\sigma \) in an abstract simplicial complex \(\mathcal{K}\) is the set of all simplices in \(\mathcal{K}\) having \(\sigma \) as a face. </p>
-<p>The star \(\operatorname{St}(S)\) of a set \(S\) of simplices in \(\mathcal{K}\) (i.e., a subset of \(\mathcal{K}\)) is the set of all simplices in \(\mathcal{K}\) having some simplex in \(S\) as a face. Equivalently, \(\operatorname{St}(S) = \bigcup _{\sigma \in S} \operatorname{St}(\sigma )\). </p>
+      <div class="thm_thmheading">Definition 1.15 (def:geometric_realization)</div>
+      <div class="thm_thm_content"><p>  The <em>geometric realization</em> of an abstract simplicial complex \(\mathcal{K}\) is a geometric simplicial complex whose underlying abstract simplicial complex is \(\mathcal{K}\) itself. In particular, we define it as... </p>
 </div>
     </li>
     
     <li>
-      <div class="thm_thmheading">Definition 1.9 (def:closure)</div>
-      <div class="thm_thm_content"><p>  The <em>closure</em> \(\operatorname{Cl}(S)\) of a set of simplices \(S \subseteq \mathcal{K}\) is the smallest (by inclusion) simplicial complex containing \(S\). </p>
+      <div class="thm_thmheading">Definition 1.5 (def:abstract_simplicial_k-complex)</div>
+      <div class="thm_thm_content"><p>  If the set of degrees of the simplices of an abstract simplicial complex has a maximum \(k\), then that abstract simplicial complex is said to be an <em>abstract simplicial \(k\)-complex</em>. </p>
 </div>
     </li>
     
@@ -208,6 +243,17 @@ Click chapter titles to see missing items.
 </section>
 
 <section>
+  
+  <h3>2 Discrete Exterior Calculus</h3>
+  <ul class="coverage">
+    
+    <li>
+      <div class="thm_thmheading">Definition 2.1 (def:discrete_k-form)</div>
+      <div class="thm_thm_content"><p>  A <em>(real-valued) discrete (differential) \(k\)-form</em> on an oriented abstract simplicial complex \(\mathcal{K}\) is a map \(\alpha \colon F_k \to \mathbb {R}\). The set of all discrete \(k\)-forms on \(\mathcal{K}\) is denoted \(\Omega ^k\). </p>
+</div>
+    </li>
+    
+  </ul>
   
 </section>
 
@@ -220,6 +266,20 @@ Click chapter titles to see missing items.
 </section>
 
 <section>
+  
+  <h3>1 Combinatorial Surfaces</h3>
+  <ul class="coverage">
+    
+    <li>
+      <div class="thm_thmheading">Lemma 1.9 (lem:closure_eq_down_closure)</div>
+      <div class="thm_thm_content">
+<div class="displaymath" id="a0000000007">
+  \[  \operatorname{Cl}(S) = \bigcup _{\sigma \in S} \mathcal{P}(\sigma ) \setminus \emptyset .  \]
+</div>
+</div>
+    </li>
+    
+  </ul>
   
 </section>
 

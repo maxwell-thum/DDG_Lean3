@@ -48,6 +48,16 @@
  </li>
 <li class=" active current">
   <a href="chap-discrete_exterior_calculus.html"><span class="toc_ref">2</span> <span class="toc_entry">Discrete Exterior Calculus</span></a>
+  <span class="expand-toc">▼</span>
+  <ul class="sub-toc-1 active">
+     <li class="">
+  <a href="chap-discrete_exterior_calculus.html#a0000000004"><span class="toc_ref">2.1</span> <span class="toc_entry">Discrete Differential Forms</span></a>
+ </li>
+<li class="">
+  <a href="chap-discrete_exterior_calculus.html#a0000000005"><span class="toc_ref">2.2</span> <span class="toc_entry">Discrete Exterior Calculus</span></a>
+ </li>
+
+  </ul>
  </li>
 <li ><a href="dep_graph_document.html">Dependency graph</a></li>
 </ul>
@@ -60,6 +70,131 @@
 <div class="main-text">
 <h1 id="chap:discrete_exterior_calculus">2 Discrete Exterior Calculus</h1>
 
+<p>Throughout this chapter, we let \(\mathcal{K}\) be an oriented abstract simplicial complex. </p>
+<h1 id="a0000000004">2.1 Discrete Differential Forms</h1>
+<p><div class="definition_thmwrapper" id="def:discrete_k-form">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">2.1</span>
+    <div class="thm_icons">
+    <a class="icon proof" href="chap-discrete_exterior_calculus.html#def:discrete_k-form">#</a>
+
+  </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p>  A <em>(real-valued) discrete (differential) \(k\)-form</em> on an oriented abstract simplicial complex \(\mathcal{K}\) is a map \(\alpha \colon F_k \to \mathbb {R}\). The set of all discrete \(k\)-forms on \(\mathcal{K}\) is denoted \(\Omega ^k\). </p>
+
+  </div>
+</div> </p>
+<h2 id="a0000000013">2.1.1 Discretization</h2>
+<p>Recall the notions of a <em>manifold</em> and <em>differential (\(k\)-)forms</em>. From here on, let \(M\) be an \(n\)-dimensional triangulable topological manifold. Let \(t\colon |\mathcal{K}| \to M\) be a triangulation of \(M\). </p>
+<p><div class="definition_thmwrapper" id="def:k-discretization">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">2.2</span>
+    <div class="thm_icons">
+    <a class="icon proof" href="chap-discrete_exterior_calculus.html#def:k-discretization">#</a>
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+    <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+                <ul class="uses">
+          <li><a href="chap-discrete_exterior_calculus.html#def:discrete_k-form">Definition 2.1</a></li>
+          <li><a href="chap-combinatorial_surfaces.html#def:geometric_realization">Definition 1.15</a></li>
+        </ul>
+
+      </div>
+    </div>
+
+  </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p>  The <em>discretization</em> on \(\mathcal{K}\) of a differential \(k\)-form \(\alpha \) on \(M\) is a discrete differential \(k\)-form defined by integrating \(\alpha \) over the image in \(M\) of each (oriented) \(k\)-simplex in \(\mathcal{K}\). In other words, for all \(\sigma \in F_k\), </p>
+<div class="displaymath" id="a0000000014">
+  \[  \hat{\alpha }_\sigma := \int _{t(|\sigma |)} \alpha .  \]
+</div>
+
+  </div>
+</div> </p>
+<h1 id="a0000000005">2.2 Discrete Exterior Calculus</h1>
+<h2 id="a0000000015">2.2.1 The discrete exterior derivative</h2>
+<p><div class="definition_thmwrapper" id="def:discrete_exterior_derivative">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">2.3</span>
+    <div class="thm_icons">
+    <a class="icon proof" href="chap-discrete_exterior_calculus.html#def:discrete_exterior_derivative">#</a>
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+    <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+                <ul class="uses">
+          <li><a href="chap-discrete_exterior_calculus.html#def:discrete_k-form">Definition 2.1</a></li>
+        </ul>
+
+      </div>
+    </div>
+
+  </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p>  The <em>discrete exterior derivative</em> on \(k\)-forms is a map \(\mathrm{d}_k \colon \Omega ^k \to \Omega ^{k+1}\) such that </p>
+
+  </div>
+</div> </p>
+<p>We are not yet able to prove this in Lean, but </p>
+<p><div class="theorem_thmwrapper" id="thm:discrete_exterior_derivative_unique">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">2.4</span>
+    <div class="thm_icons">
+    <a class="icon proof" href="chap-discrete_exterior_calculus.html#thm:discrete_exterior_derivative_unique">#</a>
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+    <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+                <ul class="uses">
+          <li><a href="chap-discrete_exterior_calculus.html#def:discrete_exterior_derivative">Definition 2.3</a></li>
+          <li><a href="chap-discrete_exterior_calculus.html#def:k-discretization">Definition 2.2</a></li>
+        </ul>
+
+      </div>
+    </div>
+
+  </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>  The discrete exterior derivative is unique and given by </p>
+<div class="displaymath" id="a0000000016">
+  \[  (\mathrm{d}_k \alpha )(\sigma ) = \sum _{\tau \in F_k \cap \mathcal{P}(\sigma )} \mathrm{sgn}(\tau ,\sigma ) \alpha (\tau )  \]
+</div>
+<p> for all \(\alpha \in \Omega ^k\) and \(\sigma \in F_{k+1}\). </p>
+
+  </div>
+</div> </p>
 
 </div> <!--main-text -->
 </div> <!-- content-wrapper -->
