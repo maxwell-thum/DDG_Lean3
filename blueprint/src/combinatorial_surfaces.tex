@@ -42,24 +42,25 @@ Abstract simplicial complexes are the combinatorial or topological analogs of \e
 
 \begin{definition}\label{def:degree}
     \uses{def:abstract_simplicial_complex}
-    %\lean{abstract_simplicial_complex.degree}
+    \leanok
+    \lean{abstract_simplicial_complex.degree}
     The \emph{degree} or \emph{dimension} of an (abstract) simplex with $k+1$ vertices is $k$. 
 \end{definition}
 
 \begin{definition}\label{def:k_simplices}
     \uses{def:degree}
-    An (abstract) simplex of degree $k$ is called an \emph{abstract $k$-simplex}.
+    \leanok
+    \lean{abstract_simplicial_complex.k_simplices}
+    An (abstract) simplex of degree $k$ is called an \emph{abstract $k$-simplex}. The set of all $k$-simplices is denoted $F_k$. %(my notation)
 \end{definition}
 For instance, $0$-simplices are points or vertices, $1$-simplices are line segments or edges, $2$-simplices are triangles or faces, and $3$-simplices are tetrahedra. %Under the convention that it is a simplex, the empty set is the only $(-1)$-simplex.
 
-\begin{definition}\label{def:face} % this might not need to be coded in lean
-    \uses{def:abstract_simplicial_complex}
-    A nonempty subset of an abstract simplex is called a \emph{face}.
-\end{definition}
-By definition of an abstract simplicial complex, all of the faces of a simplex are themselves simplices. A proper subset of a simplex is called a \emph{proper face}.
+A nonempty subset of an abstract simplex is called a \emph{face}. By definition of an abstract simplicial complex, all of the faces of a simplex are themselves simplices. A proper subset of a simplex is called a \emph{proper face}.
 
 \begin{definition}\label{def:subcomplex}
     \uses{def:abstract_simplicial_complex}
+    \leanok
+    \lean{abstract_simplicial_complex.subcomplex}
     Given two simplicial complexes $\K$ and $\K'$, we say that $\K'$ is a \emph{subcomplex} of $\K$ if $\K' \subseteq \K$, that is, every simplex in $\K'$ is a simplex in $\K$ as well.
 \end{definition}
 
@@ -74,6 +75,9 @@ By definition of an abstract simplicial complex, all of the faces of a simplex a
 \end{definition}
 
 \begin{definition}\label{def:star}
+    \uses{def:abstract_simplicial_complex}
+    \leanok
+    \lean{abstract_simplicial_complex.star}
     The \emph{star} $\St(\sigma)$ of a simplex $\sigma$ in an abstract simplicial complex $\K$ is the set of all simplices in $\K$ having $\sigma$ as a face.
 
     The star $\St(S)$ of a set $S$ of simplices in $\K$ (i.e., a subset of $\K$) is the set of all simplices in $\K$ having some simplex in $S$ as a face. Equivalently, $\St(S) = \bigcup_{\sigma \in S} \St(\sigma)$.
@@ -81,6 +85,8 @@ By definition of an abstract simplicial complex, all of the faces of a simplex a
 
 \begin{definition}\label{def:closure}
     \uses{def:abstract_simplicial_complex}
+    \leanok
+    \lean{abstract_simplicial_complex.closure}
     The \emph{closure} $\Cl(S)$ of a set of simplices $S \subseteq \K$ is the smallest (by inclusion) simplicial complex containing $S$.
 \end{definition}
 
@@ -102,6 +108,16 @@ By definition of an abstract simplicial complex, all of the faces of a simplex a
     \[ \Lk(S) = \Cl(\St(S)) \setminus \St(\Cl(S)). \]
 \end{lemma}
 
+\subsection{Oriented ASCs}
+\label{ssec:oriented_ASCs}
+
+
+
+\begin{definition}
+    An \emph{orientation} on a 
+    An \emph{oriented abstract simplicial complex} is an abstract simplicial complex with an orientation assigned to each of its simplices.
+\end{definition}
+
 \subsection{The halfedge mesh}
 \label{ssec:halfedge_mesh}
 
@@ -110,3 +126,15 @@ By definition of an abstract simplicial complex, all of the faces of a simplex a
 \section{Simplicial complexes}
 \label{sec:simplicial_complex}
 
+\begin{definition} % if I don't label it, does it not show up in the graph? or is there like definition*?
+    A \emph{(geometric) simplicial complex} is... 
+\end{definition}
+
+\begin{definition}
+    The \emph{underlying abstract simplicial complex} of a geometric simplicial complex is the abstract simplicial complex whose abstract simplices are simply the sets of vertices of each geometric simplex.
+\end{definition}
+
+\begin{definition}\label{def:geometric_realization}
+    \uses{def:abstract_simplicial_complex}
+    The \emph{geometric realization} of an abstract simplicial complex $\K$ is a geometric simplicial complex whose underlying abstract simplicial complex is $\K$ itself. In particular, we define it as...
+\end{definition}

@@ -1,3 +1,40 @@
 \chapter{Discrete Exterior Calculus}
 \label{chap:discrete_exterior_calculus}
 
+Throughout this chapter, we let $\K$ be an oriented abstract simplicial complex. %a pure abstract simplicial $k$-complex. 
+
+\section{Discrete Differential Forms}
+
+\begin{definition}\label{def:discrete_k-form}
+    \uses{def:oriented_simplicial_complex}
+    A \emph{(real-valued) discrete (differential) $k$-form} on an oriented abstract simplicial complex $\K$ is a map $\alpha\colon F_k \to \R$. The set of all discrete $k$-forms on $\K$ is denoted $\Omega^k$.
+\end{definition}
+
+\subsection{Discretization}
+
+Recall the notions of a \emph{manifold} and \emph{differential ($k$-)forms}. % idk link to mathlib?
+From here on, let $M$ be an $n$-dimensional triangulable topological manifold. Let $t\colon |\K| \to M$ be a triangulation of $M$.
+
+\begin{definition}\label{def:k-discretization}
+    \uses{def:discrete_k-form,def:geometric_realization}
+    The \emph{discretization} on $\K$ of a differential $k$-form $\alpha$ on $M$ is a discrete differential $k$-form defined by integrating $\alpha$ over the image in $M$ of each (oriented) $k$-simplex in $\K$. In other words, for all $\sigma \in F_k$,
+    \[ \hat{\alpha}_\sigma := \int_{t(|\sigma|)} \alpha. \]
+\end{definition}
+
+\section{Discrete Exterior Calculus}
+
+\subsection{The discrete exterior derivative}
+
+\begin{definition}\label{def:discrete_exterior_derivative}
+    \uses{def:discrete_k-form}
+    The \emph{discrete exterior derivative} on $k$-forms is a map $\mathrm{d}_k \colon \Omega^k \to \Omega^{k+1}$ such that 
+\end{definition}
+
+We are not yet able to prove this in Lean, but 
+
+\begin{theorem}\label{thm:discrete_exterior_derivative_unique}
+    \uses{def:discrete_exterior_derivative,def:k-discretization}
+    The discrete exterior derivative is unique and given by 
+    \[ (\mathrm{d}_k \alpha)(\sigma) = \sum_{\tau \in F_k \cap \Pow(\sigma)} \mathrm{sgn}(\tau,\sigma) \alpha(\tau) \] % this will be fixed don't worry
+    for all $\alpha \in \Omega^k$ and $\sigma \in F_{k+1}$.
+\end{theorem}
