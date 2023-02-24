@@ -99,7 +99,7 @@ lemma disjoint_or_exists_inter_eq_convex_hull (hs : s ∈ K.faces) (ht : t ∈ K
 begin
   classical,
   by_contra' h,
-  refine h.2 (s ∩ t) (K.down_closed hs (inter_subset_left _ _) $ λ hst, h.1 $
+  refine h.2 (s ∩ t) (K.down_closed _ hs _ (inter_subset_left _ _) $ λ hst, h.1 $
     disjoint_iff_inf_le.mpr $ (K.inter_subset_convex_hull hs ht).trans _) _,
   { rw [←coe_inter, hst, coe_empty, convex_hull_empty],
     refl },
@@ -117,19 +117,19 @@ end
 { faces := faces \ {∅},
   not_empty_mem := λ h, h.2 (mem_singleton _),
   indep := λ s hs, indep _ hs.1,
-  down_closed := λ s t hs hts ht, ⟨down_closed _ hs.1 _ hts, ht⟩,
+  down_closed := λ s hs t hts ht, ⟨down_closed _ hs.1 _ hts, ht⟩,
   inter_subset_convex_hull := λ s t hs ht, inter_subset_convex_hull _ hs.1 _ ht.1 }
 
 /-- Construct a simplicial complex as a subset of a given simplicial complex. -/
 @[simps] def of_subcomplex (K : simplicial_complex 𝕜 E)
   (faces : set (finset E))
   (subset : faces ⊆ K.faces)
-  (down_closed : ∀ {s t}, s ∈ faces → t ⊆ s → t ∈ faces) :
+  (down_closed : ∀ s ∈ faces, ∀ t ⊆ s, t ∈ faces) :
   simplicial_complex 𝕜 E :=
 { faces := faces,
   not_empty_mem := λ h, K.not_empty_mem (subset h),
   indep := λ s hs, K.indep (subset hs),
-  down_closed := λ s t hs hts _, down_closed hs hts,
+  down_closed := λ s hs t hts _, down_closed _ hs _ hts,
   inter_subset_convex_hull := λ s t hs ht, K.inter_subset_convex_hull (subset hs) (subset ht) }
 
 /-- Construct a simplicial complex from an abstract simplicial complex. This is usually 
@@ -171,7 +171,7 @@ end
 /-- A face is a subset of another one iff its vertices are.  -/
 lemma face_subset_face_iff (hs : s ∈ K.faces) (ht : t ∈ K.faces) :
   convex_hull 𝕜 (s : set E) ⊆ convex_hull 𝕜 ↑t ↔ s ⊆ t :=
-⟨λ h x hxs, (vertex_mem_convex_hull_iff (K.down_closed hs (finset.singleton_subset_iff.2 hxs) $
+⟨λ h x hxs, (vertex_mem_convex_hull_iff (K.down_closed _ hs _ (finset.singleton_subset_iff.2 hxs) $
   singleton_ne_empty _) ht).1 (h (subset_convex_hull 𝕜 ↑s hxs)), convex_hull_mono⟩
 
 /-! ### Facets -/
@@ -212,7 +212,7 @@ instance : has_inf (simplicial_complex 𝕜 E) :=
 ⟨λ K L, { faces := K.faces ∩ L.faces,
   not_empty_mem := λ h, K.not_empty_mem (set.inter_subset_left _ _ h),
   indep := λ s hs, K.indep hs.1,
-  down_closed := λ s t hs hst ht, ⟨K.down_closed hs.1 hst ht, L.down_closed hs.2 hst ht⟩,
+  down_closed := λ s hs t hst ht, ⟨K.down_closed s hs.1 t hst ht, L.down_closed s hs.2 t hst ht⟩,
   inter_subset_convex_hull := λ s t hs ht, K.inter_subset_convex_hull hs.1 ht.1 }⟩
 
 /- I don't think I care about this much for DDG so I'm just commenting it out for now
@@ -228,7 +228,7 @@ instance : has_bot (simplicial_complex 𝕜 E) :=
 ⟨{ faces := ∅,
   not_empty_mem := set.not_mem_empty ∅,
   indep := λ s hs, (set.not_mem_empty _ hs).elim,
-  down_closed := λ s _ hs, (set.not_mem_empty _ hs).elim,
+  down_closed := λ s hs _, (set.not_mem_empty _ hs).elim,
   inter_subset_convex_hull := λ s _ hs, (set.not_mem_empty _ hs).elim }⟩
 
 /- Ditto

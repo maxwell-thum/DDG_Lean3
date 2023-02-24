@@ -80,7 +80,7 @@ lemma disjoint_or_exists_inter_eq_face (hs : s ∈ K.faces) (ht : t ∈ K.faces)
 begin
   classical,
   by_contra' h,
-  refine h.2 (s ∩ t) (K.down_closed s hs _ (inter_subset_left _ _) _) _,
+  refine h.2 (s ∩ t) (K.down_closed s hs _ (inter_subset_left _ _) $ λ hst, h.1 _) _,
   { rw [← coe_inter],
     exact coe_eq_empty.mpr hst, },
   { rw [coe_inter], }
@@ -98,7 +98,7 @@ end
 { faces := faces \ {∅},
   not_empty_mem := λ h, h.2 (mem_singleton _),
   --indep := λ s hs, indep _ hs.1,
-  down_closed := λ s t hs hts ht, ⟨down_closed _ hs.1 _ hts, ht⟩,
+  down_closed := λ s hs t hts ht, ⟨down_closed s hs.1 t hts, ht⟩,
   --inter_subset_convex_hull := λ s t hs ht, inter_subset_convex_hull _ hs.1 _ ht.1 
   }
 
@@ -107,12 +107,12 @@ complex. -/
 @[simps] def of_subcomplex (K : abstract_simplicial_complex E)
   (faces : set (finset E))
   (subset : faces ⊆ K.faces)
-  (down_closed : ∀ {s t}, s ∈ faces → t ⊆ s → t ∈ faces) :
+  (down_closed : ∀ s ∈ faces, ∀ t ⊆ s, t ∈ faces) :
   abstract_simplicial_complex E :=
 { faces := faces,
   not_empty_mem := λ h, K.not_empty_mem (subset h),
   --indep := λ s hs, K.indep (subset hs),
-  down_closed := λ s t hs hts _, down_closed hs hts,
+  down_closed := λ s hs t hts _, down_closed s hs t hts,
   --inter_subset_convex_hull := λ s t hs ht, K.inter_subset_convex_hull (subset hs) (subset ht) 
 }
 
@@ -135,7 +135,7 @@ begin
   ext x,
   refine ⟨λ h, mem_bUnion h $ mem_coe.2 $ mem_singleton_self x, λ h, _⟩,
   obtain ⟨s, hs, hx⟩ := mem_Union₂.1 h,
-  exact K.down_closed hs (finset.singleton_subset_iff.2 $ mem_coe.1 hx) (singleton_ne_empty _),
+  exact K.down_closed _ hs _ (finset.singleton_subset_iff.2 $ mem_coe.1 hx) (singleton_ne_empty _),
 end
 
 /-
@@ -195,7 +195,7 @@ instance : has_inf (abstract_simplicial_complex E) :=
 ⟨λ K L, { faces := K.faces ∩ L.faces,
   not_empty_mem := λ h, K.not_empty_mem (set.inter_subset_left _ _ h),
   --indep := λ s hs, K.indep hs.1,
-  down_closed := λ s t hs hst ht, ⟨K.down_closed hs.1 hst ht, L.down_closed hs.2 hst ht⟩,
+  down_closed := λ s hs t hst ht, ⟨K.down_closed _ hs.1 _ hst ht, L.down_closed _ hs.2 _ hst ht⟩,
   --inter_subset_convex_hull := λ s t hs ht, K.inter_subset_convex_hull hs.1 ht.1 
   }⟩
 
@@ -210,7 +210,7 @@ instance : has_bot (abstract_simplicial_complex E) :=
 ⟨{ faces := ∅,
   not_empty_mem := set.not_mem_empty ∅,
   --indep := λ s hs, (set.not_mem_empty _ hs).elim,
-  down_closed := λ s _ hs, (set.not_mem_empty _ hs).elim,
+  down_closed := λ s hs _, (set.not_mem_empty _ hs).elim,
   --inter_subset_convex_hull := λ s _ hs, (set.not_mem_empty _ hs).elim 
   }⟩
 
