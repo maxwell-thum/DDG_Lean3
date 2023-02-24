@@ -14,7 +14,7 @@ import data.set.finite
 These edits have nothing to do with the original authors. 
 I'm not sure whether this will ultimately go in mathlib, so I'm changing a lot willy-nilly.
 
-# Simplicial complexes
+# Abstract simplicial complexes
 
 In this file, we define abstract simplicial complexes. An abstract simplicial complex is...
 
@@ -46,7 +46,7 @@ finite sets. -/
 (faces : set (finset E))
 (not_empty_mem : ∅ ∉ faces)
 --(indep : ∀ {s}, s ∈ faces → affine_independent 𝕜 (coe : (s : set E) → E))
-(down_closed : ∀ {s t}, s ∈ faces → t ⊆ s → t ≠ ∅ → t ∈ faces)
+(down_closed : ∀ s ∈ faces, ∀ t ⊆ s, t ≠ ∅ → t ∈ faces)
 /-(inter_subset_convex_hull : ∀ {s t}, s ∈ faces → t ∈ faces →
   convex_hull 𝕜 ↑s ∩ convex_hull 𝕜 ↑t ⊆ convex_hull 𝕜 (s ∩ t : set E))-/
 
@@ -80,7 +80,7 @@ lemma disjoint_or_exists_inter_eq_face (hs : s ∈ K.faces) (ht : t ∈ K.faces)
 begin
   classical,
   by_contra' h,
-  refine h.2 (s ∩ t) (K.down_closed hs (inter_subset_left _ _) $ λ hst, h.1 _) _,
+  refine h.2 (s ∩ t) (K.down_closed s hs _ (inter_subset_left _ _) _) _,
   { rw [← coe_inter],
     exact coe_eq_empty.mpr hst, },
   { rw [coe_inter], }
@@ -116,7 +116,14 @@ complex. -/
   --inter_subset_convex_hull := λ s t hs ht, K.inter_subset_convex_hull (subset hs) (subset ht) 
 }
 
-/-! ### Vertices -/
+/-! ### Degrees and Vertices -/
+
+/-- The degree (or dimension) of a simplex is its cardinality minus one. -/
+def degree (s : finset E) : ℕ := s.card - 1
+
+/-- The set of `k`-faces in `K`, the faces in `K` with degree `k`. -/
+def k_faces (K : abstract_simplicial_complex E) (k : ℕ) : set (finset E) := 
+  { s ∈ K.faces | degree s = k }
 
 /-- The vertices of an abstract simplicial complex are its zero dimensional faces. -/
 def vertices (K : abstract_simplicial_complex E) : set E := {x | {x} ∈ K.faces}

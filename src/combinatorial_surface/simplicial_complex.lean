@@ -5,7 +5,8 @@ Authors: Yaël Dillies, Bhavik Mehta, Maxwell Thum
 -/
 import analysis.convex.hull
 import linear_algebra.affine_space.independent
-import combinatorial_surface.abstract_simplicial_complex
+import combinatorial_surface.finite_abstract_simplicial_complex
+import data.real.basic
 
 /-!
 # DISCLAIMER
@@ -130,6 +131,16 @@ end
   indep := λ s hs, K.indep (subset hs),
   down_closed := λ s t hs hts _, down_closed hs hts,
   inter_subset_convex_hull := λ s t hs ht, K.inter_subset_convex_hull (subset hs) (subset ht) }
+
+/-- Construct a simplicial complex from an abstract simplicial complex. This is usually 
+called *geometric realization*. This particular realization is from 
+`https://ncatlab.org/nlab/show/simplicial+complex#canonical_construction`. -/
+def of_finasc {A : Type*} (K : finite_abstract_simplicial_complex A) : simplicial_complex ℝ (K.vertices → ℝ) := 
+{ faces := { x : finset (K.vertices → ℝ) | ∃ a ∈ K.faces, ↑x = f '' a}, -- idk put an order on the set first
+  not_empty_mem := sorry, --K.not_empty_mem,
+  indep := sorry,
+  down_closed := sorry, --K.down_closed,
+  inter_subset_convex_hull := sorry }
 
 /-! ### Vertices -/
 
