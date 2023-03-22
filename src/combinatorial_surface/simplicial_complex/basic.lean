@@ -5,7 +5,7 @@ Authors: Yaël Dillies, Bhavik Mehta, Maxwell Thum
 -/
 import analysis.convex.hull
 import linear_algebra.affine_space.independent
-import combinatorial_surface.finite_abstract_simplicial_complex
+import combinatorial_surface.abstract_simplicial_complex.finite
 import data.real.basic
 
 /-!

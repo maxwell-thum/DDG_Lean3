@@ -37,7 +37,7 @@ Simplicial complexes can be generalized to affine spaces once `convex_hull` has 
 
 open finset set
 
-variables (E : Type*)
+variables (E : Type*) [decidable_eq E]
 
 /-- An abstract simplicial complex in a type `E` is a downward closed set of nonempty
 finite sets. -/
@@ -118,12 +118,16 @@ complex. -/
 
 /-! ### Degrees and Vertices -/
 
+/-
 /-- The degree (or dimension) of a simplex is its cardinality minus one. -/
 def degree (s : finset E) : ℕ := s.card - 1
+-/
 
 /-- The set of `k`-faces in `K`, the faces in `K` with degree `k`. -/
 def k_faces (K : abstract_simplicial_complex E) (k : ℕ) : set (finset E) := 
-  { s ∈ K.faces | degree s = k }
+  { s ∈ K.faces | s.card = k + 1 }
+
+
 
 /-- The vertices of an abstract simplicial complex are its zero dimensional faces. -/
 def vertices (K : abstract_simplicial_complex E) : set E := {x | {x} ∈ K.faces}

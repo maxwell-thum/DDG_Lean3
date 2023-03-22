@@ -1,4 +1,4 @@
-import combinatorial_surface.abstract_simplicial_complex
+import combinatorial_surface.abstract_simplicial_complex.basic
 
 open abstract_simplicial_complex
 
