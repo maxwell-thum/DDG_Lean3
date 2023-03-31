@@ -27,42 +27,43 @@ functions from its simplices/faces to ℕ with compatible orders.
 -/
 
 open finset set abstract_simplicial_complex
-variables (E : Type*) [decidable_eq E] {K : abstract_simplicial_complex E} {s t : finset E} {x : E}
+variables (E : Type*) [decidable_eq E] {s t : finset E} {x : E}
 
---instance : has_inv (fin s.card ≃ s) := 
-
+/-- An *oriented* abstract simplicial complex is an abstract simplicial complex with orders assigned to
+each of its faces such that the order of a subset of a face has the same order as that subset has within
+the larger face's order. -/
 @[ext] structure oriented_asc extends abstract_simplicial_complex E :=
 (orientation : faces → list E)
 (orientation_nodup : Π s : faces, (orientation s).nodup)
-(orientation_is_vertices : Π s : faces, (orientation s).to_finset = s.1) -- name is wip
+(olists_eq_faces : Π s : faces, (⟨orientation s, orientation_nodup s⟩ : finset E) = s.1) -- name is wip
 (orientation_consistent : Π s : faces, Π t : faces, t.1 ⊆ s.1 → (orientation t).sublist (orientation s))
---(orientation_is_vertices : Π s : faces, (⟨orientation s, orientation_nodup s⟩ : finset E) = s.1) -- name is wip
-/-(orientation_consistent : Π s : faces, ∀ k : fin (s.1.card), 
-  (orientation s).remove_nth k = orientation ⟨s.1.erase ((orientation s).nth_le k (by {
+-- (orientation_is_vertices : Π s : faces, (orientation s).to_finset = s.1) -- name is wip
 
-  })), by {
-    have : s.val.erase ((orientation s).nth_le ↑k _) ⊆ s,
-    { }
-  }⟩)-/
---(consistent : ∀ s ∈ faces, ∀ t ∈ faces, t ⊆ s → )
-/-
-/- I understand that `compatible` is absurd but this definition was the only way I 
-could get Lean to understand me. It just wasn't synthesizing the placeholders 
-otherwise. 
-Possibly related: Why are multiple `E`s showing up everywhere?? -/
-(compatible : ∀ s : finset E, ∀ hs : s ∈ faces, ∀ t : finset E, ∀ ht : t ∈ faces, 
-  ∀ v : E, ∀ hv : v ∈ s ∩ t, ∀ w : E, ∀ hw : w ∈ s ∩ t, 
-  ((orientation s hs)⁻¹ ⟨v, (mem_of_mem_inter_left hv)⟩) 
-  ≤ (orientation s hs ⟨w, (mem_of_mem_inter_left hw)⟩) 
-  ↔ (orientation t ht ⟨v, (mem_of_mem_inter_right hv)⟩) 
-  ≤ (orientation t ht ⟨w, (mem_of_mem_inter_right hw)⟩)) -/
---(complex_orientation : partial_order {x // {x} ∈ faces})
---(simplex_orientation : Π s : finset {x // {x} ∈ faces}, s ∈ faces → linear_order s)
---(complex_orient_eq_simplex_orient : ∀ s ∈ faces, ∀ v w ∈ s, complex_orientation.le v w ↔ (simplex_orientation s _).le v w)
+namespace oriented_asc
+variables {E} {K : oriented_asc E}
 
---(oriented_faces : Π k : ℕ, set (fin (k+1) → E))
+/-- The set of oriented faces in `K`. -/
+def oriented_faces (K : oriented_asc E) : set (list E) := range K.orientation
 
+/-- The set of oriented `k`-faces in `K`, the 'image' of `K.faces` under `K.orientation`. -/
+def oriented_k_faces (K : oriented_asc E) (k : ℕ) : set K.oriented_faces := 
+  { s | ∃ t ∈ K.k_faces k, K.orientation t = s.1 }
+  --{ s : K.oriented_faces | s.1.length = k + 1 }
 
-/-- The set of `k`-faces in `K`, the faces in `K` with degree `k`. -/
-def oriented_k_faces (K : oriented_asc E) (k : ℕ) : set (list E) := 
-  { s ∈ K.faces | s.card = k + 1 }
+/-- The images of `k`-faces under `K.orientation` are indeed `k+1` long. -/
+lemma oriented_k_face_length_eq_k {k : ℕ} : 
+  ∀ s : K.oriented_faces, s ∈ oriented_k_faces K k → s.1.length = k + 1 := by
+{ intros s hs,
+  cases hs with t ht,
+  cases ht with htk hts,
+  rw ← hts,
+  have card_eq_length : (K.orientation t).length = (⟨K.orientation t, K.orientation_nodup t⟩ : finset E).card,
+    simp only [card_mk, multiset.coe_card],
+  rw card_eq_length,
+  rw K.olists_eq_faces t,
+  unfold k_faces at htk,
+  rw mem_set_of_eq at htk,
+  exact htk, 
+}
+
+end oriented_asc
