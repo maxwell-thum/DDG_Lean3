@@ -127,8 +127,6 @@ def degree (s : finset E) : ℕ := s.card - 1
 def k_faces (K : abstract_simplicial_complex E) (k : ℕ) : set (finset E) := 
   { s ∈ K.faces | s.card = k + 1 }
 
-
-
 /-- The vertices of an abstract simplicial complex are its zero dimensional faces. -/
 def vertices (K : abstract_simplicial_complex E) : set E := {x | {x} ∈ K.faces}
 

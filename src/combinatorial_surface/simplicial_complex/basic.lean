@@ -49,8 +49,10 @@ Simplicial complexes can be generalized to affine spaces once `convex_hull` has 
 
 open finset set
 
-variables (𝕜 E : Type*) {ι : Type*} [ordered_ring 𝕜] [add_comm_group E] [module 𝕜 E]
-
+variables (𝕜 E : Type*) [decidable_eq E] {ι : Type*} [ordered_ring 𝕜] [add_comm_group E] [module 𝕜 E]
+/- I added `decidable_eq E` to `asc` for some reason to do with set theory 
+iirc. Apparently lean can't synthesize that from `add_comm_group E` alone 
+though... If the authors of this didn't add it then do I want to? -/
 namespace geometry
 
 /-- A simplicial complex in a `𝕜`-module is a collection of simplices which glue nicely together.

@@ -7,7 +7,7 @@ import combinatorial_surface.abstract_simplicial_complex.basic
 import combinatorial_surface.halfedge_mesh
 
 /-!
-# Abstract simplicial complexesHalfedge representations of pure 2-ASCs
+# Halfedge representations of pure 2-ASCs
 
 In this file, we define 
 
