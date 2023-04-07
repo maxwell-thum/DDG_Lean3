@@ -22,7 +22,7 @@ variables {E : Type*} [decidable_eq E] {K : abstract_simplicial_complex E} {s t 
 
 /-- Construct a halfedge representation of a (manifold?) pure abstract simplicial 2-complex. -/
 @[simps] def to_halfedge_mesh (K : abstract_simplicial_complex E) : halfedge_mesh :=
-{ halfedges := { ij : E × E // ij.1 ∈ K.vertices ∧ ij.2 ∈ K.vertices ∧ {ij.1, ij.2} ∈ K.k_faces 1 },
+{ halfedges := { ij : E × E // ij.1 ∈ K.vertices ∧ ij.2 ∈ K.vertices ∧ {ij.1, ij.2} ∈ K.simplices },
   twin := λ ij, ⟨(ij.1.2, ij.1.1), ⟨ij.2.2.1, ij.2.1, by {rw [finset.pair_comm] ; exact ij.2.2.2}⟩⟩,
   twin_twin_eq_id := by
   { ext,

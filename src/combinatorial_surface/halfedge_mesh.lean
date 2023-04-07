@@ -23,13 +23,13 @@ permutations: `twin` and `next`, usually denoted "η" and "ρ" respectively.
 `next` can be any permutation, but `twin` must be an involution with no fixed 
 points. -/
 structure halfedge_mesh :=
-(halfedges : Type*)
-(twin : halfedges → halfedges)
-(twin_is_perm : function.bijective twin)
-(twin_twin_eq_id : twin ∘ twin = id)
-(twin_no_fixed : ∀ h : halfedges, twin h ≠ h)
-(next : halfedges → halfedges)
-(next_is_perm : function.bijective next)
+  (halfedges : Type*)
+  (twin : halfedges → halfedges)
+  --(twin_is_perm : function.bijective twin) -- pretty sure `twin_twin_eq_id` implies this
+  (twin_twin_eq_id : twin ∘ twin = id)
+  (twin_no_fixed : ∀ h : halfedges, twin h ≠ h)
+  (next : halfedges → halfedges)
+  (next_is_perm : function.bijective next)
 
 namespace halfedge_mesh
 variables {H : halfedge_mesh}

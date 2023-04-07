@@ -32,9 +32,9 @@ variables {E : Type*} [decidable_eq E] {K : oriented_asc E} {k : ℕ} {s t : fin
 /- # (Abstract) simplicial homology (sort of) -/
 
 /-- The group of `k`-chains on `K` is the free abelian group on the set of 
-(oriented) `k`-faces of `K`. 
+(oriented) `k`-simplices of `K`. 
 (this definition doesn't quite seem the same as what's written here)-/
-def k_chains (K : oriented_asc E) (k : ℕ) := K.k_faces k →₀ ℤ
+def k_chains (K : oriented_asc E) (k : ℕ) := K.oriented_k_simplices k →₀ ℤ
 
 /-- The additive commutative monoid structure on `k_chains K k`. -/
 noncomputable instance k_chains.add_comm_monoid : add_comm_monoid (k_chains K k) 
@@ -42,10 +42,13 @@ noncomputable instance k_chains.add_comm_monoid : add_comm_monoid (k_chains K k)
 
 /-- The `ℤ`-module structure on `k_chains K k`. -/
 noncomputable instance k_chains.int_module : module ℤ (k_chains K k)
-  := finsupp.module (K.k_faces k) ℤ
+  := finsupp.module (K.oriented_k_simplices k) ℤ
 
 noncomputable def boundary : k_chains K (k+1) →ₗ[ℤ] k_chains K k
-  := ⟨(λ σ, (finset.sum σ.support (λ s, ∑ i : fin (k+1), (-1:ℤ)^(i:ℕ) • (s.delete i) ))), --∑ i : fin (k+1), (-1:ℤ)^(i:ℕ) • (s.delete i) 
+  := ⟨(λ σ, 
+        (finset.sum σ.support (λ s, 
+          finset.sum (finset.range (k + 1)) (λ i, 
+            (-1:ℤ)^i • (list.remove_nth s.1.1 i)) ))), --∑ i : fin (k+1), (-1:ℤ)^(i:ℕ) • (s.delete i) 
     sorry, 
     sorry⟩
 
