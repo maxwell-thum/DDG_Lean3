@@ -123,9 +123,9 @@ complex. -/
 def degree (s : finset E) : ℕ := s.card - 1
 -/
 
-/-- The set of `k`-simplices in `K`, the simplices in `K` with degree `k`. -/
-def k_simplices (K : abstract_simplicial_complex E) (k : ℕ) : set K.simplices := 
-  { s : K.simplices | s.1.card = k + 1 }
+/-- The set of `n`-simplices in `K`, the simplices in `K` with degree `n`. -/
+def n_simplices (K : abstract_simplicial_complex E) (n : ℕ) : set (finset E) := 
+  { s : finset E | s ∈ K.simplices ∧ s.card = n + 1 }
 
 /-- The vertices of an abstract simplicial complex are the elements of its (zero-dimensional) simplices. -/
 def vertices (K : abstract_simplicial_complex E) : set E := {x | {x} ∈ K.simplices}

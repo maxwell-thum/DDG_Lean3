@@ -27,7 +27,7 @@ functions from its simplices/simplices to ℕ with compatible orders.
 -/
 
 open finset set abstract_simplicial_complex
-variables (E : Type*) [decidable_eq E] {s t : finset E} {x : E}
+variables (E : Type*) [decidable_eq E] {x : E}
 
 /-- An *oriented* abstract simplicial complex is an abstract simplicial complex with orders assigned to
 each of its simplices such that the order of a subset of a simplex has the same order as that subset has within
@@ -35,39 +35,63 @@ the larger simplex's order. -/
 @[ext] structure oriented_asc extends abstract_simplicial_complex E :=
 (orientation : simplices → list E)
 (orientation_nodup : Π s : simplices, (orientation s).nodup)
-(olists_eq_simplices : Π s : simplices, (⟨orientation s, orientation_nodup s⟩ : finset E) = s.1) -- name is wip
+(olists_eq_simplices : Π s : simplices, (orientation s).to_finset = s.1)
+--(olists_eq_simplices : Π s : simplices, (⟨orientation s, orientation_nodup s⟩ : finset E) = s.1) -- name is wip
 (orientation_consistent : Π s : simplices, Π t : simplices, t.1 ⊆ s.1 → (orientation t).sublist (orientation s))
 -- (orientation_is_vertices : Π s : simplices, (orientation s).to_finset = s.1) -- name is wip
 
 namespace oriented_asc
-variables {E} {K : oriented_asc E} {k : ℕ}
+variables {E} {K : oriented_asc E} {n : ℕ} --{k : fin (n+1)}
 
 /-- The set of oriented simplices in `K`. -/
 def oriented_simplices (K : oriented_asc E) : set (list E) := range K.orientation
 
+/-- Coercion from `simplices` to `oriented_simplices`. -/
+instance : has_coe K.simplices K.oriented_simplices := ⟨λ s, ⟨K.orientation s, mem_range_self s⟩⟩
 
-/-- The set of oriented `k`-simplices in `K`, the oriented simplices of length `k+1`. -/
-def oriented_k_simplices (K : oriented_asc E) (k : ℕ) : set K.oriented_simplices := 
-  { s | s.1.length = k + 1 }
+/-- Convenient name-/
+def deorient (s : oriented_simplices K) : finset E := s.1.to_finset
+/-
+⟨s.1, by 
+{ cases s.2 with t ht,
+  rw ← ht,
+  exact K.orientation_nodup t, } ⟩ 
+-/
+
+--lemma deorient_comp_orientation_eq_id (s : K.simplices) : deorient (K.orientation s) = s.1 := by { }
+
+lemma deorient_is_simplex (s : oriented_simplices K) : deorient s ∈ K.simplices := by
+{ cases s.2 with t ht,
+  rw deorient,
+  rw ← ht,
+  rw K.olists_eq_simplices t,
+  exact t.2, }
+
+/-- Coercion from `oriented_simplices` back to `simplices`. -/
+instance : has_coe K.oriented_simplices K.simplices := ⟨λ s, ⟨deorient s, deorient_is_simplex s⟩⟩
+
+/-- The set of oriented `n`-simplices in `K`, the oriented simplices of length `n+1`. -/
+def oriented_n_simplices (K : oriented_asc E) (n : ℕ) : set (list E) := 
+  { s | s ∈ K.oriented_simplices ∧ s.length = n + 1 }
 
 @[simp] lemma orientation_length_eq_card {t : K.simplices} : 
     (K.orientation t).length = t.1.card := by
   rw [← K.olists_eq_simplices t, card_mk, multiset.coe_card]
 
-/-- `oriented_k_simplices` equals the set of images of `k`-simplices under `K.orientation`. -/
-lemma oriented_k_simplices_eq_orientation_of_k_simplices :
-  K.oriented_k_simplices k = { s | ∃ t ∈ K.k_simplices k, K.orientation t = s.1 } := by
-{ unfold oriented_k_simplices,
+/-- `oriented_n_simplices` equals the set of images of `n`-simplices under `K.orientation`. -/
+lemma oriented_n_simplices_eq_orientation_of_k_simplices :
+  K.oriented_n_simplices n = { s | ∃ t ∈ K.n_simplices n, K.orientation t = s } := by
+{ unfold oriented_n_simplices,
   simp only [set_of],
   ext s,
   split,
   { intro hs,
-    cases s.2 with t ht,
+    cases hs.1 with t ht,
     use t,
     split,
-    { unfold k_simplices,
+    { unfold n_simplices,
       rw [mem_set_of_eq, ← orientation_length_eq_card, ht],
-      exact hs, },
+      exact hs.2, },
     { exact ht, },
   },
   { intro hs,
@@ -75,44 +99,27 @@ lemma oriented_k_simplices_eq_orientation_of_k_simplices :
     cases ht with htk hts,
     rw ← hts,
     rw orientation_length_eq_card,
-    unfold k_simplices at htk,
+    unfold n_simplices at htk,
     rw mem_set_of_eq at htk,
+    split,
+    { unfold oriented_simplices,
+      exact mem_range_self _, },
     exact htk,
   },
 }
 
-/-
-/-- The set of oriented `k`-simplices in `K`, the 'image' of `K.simplices` under `K.orientation`. -/
-def oriented_k_simplices (K : oriented_asc E) (k : ℕ) : set K.oriented_simplices := 
-  { s | ∃ t ∈ K.k_simplices k, K.orientation t = s.1 }
-  --{ s : K.oriented_simplices | s.1.length = k + 1 }
 
-/-- The images of `k`-simplices under `K.orientation` are indeed `k+1` long. -/
-lemma oriented_k_simplex_length_eq_k : 
-  ∀ s : K.oriented_simplices, ∀ k : ℕ, s ∈ oriented_k_simplices K k ↔ s.1.length = k + 1 := by
-{ intros s k,
+lemma oriented_n_plus_1_simplex_remove_kth_is_oriented_n_simplex 
+    {s : list E} {hs : s ∈ K.oriented_n_simplices (n+1)} {k : fin (n+2)} : 
+  list.remove_nth s k ∈ K.oriented_n_simplices n := by
+{ unfold oriented_n_simplices,
+  simp only [mem_set_of_eq],
   split,
-  { intro hs,
-    cases hs with t ht,
-    cases ht with htk hts,
-    rw ← hts,
-    have card_eq_length : (K.orientation t).length = (⟨K.orientation t, K.orientation_nodup t⟩ : finset E).card,
-      simp only [card_mk, multiset.coe_card],
-    rw card_eq_length,
-    rw K.olists_eq_simplices t,
-    unfold k_simplices at htk,
-    rw mem_set_of_eq at htk,
-    exact htk, },
-  { intro hs,
-    unfold oriented_k_simplices,
-    rw mem_set_of_eq,
-    use s.1.to_finset,
-
-    }
+  { unfold oriented_simplices,
+    simp only [set.mem_range, set_coe.exists],
+     },
+  { rw list.length_remove_nth _ _ ((eq.symm hs.2).trans_gt (fin.is_lt k)),
+    simp [hs.2], }
 }
--/
-
-lemma oriented_k_plus_1_simplex_remove_nth_is_oriented_k_simplex : 
-  ∀ s : K.oriented_simplices, s ∈ K.oriented_k_simplices (k+1) → ∀ 
 
 end oriented_asc
