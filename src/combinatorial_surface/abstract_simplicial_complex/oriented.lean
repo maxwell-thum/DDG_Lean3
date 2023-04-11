@@ -8,15 +8,15 @@ import combinatorial_surface.abstract_simplicial_complex.basic
 /-!
 # Oriented abstract simplicial complexes
 
-~~Based on this definition from (a StackExchange question quoting) Rotman's
+A definition from (a StackExchange question quoting) Rotman's
 Algebraic Topology:
 "An oriented simplicial complex K
  is a simplicial complex and a partial order on Vert(K)
  whose restriction to the vertices of any simplex in K
- is a linear order."~~
+ is a linear order."
 
-Now based on my definition which is easier: an orientation on an ASC is a set of 
-functions from its simplices/simplices to ℕ with compatible orders. 
+My modified definition: An orientation on an ASC assigns each simplex a list 
+containing each of its vertices exactly once.
 
 ## Main declarations
 
