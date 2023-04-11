@@ -46,21 +46,24 @@ variables {E} {K : oriented_asc E} {n : ℕ} --{k : fin (n+1)}
 /-- The set of oriented simplices in `K`. -/
 def oriented_simplices (K : oriented_asc E) : set (list E) := range K.orientation
 
+namespace oriented_simplices
+
+namespace simplices
+
 /-- Coercion from `simplices` to `oriented_simplices`. -/
 instance : has_coe K.simplices K.oriented_simplices := ⟨λ s, ⟨K.orientation s, mem_range_self s⟩⟩
 
-/-- Convenient name-/
+end simplices
+
+/-- Convenient name -/
 def deorient (s : oriented_simplices K) : finset E := s.1.to_finset
-/-
-⟨s.1, by 
-{ cases s.2 with t ht,
-  rw ← ht,
-  exact K.orientation_nodup t, } ⟩ 
--/
 
 --lemma deorient_comp_orientation_eq_id (s : K.simplices) : deorient (K.orientation s) = s.1 := by { }
 
-lemma deorient_is_simplex (s : oriented_simplices K) : deorient s ∈ K.simplices := by
+/-- `deorient` just yields a `finset` analogous to how `orientation` yields a `list`.
+This shows deoriented simplices are actually simplices so that we can coerce 
+`oriented_simplices` back to `simplices`. -/
+lemma deorient_is_simplex {s : oriented_simplices K} : deorient s ∈ K.simplices := by
 { cases s.2 with t ht,
   rw deorient,
   rw ← ht,
@@ -68,19 +71,31 @@ lemma deorient_is_simplex (s : oriented_simplices K) : deorient s ∈ K.simplice
   exact t.2, }
 
 /-- Coercion from `oriented_simplices` back to `simplices`. -/
-instance : has_coe K.oriented_simplices K.simplices := ⟨λ s, ⟨deorient s, deorient_is_simplex s⟩⟩
+instance : has_coe K.oriented_simplices K.simplices := ⟨λ s, ⟨deorient s, deorient_is_simplex⟩⟩
+
+end oriented_simplices
+
+open oriented_simplices
 
 /-- The set of oriented `n`-simplices in `K`, the oriented simplices of length `n+1`. -/
 def oriented_n_simplices (K : oriented_asc E) (n : ℕ) : set (list E) := 
   { s | s ∈ K.oriented_simplices ∧ s.length = n + 1 }
 
-@[simp] lemma orientation_length_eq_card {t : K.simplices} : 
-    (K.orientation t).length = t.1.card := by
-  rw [← K.olists_eq_simplices t, card_mk, multiset.coe_card]
+namespace oriented_n_simplices
+
+/-- Coercion from `oriented_n_simplices` to `oriented_simplices`. -/
+instance {n : ℕ} : has_coe (K.oriented_n_simplices n) K.oriented_simplices := 
+⟨λ s, ⟨s.1, s.2.1⟩⟩
+
+@[simp] lemma orientation_length_eq_card {s : K.simplices} : 
+    (K.orientation s).length = s.1.card := by
+{ rw [← K.olists_eq_simplices s, ← list.to_finset_eq (K.orientation_nodup s), card_mk, 
+    multiset.coe_card], }
 
 /-- `oriented_n_simplices` equals the set of images of `n`-simplices under `K.orientation`. -/
 lemma oriented_n_simplices_eq_orientation_of_k_simplices :
-  K.oriented_n_simplices n = { s | ∃ t ∈ K.n_simplices n, K.orientation t = s } := by
+    K.oriented_n_simplices n = 
+    { s | ∃ t : K.simplices, t.1 ∈ K.n_simplices n ∧ K.orientation t = s } := by
 { unfold oriented_n_simplices,
   simp only [set_of],
   ext s,
@@ -91,7 +106,9 @@ lemma oriented_n_simplices_eq_orientation_of_k_simplices :
     split,
     { unfold n_simplices,
       rw [mem_set_of_eq, ← orientation_length_eq_card, ht],
-      exact hs.2, },
+      split,
+        exact t.2,
+        exact hs.2, },
     { exact ht, },
   },
   { intro hs,
@@ -104,22 +121,33 @@ lemma oriented_n_simplices_eq_orientation_of_k_simplices :
     split,
     { unfold oriented_simplices,
       exact mem_range_self _, },
-    exact htk,
+    exact htk.2,
   },
 }
 
-
 lemma oriented_n_plus_1_simplex_remove_kth_is_oriented_n_simplex 
-    {s : list E} {hs : s ∈ K.oriented_n_simplices (n+1)} {k : fin (n+2)} : 
-  list.remove_nth s k ∈ K.oriented_n_simplices n := by
+    {s : K.oriented_n_simplices (n+1)} {k : fin (n+2)} : 
+  list.remove_nth s.1 k ∈ K.oriented_n_simplices n := by
 { unfold oriented_n_simplices,
   simp only [mem_set_of_eq],
   split,
   { unfold oriented_simplices,
     simp only [set.mem_range, set_coe.exists],
-     },
+    use (s.1.remove_nth ↑k).to_finset,
+    have goal1 : (s.1.remove_nth ↑k).to_finset ∈ K.simplices,
+    { cases s.2 with hs1 hs,
+      cases hs1 with t ht,
+      refine K.down_closed (deorient (s : K.oriented_simplices)) _ (s.1.remove_nth ↑k).to_finset _ _,
+      { exact deorient_is_simplex},
+      { unfold deorient,
+        rw oriented_simplices.has_coe, },
+      { sorry } },
+    use goal1,
+    sorry },
   { rw list.length_remove_nth _ _ ((eq.symm hs.2).trans_gt (fin.is_lt k)),
     simp [hs.2], }
 }
+
+end oriented_n_simplices
 
 end oriented_asc
