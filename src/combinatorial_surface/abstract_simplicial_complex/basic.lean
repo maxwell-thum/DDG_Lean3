@@ -56,24 +56,6 @@ variables {E} {K : abstract_simplicial_complex E} {s t : finset E} {x : E}
 /-- A `finset` belongs to an `abstract_simplicial_complex` if it's a simplex of it. -/
 instance : has_mem (finset E) (abstract_simplicial_complex E) := ⟨λ s K, s ∈ K.simplices⟩
 
-/-
-/-- The underlying space of a simplicial complex is the union of its simplices. -/
-def space (K : simplicial_complex 𝕜 E) : set E := ⋃ s ∈ K.simplices, convex_hull 𝕜 (s : set E)
-
-lemma mem_space_iff : x ∈ K.space ↔ ∃ s ∈ K.simplices, x ∈ convex_hull 𝕜 (s : set E) := mem_Union₂
-
-lemma convex_hull_subset_space (hs : s ∈ K.simplices) : convex_hull 𝕜 ↑s ⊆ K.space :=
-subset_bUnion_of_mem hs
-
-protected lemma subset_space (hs : s ∈ K.simplices) : (s : set E) ⊆ K.space :=
-(subset_convex_hull 𝕜 _).trans $ convex_hull_subset_space hs
-
-lemma convex_hull_inter_convex_hull (hs : s ∈ K.simplices) (ht : t ∈ K.simplices) :
-  convex_hull 𝕜 ↑s ∩ convex_hull 𝕜 ↑t = convex_hull 𝕜 (s ∩ t : set E) :=
-(K.inter_subset_convex_hull hs ht).antisymm $ subset_inter
-  (convex_hull_mono $ set.inter_subset_left _ _) $ convex_hull_mono $ set.inter_subset_right _ _
--/
-
 /-- -/
 lemma disjoint_or_exists_inter_eq_simplex (hs : s ∈ K.simplices) (ht : t ∈ K.simplices) :
   (s : set E) ∩ t = ∅ ∨ ∃ u ∈ K.simplices, (s : set E) ∩ t = u :=
@@ -118,11 +100,6 @@ complex. -/
 
 /-! ### Degrees and Vertices -/
 
-/-
-/-- The degree (or dimension) of a simplex is its cardinality minus one. -/
-def degree (s : finset E) : ℕ := s.card - 1
--/
-
 /-- The set of `n`-simplices in `K`, the simplices in `K` with degree `n`. -/
 def n_simplices (K : abstract_simplicial_complex E) (n : ℕ) : set (finset E) := 
   { s : finset E | s ∈ K.simplices ∧ s.card = n + 1 }
@@ -139,28 +116,6 @@ begin
   obtain ⟨s, hs, hx⟩ := mem_Union₂.1 h,
   exact K.down_closed _ hs _ (finset.singleton_subset_iff.2 $ mem_coe.1 hx) (singleton_ne_empty _),
 end
-
-/-
-lemma vertices_subset_space : K.vertices ⊆ K.space :=
-vertices_eq.subset.trans $ Union₂_mono $ λ x hx, subset_convex_hull 𝕜 x
-
-lemma vertex_mem_convex_hull_iff (hx : x ∈ K.vertices) (hs : s ∈ K.simplices) :
-  x ∈ convex_hull 𝕜 (s : set E) ↔ x ∈ s :=
-begin
-  refine ⟨λ h, _, λ h, subset_convex_hull _ _ h⟩,
-  classical,
-  have h := K.inter_subset_convex_hull hx hs ⟨by simp, h⟩,
-  by_contra H,
-  rwa [←coe_inter, finset.disjoint_iff_inter_eq_empty.1
-    (finset.disjoint_singleton_right.2 H).symm, coe_empty, convex_hull_empty] at h,
-end
-
-/-- A simplex is a subset of another one iff its vertices are.  -/
-lemma simplex_subset_simplex_iff (hs : s ∈ K.simplices) (ht : t ∈ K.simplices) :
-  convex_hull 𝕜 (s : set E) ⊆ convex_hull 𝕜 ↑t ↔ s ⊆ t :=
-⟨λ h x hxs, (vertex_mem_convex_hull_iff (K.down_closed hs (finset.singleton_subset_iff.2 hxs) $
-  singleton_ne_empty _) ht).1 (h (subset_convex_hull 𝕜 ↑s hxs)), convex_hull_mono⟩
--/
 
 /-! ### Facets -/
 
