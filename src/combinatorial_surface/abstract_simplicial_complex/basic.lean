@@ -3,8 +3,6 @@ Copyright (c) 2021 Yaël Dillies, Bhavik Mehta. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Yaël Dillies, Bhavik Mehta, Maxwell Thum
 -/
---import analysis.convex.hull
---import linear_algebra.affine_space.independent
 import data.finset.basic
 import data.set.finite
 
@@ -45,10 +43,7 @@ finite sets. -/
 @[ext] structure abstract_simplicial_complex :=
 (simplices : set (finset E))
 (not_empty_mem : ∅ ∉ simplices)
---(indep : ∀ {s}, s ∈ simplices → affine_independent 𝕜 (coe : (s : set E) → E))
 (down_closed : ∀ s ∈ simplices, ∀ t ⊆ s, t ≠ ∅ → t ∈ simplices)
-/-(inter_subset_convex_hull : ∀ {s t}, s ∈ simplices → t ∈ simplices →
-  convex_hull 𝕜 ↑s ∩ convex_hull 𝕜 ↑t ⊆ convex_hull 𝕜 (s ∩ t : set E))-/
 
 namespace abstract_simplicial_complex
 variables {E} {K : abstract_simplicial_complex E} {s t : finset E} {x : E}
@@ -72,16 +67,11 @@ end
 /-- Construct an abstract simplicial complex by removing the empty simplex for you. -/
 @[simps] def of_erase
   (simplices : set (finset E))
-  --(indep : ∀ s ∈ simplices, affine_independent 𝕜 (coe : (s : set E) → E))
-  (down_closed : ∀ s ∈ simplices, ∀ t ⊆ s, t ∈ simplices)
-  /-(inter_subset_convex_hull : ∀ s t ∈ simplices,
-    convex_hull 𝕜 ↑s ∩ convex_hull 𝕜 ↑t ⊆ convex_hull 𝕜 (s ∩ t : set E))-/ :
+  (down_closed : ∀ s ∈ simplices, ∀ t ⊆ s, t ∈ simplices) :
   abstract_simplicial_complex E :=
 { simplices := simplices \ {∅},
   not_empty_mem := λ h, h.2 (mem_singleton _),
-  --indep := λ s hs, indep _ hs.1,
   down_closed := λ s hs t hts ht, ⟨down_closed s hs.1 t hts, ht⟩,
-  --inter_subset_convex_hull := λ s t hs ht, inter_subset_convex_hull _ hs.1 _ ht.1 
   }
 
 /-- Construct an abstract simplicial complex as a subset of a given abstract simplicial 
@@ -93,9 +83,7 @@ complex. -/
   abstract_simplicial_complex E :=
 { simplices := simplices,
   not_empty_mem := λ h, K.not_empty_mem (subset h),
-  --indep := λ s hs, K.indep (subset hs),
   down_closed := λ s hs t hts _, down_closed s hs t hts,
-  --inter_subset_convex_hull := λ s t hs ht, K.inter_subset_convex_hull (subset hs) (subset ht) 
 }
 
 /-! ### Degrees and Vertices -/
@@ -116,6 +104,36 @@ begin
   obtain ⟨s, hs, hx⟩ := mem_Union₂.1 h,
   exact K.down_closed _ hs _ (finset.singleton_subset_iff.2 $ mem_coe.1 hx) (singleton_ne_empty _),
 end
+
+namespace simplices
+
+namespace n_simplices
+
+/-- Coercion from `n_simplices` to `simplices`. -/
+instance {n : ℕ} : has_coe (K.n_simplices n) K.simplices := ⟨λ s, ⟨s.1, s.2.1⟩⟩
+
+/-! #### Removing single vertices 
+This is mostly for `oriented.lean`. -/
+
+lemma np1_simplex_remove_vertex_is_n_simplex 
+  {n : ℕ} (s : K.n_simplices (n+1)) (v : E) (hv : v ∈ s.1) : (erase s.1 v) ∈ K.n_simplices n := by
+{ apply and.symm,
+  have : (erase s.1 v).card = n + 1,
+    rw [finset.card_erase_of_mem hv, s.2.2, add_tsub_cancel_right],
+  split,
+    exact this,
+  { apply K.down_closed s.1 s.2.1 (erase s.1 v) (finset.erase_subset v s.1),
+    apply (not_iff_not_of_iff finset.card_eq_zero).1,
+    rw this,
+    simp, }, }
+
+/-- Removing a vertex from an `(n+1)`-simplex to obtain an `n`-simplex. -/
+def remove_vertex {n : ℕ} (s : K.n_simplices (n+1)) (v : E) (hv : v ∈ s.1) : K.n_simplices n := 
+  ⟨erase s.1 v, np1_simplex_remove_vertex_is_n_simplex s v hv⟩
+
+end n_simplices
+
+end simplices
 
 /-! ### Facets -/
 
@@ -151,9 +169,7 @@ variables (E)
 instance : has_inf (abstract_simplicial_complex E) :=
 ⟨λ K L, { simplices := K.simplices ∩ L.simplices,
   not_empty_mem := λ h, K.not_empty_mem (set.inter_subset_left _ _ h),
-  --indep := λ s hs, K.indep hs.1,
   down_closed := λ s hs t hst ht, ⟨K.down_closed _ hs.1 _ hst ht, L.down_closed _ hs.2 _ hst ht⟩,
-  --inter_subset_convex_hull := λ s t hs ht, K.inter_subset_convex_hull hs.1 ht.1 
   }⟩
 
 instance : semilattice_inf (abstract_simplicial_complex E) :=
@@ -166,9 +182,7 @@ instance : semilattice_inf (abstract_simplicial_complex E) :=
 instance : has_bot (abstract_simplicial_complex E) :=
 ⟨{ simplices := ∅,
   not_empty_mem := set.not_mem_empty ∅,
-  --indep := λ s hs, (set.not_mem_empty _ hs).elim,
   down_closed := λ s hs _, (set.not_mem_empty _ hs).elim,
-  --inter_subset_convex_hull := λ s _ hs, (set.not_mem_empty _ hs).elim 
   }⟩
 
 instance : order_bot (abstract_simplicial_complex E) :=
@@ -179,8 +193,6 @@ instance : inhabited (abstract_simplicial_complex E) := ⟨⊥⟩
 variables {E}
 
 lemma simplices_bot : (⊥ : abstract_simplicial_complex E).simplices = ∅ := rfl
-
---lemma space_bot : (⊥ : simplicial_complex 𝕜 E).space = ∅ := set.bUnion_empty _
 
 lemma facets_bot : (⊥ : abstract_simplicial_complex E).facets = ∅ := eq_empty_of_subset_empty facets_subset
 
