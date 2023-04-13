@@ -3,6 +3,8 @@
 
 α
 
+⟨val : finset E, property : val ∈ simplices⟩
+
 -/
 
 -- and ... not?

@@ -34,10 +34,10 @@ each of its simplices such that the order of a subset of a simplex has the same 
 the larger simplex's order. -/
 @[ext] structure oriented_asc extends abstract_simplicial_complex E :=
 (orientation : simplices → list E)
-(orientation_nodup : Π s : simplices, (orientation s).nodup)
-(olists_eq_simplices : Π s : simplices, (orientation s).to_finset = s.1)
---(orientation_consistent : Π s : simplices, s.1.card > 1 → ∀ v ∈ s, orientation ( = s.val.remove_nth ↑k )
---(orientation_consistent : Π s : simplices, Π t : simplices, t.1 ⊆ s.1 → (orientation t).sublist (orientation s))
+(orientation_nodup : ∀ s : simplices, (orientation s).nodup)
+(olists_eq_simplices : ∀ s : simplices, (orientation s).to_finset = s.1)
+--(orientation_consistent : ∀ s : simplices, s.1.card > 1 → ∀ v ∈ s, orientation ( = s.val.remove_nth ↑k )
+--(orientation_consistent : ∀ s : simplices, ∀ t : simplices, t.1 ⊆ s.1 → (orientation t).sublist (orientation s))
 
 namespace oriented_asc
 variables {E} {K : oriented_asc E} {n : ℕ}
