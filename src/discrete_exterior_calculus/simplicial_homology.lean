@@ -35,21 +35,17 @@ variables {E : Type*} [decidable_eq E] {K : oriented_asc E} {n : ℕ} {x : E}
 
 /-- The group of `n`-chains on `K` is the free abelian group on the set of 
 (oriented) `n`-simplices of `K`. 
-(this definition doesn't quite seem the same as what's written here)-/
+(this definition doesn't quite seem the same as what's written here) -/
 def n_chains (K : oriented_asc E) (n : ℕ) := K.oriented_n_simplices n →₀ ℤ
-
-namespace oriented_n_simplices
-
-end oriented_n_simplices
 
 namespace n_chains
 
 /-- The additive commutative monoid structure on `K.n_chains n`. -/
-noncomputable instance n_chains.add_comm_monoid : add_comm_monoid (K.n_chains n) 
+noncomputable instance add_comm_monoid : add_comm_monoid (K.n_chains n) 
   := finsupp.add_comm_monoid
 
 /-- The `ℤ`-module structure on `K.n_chains n`. -/
-noncomputable instance n_chains.int_module : module ℤ (K.n_chains n)
+noncomputable instance int_module : module ℤ (K.n_chains n)
   := finsupp.module (K.oriented_n_simplices n) ℤ
 
 /-- The `n`-chain boundary of a single `(n+1)`-simplex. -/
@@ -60,42 +56,43 @@ noncomputable def simplex_boundary (s : K.oriented_n_simplices (n+1)) : K.n_chai
 noncomputable def simplex_boundary' : K.oriented_n_simplices (n+1) → ℤ → K.n_chains n
   := λ s, λ z, z • simplex_boundary s
 
-/-- Helper lemma for `simplex_boundary'_add`. -/
-lemma simplex_boundary'_zero_eq_zero {s : ↥(K.oriented_n_simplices n)} 
-    {σ τ : K.n_chains (n + 1)} (t : ↥(K.oriented_n_simplices (n+1))) : 
-    t ∈ σ.support ∪ τ.support → simplex_boundary' t 0 = 0 := by
-{ intro ht,
-  unfold simplex_boundary',
+/-- Helper lemma for `simplex_boundary'_add` and `simplex_boundary'_smul`. -/
+lemma simplex_boundary'_zero_eq_zero {t : ↥(K.oriented_n_simplices (n+1))} : 
+    simplex_boundary' t 0 = 0 := by
+{ unfold simplex_boundary',
   simp only [zero_smul], }
 
-lemma simplex_boundary'_add {σ τ : K.n_chains (n + 1)} : 
+/-- `simplex_boundary'` respects chain addition. -/
+lemma simplex_boundary'_add (σ τ : K.n_chains (n + 1)) : 
     sum (σ + τ) simplex_boundary' = 
     sum σ simplex_boundary' + sum τ simplex_boundary' := by
-{ rw [sum_of_support_subset (σ + τ) finsupp.support_add _ simplex_boundary'_zero_eq_zero],
-  rw [sum_of_support_subset σ (subset_union_left σ.support τ.support) _ simplex_boundary'_zero_eq_zero],
-  rw [sum_of_support_subset τ (subset_union_right σ.support τ.support) _ simplex_boundary'_zero_eq_zero],
+{ rw [sum_of_support_subset (σ + τ) finsupp.support_add _ (λ _ _, simplex_boundary'_zero_eq_zero)],
+  rw [sum_of_support_subset σ (subset_union_left σ.support τ.support) _ (λ _ _, simplex_boundary'_zero_eq_zero)],
+  rw [sum_of_support_subset τ (subset_union_right σ.support τ.support) _ (λ _ _, simplex_boundary'_zero_eq_zero)],
   simp only [finsupp.add_apply],
   rw ← finset.sum_add_distrib,
   apply congr_arg,
   ext s t,
   unfold simplex_boundary',
   simp only [finsupp.coe_smul, zsmul_eq_mul, int.cast_add, pi.mul_apply, finsupp.coe_add, pi.add_apply, ← int.distrib_right],
-  refl,
-  sorry
-  --unfold simplex_boundary,
-   }
+  refl, }
 
+/-- `simplex_boundary'` respects scalar multiplication. -/
 lemma simplex_boundary'_smul (z : ℤ) (σ : K.n_chains (n + 1)) : 
-    sum (z • σ) simplex_boundary' = 
-    z • sum σ simplex_boundary' := by
-{ sorry }
+    sum (z • σ) simplex_boundary' = z • sum σ simplex_boundary' := by
+{ rw [finsupp.sum_smul_index' (λ _, simplex_boundary'_zero_eq_zero), finsupp.smul_sum],
+  apply congr_arg,
+  ext t z s,
+  unfold simplex_boundary',
+  simp [mul_assoc], }
 
 /-- The boundary of an `(n+1)`-chain. -/
 noncomputable def boundary : K.n_chains (n+1) →ₗ[ℤ] K.n_chains n := 
 ⟨ (λ σ, sum σ simplex_boundary'),
   simplex_boundary'_add, 
-  simplex_boundary'_smul
-  ⟩
+  simplex_boundary'_smul⟩
+
+end n_chains
 
 /- # (Abstract) simplicial cohomology (sort of) -/
 
@@ -103,10 +100,20 @@ noncomputable def boundary : K.n_chains (n+1) →ₗ[ℤ] K.n_chains n :=
 (I kinda want to move away from the group language if it makes sense to)-/
 def n_cochains (K : oriented_asc E) (n : ℕ) := module.dual ℤ (K.n_chains n)
 
-/-- The coboundary is simply the tranpose of the boundary. -/
-noncomputable def coboundary : n_cochains K n → n_cochains K (n+1)
-  := module.dual.transpose boundary
+namespace n_cochains
 
-end n_chains
+/-- The additive commutative monoid structure on `K.n_cochains n`. -/
+noncomputable instance add_comm_monoid : add_comm_monoid (K.n_cochains n) 
+  := module.dual.add_comm_monoid ℤ (K.n_chains n)
+
+/-- The `ℤ`-module structure on `K.n_cochains n`. -/
+noncomputable instance int_module : module ℤ (K.n_cochains n)
+  := module.dual.module ℤ (K.n_chains n)
+
+/-- The coboundary is simply the tranpose of the boundary. -/
+noncomputable def coboundary : n_cochains K n →ₗ[ℤ] n_cochains K (n+1)
+  := module.dual.transpose n_chains.boundary
+
+end n_cochains
 
 end oriented_asc
