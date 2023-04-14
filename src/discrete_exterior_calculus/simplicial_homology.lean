@@ -111,7 +111,8 @@ theorem boundary_sq_eq_zero : (boundary n) ∘ₗ (boundary (n+1))
   unfold simplex_boundary',
   unfold simplex_boundary,
   unfold finsupp.sum,
-  simp,
+  simp [finsupp.coe_finset_sum, finset.sum_apply],
+  simp [single],q
   
   sorry
   --simp [neg_one_pow_neq_zero],
