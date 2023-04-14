@@ -32,14 +32,13 @@ function on the set of `K`'s oriented `n`-simplices. -/
 def discrete_differential_n_forms (K : oriented_asc E) (n : ℕ) 
   := K.oriented_n_simplices n → ℝ
 
-def real_n_cochains (K : oriented_asc E) (n : ℕ)
-  := K.n_chains n →ₗ[ℤ] ℝ
-
---def real_coboundary : real_n_cochains K n →ₗ[ℤ] real_n_cochains K (n+1):= (linear_map.llcomp R M M' R).flip
+namespace d_d_forms
 
 /-- The discrete exterior derivative -/
 def discrete_exterior_derivative (α : K.discrete_differential_n_forms n) :
     K.discrete_differential_n_forms (n+1)
   := 
+
+end d_d_forms
 
 end oriented_asc
