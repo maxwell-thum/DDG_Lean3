@@ -27,17 +27,17 @@ variables {E : Type*} [decidable_eq E] {K : oriented_asc E} {n : ℕ} {x : E}
 
 /- # Discrete differential forms -/
 
-/-- A discrete differential `n`-form on an oriented ASC `K` is a real-valued 
-function on the set of `K`'s oriented `n`-simplices. -/
-def discrete_differential_n_forms (K : oriented_asc E) (n : ℕ) 
-  := K.oriented_n_simplices n → ℝ
+/-- A discrete differential `m`-form on an oriented ASC `K` is a real-valued 
+function on the set of `K`'s oriented `m`-simplices. -/
+def discrete_differential_m_forms (K : oriented_asc E) (m : ℕ) 
+  := K.oriented_n_simplices m → ℝ
 
 namespace d_d_forms
 
 /-- The discrete exterior derivative -/
-def discrete_exterior_derivative (α : K.discrete_differential_n_forms n) :
-    K.discrete_differential_n_forms (n+1)
-  := 
+def discrete_exterior_derivative (α : K.discrete_differential_m_forms n) :
+    K.discrete_differential_m_forms (m+1)
+  := sorry
 
 end d_d_forms
 

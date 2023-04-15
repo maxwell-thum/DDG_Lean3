@@ -56,7 +56,7 @@ open abstract_simplicial_complex.simplices.n_simplices
 
 namespace oriented_simplices
 
-/-- Deoriented simplices are actually simplices, so we can coerce `oriented_simplices` back to 
+/-- Deoriented simplices are actually simplices, so we can convert `oriented_simplices` back to 
 `simplices`. -/
 lemma deorient_is_simplex {s : oriented_simplices K} : s.1.to_finset ∈ K.simplices := by
 { cases s.2 with t ht,
