@@ -1,11 +1,12 @@
 /-
 # for getting Unicode characters quicker
 
-α
+α × β
 
-⟨val : finset E, property : val ∈ simplices⟩
+⟨val : α, property : p self.val⟩
+
+
+
+α → β → γ
 
 -/
-
--- and ... not?
-
