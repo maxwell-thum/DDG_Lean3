@@ -5,7 +5,7 @@
 
 ⟨val : α, property : p self.val⟩
 
-
+λ
 
 α → β → γ
 

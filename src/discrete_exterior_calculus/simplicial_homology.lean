@@ -53,7 +53,7 @@ noncomputable instance module : module R (K.n_chains R n)
 
 /-- The `n`-chain boundary of a single `(n+1)`-simplex. -/
 noncomputable def simplex_boundary (s : K.oriented_n_simplices (n+1)) : K.n_chains R n
-  := finset.sum (finset.range (n + 2)) (λ i, single (remove_kth_vertex s i) ((-1:R)^i))
+  := finset.sum (fintype.elems $ fin (n + 2)) (λ i, single (remove_kth_vertex s i) ((-1:R)^(i : ℕ)))
 
 /-- Helper function which multiplies the boundary of a simplex by a ring element. -/
 noncomputable def simplex_boundary' : K.oriented_n_simplices (n+1) → R → K.n_chains R n
@@ -101,27 +101,32 @@ lemma neg_one_pow_neq_zero {n : ℕ} : (-1:R) ^ n ≠ 0 := by
   rw h,
   simp, }
 
+lemma support_simplex_boundary_eq_range_remove_kth_vertex (s : K.oriented_n_simplices (n + 1)) : 
+  @support _ R _ (simplex_boundary s) = (set.range $ remove_kth_vertex s).to_finset := by 
+{ --simp,
+  ext t,
+  unfold simplex_boundary,
+  rw mem_support_to_fun,
+
+  simp only [to_finset_range, finset.mem_image, finset.mem_univ, exists_true_left],
+
+  sorry }
+
+
 /-- The boundary of a boundary is zero. -/
 theorem boundary_sq_eq_zero : (boundary n) ∘ₗ (boundary (n+1)) 
     = (0 : K.n_chains R (n+2) →ₗ[R] K.n_chains R n) := by
 { ext s t,
+  simp only [linear_map.coe_comp, function.comp_app, lsingle_apply, linear_map.zero_apply, finsupp.coe_zero, pi.zero_apply],
   unfold boundary,
-  simp,
+  simp only [linear_map.coe_mk, linear_map.map_finsupp_sum, finsupp.sum_apply],
   unfold single,
-  unfold simplex_boundary',
+  simp only [finsupp.sum, one_ne_zero, if_false, coe_mk, sum_singleton, pi.single_eq_same],
+  simp only [simplex_boundary', one_smul, finsupp.coe_smul, pi.smul_apply, algebra.id.smul_eq_mul],
   unfold simplex_boundary,
-  unfold finsupp.sum,
-  simp [finsupp.coe_finset_sum, finset.sum_apply],
-  simp [single],
-  
+  simp,
   sorry
-  --simp [neg_one_pow_neq_zero],
-  --simp only [linear_map.coe_comp, function.comp_app, lsingle_apply, linear_map.zero_apply, finsupp.coe_zero, pi.zero_apply],
-  --unfold boundary,
-  --simp only [linear_map.coe_mk, linear_map.map_finsupp_sum, finsupp.sum_apply, finsupp.sum],
-  --unfold single,
-  --simp,
-  }
+}
 
 end n_chains
 
