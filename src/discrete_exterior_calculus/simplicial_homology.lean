@@ -70,9 +70,9 @@ noncomputable def boundary (n : ℕ) : K.n_chains R (n+1) →ₗ[R] K.n_chains R
 { to_fun := λ σ, sum σ simplex_boundary',
   map_add' := by
   { intros σ τ,
-    rw [sum_of_support_subset (σ + τ) finsupp.support_add _ (λ t _, boundary_zero_eq_zero t)],
-    rw [sum_of_support_subset σ (subset_union_left σ.support τ.support) _ (λ t _, boundary_zero_eq_zero t)],
-    rw [sum_of_support_subset τ (subset_union_right σ.support τ.support) _ (λ t _, boundary_zero_eq_zero t)],
+    rw [sum_of_support_subset (σ + τ) finsupp.support_add _ (λ t _, simplex_boundary'_zero_eq_zero t)],
+    rw [sum_of_support_subset σ (subset_union_left σ.support τ.support) _ (λ t _, simplex_boundary'_zero_eq_zero t)],
+    rw [sum_of_support_subset τ (subset_union_right σ.support τ.support) _ (λ t _, simplex_boundary'_zero_eq_zero t)],
     simp only [finsupp.add_apply],
     rw ← finset.sum_add_distrib,
     apply congr_arg,
@@ -82,7 +82,7 @@ noncomputable def boundary (n : ℕ) : K.n_chains R (n+1) →ₗ[R] K.n_chains R
   },
   map_smul' := by
   { intros z σ,
-    rw [@finsupp.sum_smul_index' _ R _ _ _ _ _ _ _ _ boundary_zero_eq_zero], -- eye roll
+    rw [@finsupp.sum_smul_index' _ R _ _ _ _ _ _ _ _ simplex_boundary'_zero_eq_zero], -- eye roll
     rw [finsupp.smul_sum],
     apply congr_arg,
     ext t z s,
