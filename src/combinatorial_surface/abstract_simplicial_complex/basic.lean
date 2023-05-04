@@ -11,6 +11,8 @@ import data.set.finite
 **THIS IS MY COPY OF MATHLIB'S `analysis.convex.simplicial_complex.basic`!!!**
 These edits have nothing to do with the original authors. 
 I'm not sure whether this will ultimately go in mathlib, so I'm changing a lot willy-nilly.
+Much of the code here is not necessarily relevant to DDG, but I have 
+modified it and left it here in case this gets added to mathlib.
 
 # Abstract simplicial complexes
 
@@ -116,8 +118,9 @@ instance {n : ℕ} : has_coe (K.n_simplices n) K.simplices := ⟨λ s, ⟨s.1, s
 This is mostly for `oriented.lean`. -/
 
 lemma np1_simplex_remove_vertex_is_n_simplex 
-  {n : ℕ} (s : K.n_simplices (n+1)) (v : E) (hv : v ∈ s.1) : (erase s.1 v) ∈ K.n_simplices n := by
-{ apply and.symm,
+  {n : ℕ} (s : K.n_simplices (n+1)) (v : E) (hv : v ∈ s.1) : (erase s.1 v) ∈ K.n_simplices n :=
+begin
+  apply and.symm,
   have : (erase s.1 v).card = n + 1,
     rw [finset.card_erase_of_mem hv, s.2.2, add_tsub_cancel_right],
   split,
@@ -125,7 +128,8 @@ lemma np1_simplex_remove_vertex_is_n_simplex
   { apply K.down_closed s.1 s.2.1 (erase s.1 v) (finset.erase_subset v s.1),
     apply (not_iff_not_of_iff finset.card_eq_zero).1,
     rw this,
-    simp, }, }
+    simp, },
+end
 
 /-- Removing a vertex from an `(n+1)`-simplex to obtain an `n`-simplex. -/
 def remove_vertex {n : ℕ} (s : K.n_simplices (n+1)) (v : E) (hv : v ∈ s.1) : K.n_simplices n := 

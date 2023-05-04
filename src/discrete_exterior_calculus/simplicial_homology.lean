@@ -61,9 +61,8 @@ noncomputable def simplex_boundary' : K.oriented_n_simplices (n+1) → R → K.n
 
 /-- Helper lemma for `boundary`. -/
 lemma simplex_boundary'_zero_eq_zero (t : ↥(K.oriented_n_simplices (n+1))) : 
-    simplex_boundary' t (0 : R) = 0 := by
-{ unfold simplex_boundary',
-  simp only [zero_smul], }
+    simplex_boundary' t (0 : R) = 0 := 
+  by unfold simplex_boundary'; simp only [zero_smul]
 
 /-- The boundary of an `(n+1)`-chain. -/
 noncomputable def boundary (n : ℕ) : K.n_chains R (n+1) →ₗ[R] K.n_chains R n := 
@@ -91,28 +90,32 @@ noncomputable def boundary (n : ℕ) : K.n_chains R (n+1) →ₗ[R] K.n_chains R
   }
 }
 
-lemma neg_one_pow_neq_zero {n : ℕ} : (-1:R) ^ n ≠ 0 := by 
-{ cases neg_one_pow_eq_or R n,
+lemma neg_one_pow_neq_zero {n : ℕ} : (-1:R) ^ n ≠ 0 := 
+begin
+  cases neg_one_pow_eq_or R n,
   exact ne_zero_of_eq_one h,
   rw h,
-  simp, }
+  simp,
+end
 
 lemma support_simplex_boundary_eq_range_remove_kth_vertex (s : K.oriented_n_simplices (n + 1)) : 
-  @support _ R _ (simplex_boundary s) = (set.range $ remove_kth_vertex s).to_finset := by 
-{ --simp,
+  @support _ R _ (simplex_boundary s) = (set.range $ remove_kth_vertex s).to_finset := 
+begin
+  --simp,
   ext t,
   unfold simplex_boundary,
   rw mem_support_to_fun,
 
   simp only [to_finset_range, finset.mem_image, finset.mem_univ, exists_true_left],
 
-  sorry }
-
+  sorry
+end
 
 /-- The boundary of a boundary is zero. -/
 theorem boundary_sq_eq_zero : (boundary n) ∘ₗ (boundary (n+1)) 
-    = (0 : K.n_chains R (n+2) →ₗ[R] K.n_chains R n) := by
-{ ext s t,
+    = (0 : K.n_chains R (n+2) →ₗ[R] K.n_chains R n) := 
+begin
+  ext s t,
   simp only [linear_map.coe_comp, function.comp_app, lsingle_apply, linear_map.zero_apply, finsupp.coe_zero, pi.zero_apply],
   unfold boundary,
   simp only [linear_map.coe_mk, linear_map.map_finsupp_sum, finsupp.sum_apply],
@@ -122,7 +125,7 @@ theorem boundary_sq_eq_zero : (boundary n) ∘ₗ (boundary (n+1))
   unfold simplex_boundary,
   simp,
   sorry
-}
+end
 
 end n_chains
 
