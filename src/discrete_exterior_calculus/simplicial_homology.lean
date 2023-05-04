@@ -67,7 +67,7 @@ lemma simplex_boundary'_zero_eq_zero (t : ↥(K.oriented_n_simplices (n+1))) :
 
 /-- The boundary of an `(n+1)`-chain. -/
 noncomputable def boundary (n : ℕ) : K.n_chains R (n+1) →ₗ[R] K.n_chains R n := 
-{ to_fun := (λ σ, sum σ simplex_boundary'),
+{ to_fun := λ σ, sum σ simplex_boundary',
   map_add' := by
   { intros σ τ,
     rw [sum_of_support_subset (σ + τ) finsupp.support_add _ (λ t _, boundary_zero_eq_zero t)],
