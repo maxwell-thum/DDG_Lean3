@@ -114,7 +114,8 @@ instance : has_coe (K.oriented_n_simplices n) (K.n_simplices n) :=
   ⟨λ s, ⟨s.1.to_finset, deorient_n_is_n_simplex⟩⟩
 
 /-- Coercing an oriented `n`-simplex to a simplex yields the same simplex 
-whether you coerce to `n_simplices` or `oriented_simplices` first.  -/
+whether you coerce to `n_simplices` or `oriented_simplices` first. 
+(I feel like I shouldn't have to use this) -/
 lemma oriented_n_coes_commute (s : K.oriented_n_simplices n) :
   ((s : K.oriented_simplices) : K.simplices) = ((s : K.n_simplices n) : K.simplices) := by
 { refl, }

@@ -59,41 +59,37 @@ noncomputable def simplex_boundary (s : K.oriented_n_simplices (n+1)) : K.n_chai
 noncomputable def simplex_boundary' : K.oriented_n_simplices (n+1) → R → K.n_chains R n
   := λ s, λ z, z • simplex_boundary s
 
-/-- Helper lemma for `simplex_boundary'_add` and `simplex_boundary'_smul`. -/
+/-- Helper lemma for `boundary`. -/
 lemma simplex_boundary'_zero_eq_zero (t : ↥(K.oriented_n_simplices (n+1))) : 
     simplex_boundary' t (0 : R) = 0 := by
 { unfold simplex_boundary',
   simp only [zero_smul], }
 
-/-- `simplex_boundary'` respects chain addition. -/
-lemma simplex_boundary'_add (σ τ : K.n_chains R (n + 1)) : 
-    sum (σ + τ) simplex_boundary' = 
-    sum σ simplex_boundary' + sum τ simplex_boundary' := by
-{ rw [sum_of_support_subset (σ + τ) finsupp.support_add _ (λ t _, simplex_boundary'_zero_eq_zero t)],
-  rw [sum_of_support_subset σ (subset_union_left σ.support τ.support) _ (λ t _, simplex_boundary'_zero_eq_zero t)],
-  rw [sum_of_support_subset τ (subset_union_right σ.support τ.support) _ (λ t _, simplex_boundary'_zero_eq_zero t)],
-  simp only [finsupp.add_apply],
-  rw ← finset.sum_add_distrib,
-  apply congr_arg,
-  ext s t,
-  unfold simplex_boundary',
-  simp only [finsupp.coe_smul, finsupp.coe_add, pi.add_apply, pi.smul_apply, smul_eq_mul, ←add_mul], }
-
-/-- `simplex_boundary'` respects scalar multiplication. -/
-lemma simplex_boundary'_smul (z : R) (σ : K.n_chains R (n + 1)) : 
-    sum (z • σ) simplex_boundary' = z • sum σ simplex_boundary' := by
-{ rw [@finsupp.sum_smul_index' _ R _ _ _ _ _ _ _ _ simplex_boundary'_zero_eq_zero], -- eye roll
-  rw [finsupp.smul_sum],
-  apply congr_arg,
-  ext t z s,
-  unfold simplex_boundary',
-  simp [mul_assoc], }
-
 /-- The boundary of an `(n+1)`-chain. -/
 noncomputable def boundary (n : ℕ) : K.n_chains R (n+1) →ₗ[R] K.n_chains R n := 
-⟨ (λ σ, sum σ simplex_boundary'),
-  simplex_boundary'_add, 
-  simplex_boundary'_smul⟩
+{ to_fun := (λ σ, sum σ simplex_boundary'),
+  map_add' := by
+  { intros σ τ,
+    rw [sum_of_support_subset (σ + τ) finsupp.support_add _ (λ t _, boundary_zero_eq_zero t)],
+    rw [sum_of_support_subset σ (subset_union_left σ.support τ.support) _ (λ t _, boundary_zero_eq_zero t)],
+    rw [sum_of_support_subset τ (subset_union_right σ.support τ.support) _ (λ t _, boundary_zero_eq_zero t)],
+    simp only [finsupp.add_apply],
+    rw ← finset.sum_add_distrib,
+    apply congr_arg,
+    ext s t,
+    unfold simplex_boundary',
+    simp only [finsupp.coe_smul, finsupp.coe_add, pi.add_apply, pi.smul_apply, smul_eq_mul, ←add_mul], 
+  },
+  map_smul' := by
+  { intros z σ,
+    rw [@finsupp.sum_smul_index' _ R _ _ _ _ _ _ _ _ boundary_zero_eq_zero], -- eye roll
+    rw [finsupp.smul_sum],
+    apply congr_arg,
+    ext t z s,
+    unfold simplex_boundary',
+    simp [mul_assoc], 
+  }
+}
 
 lemma neg_one_pow_neq_zero {n : ℕ} : (-1:R) ^ n ≠ 0 := by 
 { cases neg_one_pow_eq_or R n,
@@ -153,11 +149,13 @@ noncomputable def coboundary (n : ℕ) : K.n_cochains R n →ₗ[R] K.n_cochains
 
 /-- The coboundary of a coboundary is zero. -/
 theorem coboundary_sq_eq_zero : (coboundary (n+1)) ∘ₗ (coboundary n) 
-    = (0 : K.n_cochains R n →ₗ[R] K.n_cochains R (n+2)) := by
-{ unfold coboundary,
+    = (0 : K.n_cochains R n →ₗ[R] K.n_cochains R (n+2)) :=
+begin
+  unfold coboundary,
   rw ← module.dual.transpose_comp,
   rw n_chains.boundary_sq_eq_zero,
-  simp, }
+  simp,
+end
 
 end n_cochains
 

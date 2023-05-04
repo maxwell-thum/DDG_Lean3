@@ -1,12 +1,25 @@
 /-
 # for getting Unicode characters quicker
 
-α × β
+α × β × γ → δ
+
+λ c : γ, f(a, b, c)
+
+(a : α, b : β)
 
 ⟨val : α, property : p self.val⟩
 
-λ
+p ∧ q p ∨ q
 
-α → β → γ
+α → β → γ → δ
+
+⟨hp, hq⟩
+
+¬
+
+→ 
 
 -/
+
+/- `comment` -/
+--lemma name := ((()))

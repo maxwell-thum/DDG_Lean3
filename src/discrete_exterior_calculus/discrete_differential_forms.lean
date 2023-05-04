@@ -34,7 +34,7 @@ def discrete_differential_m_forms (K : oriented_asc E) (m : ℕ)
 
 namespace d_d_forms
 
-open n_cochains
+open n_chains n_cochains
 
 /-- The additive commutative monoid structure on `K.discrete_differential_m_forms m`. -/
 instance add_comm_monoid : add_comm_monoid (K.discrete_differential_m_forms m) 
@@ -46,8 +46,8 @@ instance module : module ℝ (K.discrete_differential_m_forms m)
 
 def d_d_m_forms_to_m_cochains (m : ℕ) :
     K.discrete_differential_m_forms m ≃ₗ[ℝ] K.n_cochains ℝ m := 
-{ to_fun := λ p, 
-  { to_fun := λ σ, finsupp.sum σ (λ s a, a * (p s)),
+{ to_fun := λ α, 
+  { to_fun := λ σ, finsupp.sum σ (λ s a, a * (α s)),
     map_add' := by 
     { intros x y,
       unfold finsupp.sum,
@@ -61,9 +61,13 @@ def d_d_m_forms_to_m_cochains (m : ℕ) :
    }
 
 /-- The discrete exterior derivative -/
-noncomputable def discrete_exterior_derivative : K.discrete_differential_m_forms m →ₗ[ℝ]
+noncomputable def discrete_exterior_derivative (m : ℕ) : K.discrete_differential_m_forms m →ₗ[ℝ]
     K.discrete_differential_m_forms (m+1)
   := (d_d_m_forms_to_m_cochains (m+1)).symm.to_linear_map ∘ₗ (coboundary m) ∘ₗ (d_d_m_forms_to_m_cochains m).to_linear_map
+
+/-- Integrating a discrete differential `m`-form against an `m`-chain. -/
+noncomputable def integrate : K.discrete_differential_m_forms m →ₗ[ℝ] K.n_chains ℝ m →ₗ[ℝ] ℝ
+  := (d_d_m_forms_to_m_cochains m).to_linear_map
 
 end d_d_forms
 
