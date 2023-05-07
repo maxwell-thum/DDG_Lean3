@@ -1,5 +1,11 @@
 # DDG_Lean3
-Formalizing Discrete Differential Geometry in Lean 3. Details will be found on the [project website](https://maxwell-thum.github.io/DDG_Lean3/).
+Formalizing Discrete Differential Geometry in Lean 3. 
+
+I originally planned to use a blueprint website, but stopped using it at some point. I have left the unfinished website up. More information about it below.
+
+# Project blueprint
+
+Details will be found on the [project website](https://maxwell-thum.github.io/DDG_Lean3/).
 
 Much of the project infrastructure has been adapted from the [unit fractions project](https://github.com/b-mehta/unit-fractions), the [sphere eversion project](https://leanprover-community.github.io/sphere-eversion/), and the [liquid tensor experiment](https://leanprover-community.github.io/lean-liquid/).
 
